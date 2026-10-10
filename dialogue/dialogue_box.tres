@@ -1,0 +1,16 @@
+[gd_resource type="Theme" format=3 uid="uid://t2kcdkvabp2d"]
+
+[ext_resource type="FontFile" uid="uid://btm21rgep3rct" path="res://fonts/Silkscreen/Silkscreen-Regular.ttf" id="1_lvx4v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vw4cm"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+
+[resource]
+default_font = ExtResource("1_lvx4v")
+default_font_size = 48
+RichTextLabel/colors/table_border = Color(1, 1, 1, 0)
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_vw4cm")

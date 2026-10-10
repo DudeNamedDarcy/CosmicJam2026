@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://dfjggw5mqn4k6" path="res://sounds_market/cha_ching_fixed.wav" id="2_a7kth"]
 [ext_resource type="PackedScene" uid="uid://cs88wese704sl" path="res://market/glorp_scene.tscn" id="3_81d4i"]
 [ext_resource type="AudioStream" uid="uid://l4ihbu6r3bhk" path="res://sounds_market/broke_boy_alam_fix.wav" id="4_bq372"]
+[ext_resource type="PackedScene" uid="uid://t3fxorjxcvtt" path="res://dialogue/dialogue_box.tscn" id="5_w6kuu"]
 
 [node name="BlackHoleMarket" type="CanvasLayer" unique_id=1787878085]
 script = ExtResource("1_1x0ya")
@@ -124,6 +125,12 @@ render_target_update_mode = 4
 
 [node name="NoMoneyStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=320706738]
 stream = ExtResource("4_bq372")
+
+[node name="DialogueBox" parent="." unique_id=1166612431 instance=ExtResource("5_w6kuu")]
+offset_left = 670.0
+offset_top = 439.0
+offset_right = -48.0
+offset_bottom = -107.0
 
 [connection signal="pressed" from="VBoxContainer/OrbitRadiusButton" to="." method="_on_orbit_radius_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/CatchRadiusButton" to="." method="_on_catch_radius_button_pressed"]
