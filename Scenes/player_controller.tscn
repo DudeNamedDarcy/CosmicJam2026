@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cwjnrld5dv08f"]
+
+[ext_resource type="Script" uid="uid://1xpuxdo2gxyj" path="res://Scenes/player_controller.gd" id="1_5ur5x"]
+[ext_resource type="Texture2D" uid="uid://ds50j8nkhow7n" path="res://ship.png" id="1_rd8vp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(59, 43)
+
+[node name="PlayerController" type="CharacterBody2D" unique_id=743970108 node_paths=PackedStringArray("sprite")]
+motion_mode = 1
+script = ExtResource("1_5ur5x")
+sprite = NodePath("Sprite2D")
+maxMovementSpeed = 200.0
+acceleration = 150.0
+friction = 125.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1811173736]
+texture = ExtResource("1_rd8vp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1640096837]
+position = Vector2(-0.5, 1.5)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=813711711]

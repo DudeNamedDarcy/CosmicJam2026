@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://gi43qa15fksh"]
+
+[ext_resource type="Texture2D" uid="uid://caiem5b8o2slt" path="res://360_F_546468872_b9emNBQeVDLbBqicXaFyoBUwutWcHmbl.jpg" id="1_b6fju"]
+[ext_resource type="PackedScene" uid="uid://cwjnrld5dv08f" path="res://Scenes/player_controller.tscn" id="1_x87qo"]
+
+[node name="GameScene" type="Node2D" unique_id=459147446]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1596285265]
+texture = ExtResource("1_b6fju")
+
+[node name="PlayerController" parent="." unique_id=743970108 instance=ExtResource("1_x87qo")]
+movementSpeed = 250.0
