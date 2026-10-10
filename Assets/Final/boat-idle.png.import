@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2xsuola2rld5"
-path="res://.godot/imported/aimer.png-d32fb016af918c2b4d435540928cc75b.ctex"
+uid="uid://nvb84pm3p0vl"
+path="res://.godot/imported/boat-idle.png-39aca8e6254f8c0335bd96f4591fdb19.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Placeholders/aimer.png"
-dest_files=["res://.godot/imported/aimer.png-d32fb016af918c2b4d435540928cc75b.ctex"]
+source_file="res://Assets/Final/boat-idle.png"
+dest_files=["res://.godot/imported/boat-idle.png-39aca8e6254f8c0335bd96f4591fdb19.ctex"]
 
 [params]
 

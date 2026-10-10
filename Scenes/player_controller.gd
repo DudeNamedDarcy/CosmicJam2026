@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name PlayerController
 enum PlayerState { Idle, Moving, Casting, Fishing, Reeling }
 const DIRECTIONAL_ARROW = preload("res://Scenes/directional_arrow.tscn")
 
@@ -12,10 +13,12 @@ var bobbersList: Array[PackedScene] = [
 @export var maxCastPower: float
 
 @export var aimArrow: Sprite2D
-@export var sprite: Sprite2D
+@export var sprite: AnimatedSprite2D
 @export var vboxContainer: VBoxContainer
 @export var planetParent: Node2D
 @export var castDistance: float = 150.0
+@export var fishingLineMarker: Marker2D
+
 
 var playerState: PlayerState = PlayerState.Idle
 var characterDirection: Vector2
@@ -28,6 +31,10 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("CastReel"):
 		castPower += delta
 	print(PlayerState.find_key(playerState))
+	AimMouse()
+		
+
+func AimMouse() -> void:
 	# Mouse aiming
 	var mouse_direction = get_global_mouse_position() - global_position
 
@@ -40,7 +47,7 @@ func _process(delta: float) -> void:
 	else:
 		aimArrow.rotation = mouse_direction.angle()
 	#print(aimArrow.rotation)
-		
+	
 func _physics_process(delta: float) -> void:
 	characterDirection.x = Input.get_axis("MoveLeft", "MoveRight")
 	characterDirection.y = Input.get_axis("MoveUp", "MoveDown")
@@ -51,8 +58,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		if characterDirection == Vector2.ZERO:
 			playerState = PlayerState.Idle
+			sprite.animation = "Idle"
 		else:
 			playerState = PlayerState.Moving
+			sprite.animation = "Move"
+
 	# Flip sprite TODO: Add squash and stretch
 	if characterDirection.x > 0:
 		sprite.flip_h = true
@@ -75,7 +85,7 @@ func _physics_process(delta: float) -> void:
 
 		if velocity.dot(normal) < 0:
 			velocity = velocity.slide(normal)
-
+	
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("CastReel") && playerState == PlayerState.Casting:
 		print("Total hold duration was: ", min(castPower, maxCastPower)) 
@@ -83,7 +93,6 @@ func _input(event: InputEvent) -> void:
 			EndFishing()
 			castPower = 0.0
 			return
-			
 		playerState = PlayerState.Fishing #the time spent waiting for fish
 		CastBobbers(min(castPower, maxCastPower))
 		castPower = 0.0 
@@ -95,7 +104,6 @@ func _input(event: InputEvent) -> void:
 			StartReelingMinigame()
 	elif playerState == PlayerState.Reeling:
 		if event.is_action_pressed("ComboUp"):
-			print("UP")
 			CheckArrow(DirectionalArrow.ArrowType.Up)
 		elif event.is_action_pressed("ComboRight"):
 			CheckArrow(DirectionalArrow.ArrowType.Right)
@@ -125,21 +133,33 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 		EndFishing()
 
 func CastBobbers(castPower: float) -> void:
+	aimArrow.hide()
+
+	var cast_direction: Vector2 = Vector2.RIGHT.rotated(aimArrow.global_rotation)
+
 	for bobberScene in bobbersList:
 		var bobber: Bobber = bobberScene.instantiate()
-		activeBobbers.append((bobber))
-		print(bobber.getBobberName())
+
 		planetParent.add_child(bobber)
-	
+		bobber.global_position = global_position
+
+		# Cast the bobber in the aiming direction
+		#bobber.cast(cast_direction, castPower)
+		# draw line connecting fishing rod marker and planet
+
+		activeBobbers.append(bobber)
+		print(bobber.getBobberName())
 
 func StartReelingMinigame() -> void:
-	for activeBobber in activeBobbers:
-		fishList.append_array(activeBobber.reelIn())
+	#for activeBobber in activeBobbers:
+		#fishList.append_array(activeBobber.reelIn())
 		
-	if fishList.size() == 0:
-		EndFishing()
-		return
-	var comboLength = 4 + fishList.size() - 1
+	#if fishList.size() == 0:
+		#EndFishing()
+		#return
+	var comboLength = 4 + 8 - 1
+	
+	#var comboLength = 4 + fishList.size() - 1
 	for i in comboLength:
 		var arrow_instance = DIRECTIONAL_ARROW.instantiate()
 		arrows.append(arrow_instance)
@@ -153,4 +173,7 @@ func EndFishing() -> void:
 	for child in planetParent.get_children():
 		activeBobbers.pop_front()
 		child.queue_free()
-		
+	aimArrow.show()
+	
+func DrawFishingLines() -> void:
+	print("Hi")
