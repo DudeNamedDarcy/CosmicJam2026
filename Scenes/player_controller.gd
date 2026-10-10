@@ -14,6 +14,7 @@ var bobbersList: Array[PackedScene] = [
 @export var aimArrow: Sprite2D
 @export var sprite: Sprite2D
 @export var vboxContainer: VBoxContainer
+@export var planetParent: Node2D
 @export var castDistance: float = 150.0
 
 var playerState: PlayerState = PlayerState.Idle
@@ -21,12 +22,12 @@ var characterDirection: Vector2
 var castPower: float = 0.0
 var arrows: Array[DirectionalArrow] = []
 var fishList: Array[Fish] = []
-
+var activeBobbers: Array[Bobber] = []
 	
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("CastReel"):
 		castPower += delta
-	#print(PlayerState.find_key(playerState))
+	print(PlayerState.find_key(playerState))
 	# Mouse aiming
 	var mouse_direction = get_global_mouse_position() - global_position
 
@@ -126,13 +127,15 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 func CastBobbers(castPower: float) -> void:
 	for bobberScene in bobbersList:
 		var bobber: Bobber = bobberScene.instantiate()
+		activeBobbers.append((bobber))
 		print(bobber.getBobberName())
-		add_child(bobber)
+		planetParent.add_child(bobber)
 	
 
 func StartReelingMinigame() -> void:
-	for i in bobbersList:
-		fishList.append_array(bobbersList[i].reelIn())
+	for activeBobber in activeBobbers:
+		fishList.append_array(activeBobber.reelIn())
+		
 	if fishList.size() == 0:
 		EndFishing()
 		return
@@ -147,3 +150,7 @@ func EndFishing() -> void:
 	for child in vboxContainer.get_children():
 		arrows.pop_front()
 		child.queue_free()	
+	for child in planetParent.get_children():
+		activeBobbers.pop_front()
+		child.queue_free()
+		
