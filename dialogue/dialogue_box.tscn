@@ -25,7 +25,6 @@ grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
 text = "Hello World!"
-fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
