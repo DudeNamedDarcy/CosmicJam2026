@@ -17,6 +17,8 @@ extends CanvasLayer
 @onready var warning_label: Label = %WarningLabel
 
 @onready var cha_ching_audio_stream_player: AudioStreamPlayer = $ChaChingAudioStreamPlayer
+@onready var no_money_stream_player: AudioStreamPlayer = $NoMoneyStreamPlayer
+
 
 #Shoutout to Gwizz for the tutorial on subViewportContainers:
 #https://www.youtube.com/watch?v=K_mZeYLYpgg
@@ -25,6 +27,8 @@ extends CanvasLayer
 #https://www.youtube.com/watch?v=6JgycHywKXA
 
 var totalMoney = (ScoreAndUpgrades.money)
+
+var out_of_money_bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,10 +40,13 @@ func _process(delta: float) -> void:
 	money_label.text = "Money: $" + str(totalMoney)
 
 func _out_of_money() -> void:
+	out_of_money_bool = false
+	no_money_stream_player.play()
 	warning_label.text = "Hey! You don't have enough money to buy that!"
-	await get_tree().create_timer(4).timeout
+	await get_tree().create_timer(3).timeout
 	#shoutout this video for making me remember await and making timers in code: https://www.youtube.com/watch?v=1sYgGvrDYag&t=851s
 	warning_label.text = ""
+	out_of_money_bool = true
 
 func _on_orbit_radius_button_pressed() -> void:
 	_handle_money(orbit_radius_progress, 200, orbit_radius_button)
@@ -68,6 +75,7 @@ func _handle_money(given_progress_bar: ProgressBar, moneyAmount:int, given_butto
 		if given_progress_bar.value >= 100:
 			given_button.text = "Sold Out!"
 	elif totalMoney < moneyAmount:
-		_out_of_money()
+		if out_of_money_bool:
+			_out_of_money()
 	else:
 		return
