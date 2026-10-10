@@ -151,15 +151,14 @@ func CastBobbers(castPower: float) -> void:
 		print(bobber.getBobberName())
 
 func StartReelingMinigame() -> void:
-	#for activeBobber in activeBobbers:
-		#fishList.append_array(activeBobber.reelIn())
+	for activeBobber in activeBobbers:
+		fishList.append_array(activeBobber.reelIn())
 		
-	#if fishList.size() == 0:
-		#EndFishing()
-		#return
-	var comboLength = 4 + 8 - 1
+	if fishList.size() == 0:
+		EndFishing()
+		return
+	var comboLength = 4 + fishList.size() - 1
 	
-	#var comboLength = 4 + fishList.size() - 1
 	for i in comboLength:
 		var arrow_instance = DIRECTIONAL_ARROW.instantiate()
 		arrows.append(arrow_instance)

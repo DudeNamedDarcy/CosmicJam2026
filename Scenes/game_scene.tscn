@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://caiem5b8o2slt" path="res://Assets/Placeholders/360_F_546468872_b9emNBQeVDLbBqicXaFyoBUwutWcHmbl.jpg" id="1_b6fju"]
 [ext_resource type="PackedScene" uid="uid://cwjnrld5dv08f" path="res://Scenes/player_controller.tscn" id="1_x87qo"]
-[ext_resource type="PackedScene" uid="uid://dwgwyoho71ym6" path="res://Scenes/fishing_line.tscn" id="3_6h5vk"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
 normal = Vector2(0, 1)
@@ -56,5 +55,3 @@ shape = SubResource("WorldBoundaryShape2D_6h5vk")
 
 [node name="Planet" type="Node2D" parent="." unique_id=797403716]
 position = Vector2(576, 93)
-
-[node name="FishingLine" parent="." unique_id=814618455 instance=ExtResource("3_6h5vk")]
