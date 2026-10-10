@@ -18,6 +18,11 @@ extends CanvasLayer
 
 @onready var cha_ching_audio_stream_player: AudioStreamPlayer = $ChaChingAudioStreamPlayer
 
+#Shoutout to Gwizz for the tutorial on subViewportContainers:
+#https://www.youtube.com/watch?v=K_mZeYLYpgg
+
+#And Mostly Mad Productions + Google AI for transparency on 3D scenes and SubViewports:
+#https://www.youtube.com/watch?v=6JgycHywKXA
 
 var totalMoney = (ScoreAndUpgrades.money)
 
@@ -55,7 +60,7 @@ func _on_larger_fuel_button_pressed() -> void:
 	_handle_money(larger_fuel_progress, 200, larger_fuel_button)
 
 func _handle_money(given_progress_bar: ProgressBar, moneyAmount:int, given_button: Button):
-	if totalMoney > moneyAmount and given_progress_bar.value < 100:
+	if totalMoney >= moneyAmount and given_progress_bar.value < 100:
 		print("enough money!")
 		totalMoney -= moneyAmount
 		given_progress_bar.value += 25

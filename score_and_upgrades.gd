@@ -1,6 +1,6 @@
 extends Node
 
-var money: float = 14000
+var money: float = 1400
 
 var orbit_progress: int = 0
 

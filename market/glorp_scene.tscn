@@ -59,8 +59,8 @@ root_node = NodePath("../Sprite3D")
 libraries/ = SubResource("AnimationLibrary_2h2ey")
 autoplay = &"move_glorp"
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="AnimationPlayer" unique_id=1126163884]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1126163884]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.36648774)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="AnimationPlayer/DirectionalLight3D" unique_id=162483700]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=162483700]
 environment = SubResource("Environment_768q2")
