@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://cs88wese704sl"]
+
+[ext_resource type="Texture2D" uid="uid://lgvcj031rd7t" path="res://icon.svg" id="1_6kb6w"]
+
+[sub_resource type="Environment" id="Environment_81d4i"]
+
+[sub_resource type="Animation" id="Animation_bq372"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w6kuu"]
+resource_name = "move_glorp"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 12.566371, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2h2ey"]
+_data = {
+&"RESET": SubResource("Animation_bq372"),
+&"move_glorp": SubResource("Animation_w6kuu")
+}
+
+[sub_resource type="Environment" id="Environment_768q2"]
+ambient_light_source = 1
+
+[node name="GlorpScene" type="Node3D" unique_id=1403479836]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1065541664]
+environment = SubResource("Environment_81d4i")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1921561783]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.8463652)
+texture = ExtResource("1_6kb6w")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1840024728]
+root_node = NodePath("../Sprite3D")
+libraries/ = SubResource("AnimationLibrary_2h2ey")
+autoplay = &"move_glorp"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1126163884]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.36648774)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=162483700]
+environment = SubResource("Environment_768q2")
