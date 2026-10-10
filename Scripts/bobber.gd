@@ -23,6 +23,9 @@ var castPower: float
 var castDeceleration: float
 var castLine: Line2D
 
+func getBobberName() -> String:
+	return bobberType
+	
 func _ready() -> void:
 	orbitRadius = startingOrbitRadius
 	catchRadius = startingCatchRadius
