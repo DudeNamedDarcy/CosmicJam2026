@@ -18,6 +18,7 @@ extends CanvasLayer
 
 @onready var cha_ching_audio_stream_player: AudioStreamPlayer = $ChaChingAudioStreamPlayer
 @onready var no_money_stream_player: AudioStreamPlayer = $NoMoneyStreamPlayer
+@onready var dialogue_box: Control = $DialogueBox
 
 
 #Shoutout to Gwizz for the tutorial on subViewportContainers:
@@ -26,14 +27,32 @@ extends CanvasLayer
 #And Mostly Mad Productions + Google AI for transparency on 3D scenes and SubViewports:
 #https://www.youtube.com/watch?v=6JgycHywKXA
 
+var intro_dialogue: Array[String] = ["You again. Ugh. If you want to quell my foul mood, buy my Wares.",
+"I am Glorp of the Celestial Mob, and you will buy my Wares.",
+"Now I have become Glorp, the seller of Wares.",
+"Welcome to the BlackHole market. Prepare to Purchase my Wares.",
+"You are truly an insatiable fellow."
+]
+
+var purchase_dialogue: Array[String] = ["Finally!",
+"Good boy",
+"Holy mackerel! Took you long enough!",
+"A worthless purchase",
+"Just big and greedy, you are"
+]
+
 var totalMoney = (ScoreAndUpgrades.money)
 
 var out_of_money_bool = true
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	warning_label.text = ""
-
+	var chosen_index: int = randi_range(0, len(intro_dialogue) -1)
+	dialogue_box.dialogue = intro_dialogue.slice(chosen_index, (chosen_index+1))
+	dialogue_box.show_text(dialogue_box.dialogue)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -68,6 +87,7 @@ func _on_larger_fuel_button_pressed() -> void:
 
 func _handle_money(given_progress_bar: ProgressBar, moneyAmount:int, given_button: Button):
 	if totalMoney >= moneyAmount and given_progress_bar.value < 100:
+		activate_buy_dialogue()
 		print("enough money!")
 		totalMoney -= moneyAmount
 		given_progress_bar.value += 25
@@ -79,3 +99,8 @@ func _handle_money(given_progress_bar: ProgressBar, moneyAmount:int, given_butto
 			_out_of_money()
 	else:
 		return
+
+func activate_buy_dialogue() -> void:
+	var chosen_index: int = randi_range(0, len(purchase_dialogue) -1)
+	dialogue_box.dialogue = purchase_dialogue.slice(chosen_index, (chosen_index+1))
+	dialogue_box.show_text(dialogue_box.dialogue)
