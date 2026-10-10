@@ -81,9 +81,15 @@ func _input(event: InputEvent) -> void:
 func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 	if arrows.is_empty():
 		return
-	if arrows[0].GetArrowType() == input_arrow:
-		var arrow = arrows.pop_front()
-		Input.start_joy_vibration(0, 0.5, 0.8, .3)
+
+	var arrow = arrows[0]
+
+	if not is_instance_valid(arrow):
+		arrows.pop_front()
+		return
+
+	if arrow.GetArrowType() == input_arrow:
+		arrows.pop_front()
 		arrow.queue_free()
 
 		if arrows.is_empty():
@@ -103,4 +109,5 @@ func StartReelingMinigame() -> void:
 func EndFishing() -> void:
 	playerState = PlayerState.Idle
 	for child in vboxContainer.get_children():
+		arrows.pop_front()
 		child.queue_free()	
