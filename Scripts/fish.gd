@@ -64,7 +64,6 @@ func handleIdle(delta: float):
 			IdleBurstTimer.start(cooldown)
 			
 func startBurst():
-	print("starting burst")
 	idleBurstDirection = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)).normalized()
 	inActiveBurst = true
 	
@@ -119,20 +118,6 @@ func handleOrbit(delta:float):
 	)
 
 	global_position += movement * delta
-
-
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	if (area.is_in_group("Bobbers")):
-		center = area
-		state = State.ORBITING
-		
-func setInCatchRadius(val: bool):
-	inCatchRadius = val
-	self.modulate = Color.RED
-	
-func getInCatchRadius() -> bool:
-	return inCatchRadius
-
 
 func _on_idle_burst_timer_timeout() -> void:
 	inCooldown = false
