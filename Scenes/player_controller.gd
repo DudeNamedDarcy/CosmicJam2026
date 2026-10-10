@@ -3,6 +3,8 @@ class_name PlayerController
 enum PlayerState { Idle, Moving, Casting, Fishing, Reeling }
 const DIRECTIONAL_ARROW = preload("res://Scenes/directional_arrow.tscn")
 
+@onready var cameraController = $FollowCamera
+
 #Upgradeable
 var bobbersList: Array[PackedScene] = [
 	preload("res://Scenes/Bobbers/Pluto.tscn")
@@ -123,13 +125,16 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 		return
 
 	if arrow.GetArrowType() == input_arrow:
+		cameraController.ApplyShake(2.0)
 		arrows.pop_front()
 		arrow.queue_free()
 
 		if arrows.is_empty():
+			cameraController.ApplyShake(2.0)
 			print("Combo complete!")
 			EndFishing()
 	else:
+		cameraController.ApplyShake(7.0)
 		EndFishing()
 
 func CastBobbers(castPower: float) -> void:
