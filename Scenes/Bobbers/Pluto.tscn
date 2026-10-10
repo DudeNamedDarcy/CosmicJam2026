@@ -9,7 +9,11 @@ radius = 150.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6vkj"]
 radius = 50.0
 
-[node name="Pluto" type="Node2D" unique_id=1409956748 node_paths=PackedStringArray("bobberSprite", "orbitArea", "catchArea")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_yysiv"]
+radius = 24.020824
+
+[node name="Pluto2" type="CharacterBody2D" unique_id=2079869234 node_paths=PackedStringArray("bobberSprite", "orbitArea", "catchArea")]
+collision_mask = 0
 script = ExtResource("1_0hars")
 bobberType = "Pluto"
 bobberTexture = ExtResource("2_t5nd4")
@@ -34,4 +38,8 @@ texture = ExtResource("2_t5nd4")
 shape = SubResource("CircleShape2D_d6vkj")
 debug_color = Color(0.9077675, 0.24772924, 0.44506162, 0.41960785)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=379185242]
+shape = SubResource("CircleShape2D_yysiv")
+
+[connection signal="area_entered" from="Orbit Area" to="." method="_on_orbit_area_area_entered"]
 [connection signal="area_entered" from="Catch Area" to="." method="_on_catch_area_entered"]

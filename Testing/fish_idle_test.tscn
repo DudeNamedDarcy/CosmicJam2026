@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://c83q6j0j7rt8k"]
+
+[ext_resource type="Script" uid="uid://bsl6rs66kavfc" path="res://Testing/test.gd" id="1_3e3w2"]
+[ext_resource type="PackedScene" uid="uid://diga0gfwjyvcg" path="res://Scenes/Fish/moon_jelly.tscn" id="2_tll1q"]
+[ext_resource type="Script" uid="uid://xiufvpalhvi1" path="res://Scripts/orbit_manager.gd" id="3_3e3w2"]
+[ext_resource type="PackedScene" uid="uid://d3oxvy0grl375" path="res://Scenes/Fish/red_dwarf_herring.tscn" id="4_7ps7b"]
+[ext_resource type="PackedScene" uid="uid://b7m36bfujolqs" path="res://Scenes/Fish/supermassive_squid.tscn" id="5_8fcry"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gem73"]
+size = Vector2(422, 20)
+
+[node name="Node2D" type="Node2D" unique_id=698541144]
+script = ExtResource("1_3e3w2")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=730163826]
+
+[node name="Moon Jelly" parent="." unique_id=1060731580 node_paths=PackedStringArray("orbitManager") instance=ExtResource("2_tll1q")]
+position = Vector2(-4, 7)
+orbitManager = NodePath("../Node2D")
+
+[node name="TextEdit" type="TextEdit" parent="." unique_id=801115250]
+offset_left = -502.0
+offset_top = -262.0
+offset_right = -290.0
+offset_bottom = -157.0
+
+[node name="RigidBody2D" type="StaticBody2D" parent="." unique_id=641872922]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=2144108858]
+position = Vector2(3, -177)
+shape = SubResource("RectangleShape2D_gem73")
+
+[node name="RigidBody2D2" type="StaticBody2D" parent="." unique_id=363979661]
+position = Vector2(-317, 17)
+rotation = 1.5707964
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2" unique_id=1263512356]
+position = Vector2(-8.000006, -120)
+shape = SubResource("RectangleShape2D_gem73")
+
+[node name="RigidBody2D3" type="StaticBody2D" parent="." unique_id=1073964339]
+position = Vector2(99, 11)
+rotation = 1.5707964
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D3" unique_id=1912737430]
+position = Vector2(2.9999943, -123)
+shape = SubResource("RectangleShape2D_gem73")
+
+[node name="RigidBody2D4" type="StaticBody2D" parent="." unique_id=1828063799]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D4" unique_id=1486760459]
+position = Vector2(21, 210)
+shape = SubResource("RectangleShape2D_gem73")
+
+[node name="Button" type="Button" parent="." unique_id=380721746]
+offset_left = 403.0
+offset_top = 239.0
+offset_right = 537.0
+offset_bottom = 275.0
+
+[node name="Node2D" type="Node2D" parent="." unique_id=516935250]
+script = ExtResource("3_3e3w2")
+
+[node name="Red Dwarf Herring" parent="." unique_id=843615539 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_7ps7b")]
+position = Vector2(-41, 40)
+orbitManager = NodePath("../Node2D")
+
+[node name="Supermassive Squid" parent="." unique_id=674465445 node_paths=PackedStringArray("orbitManager") instance=ExtResource("5_8fcry")]
+position = Vector2(76, 3)
+orbitManager = NodePath("../Node2D")
+
+[node name="Red Dwarf Herring2" parent="." unique_id=1468583391 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_7ps7b")]
+position = Vector2(-24, -1)
+orbitManager = NodePath("../Node2D")
+
+[node name="Moon Jelly2" parent="." unique_id=1404079117 node_paths=PackedStringArray("orbitManager") instance=ExtResource("2_tll1q")]
+position = Vector2(35, 20)
+orbitManager = NodePath("../Node2D")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
