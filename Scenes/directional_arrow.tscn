@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://6iyexce2xnd8"]
 
-[ext_resource type="Texture2D" uid="uid://d368v0wdbfy83" path="res://arrow.png" id="1_57jjj"]
+[ext_resource type="Texture2D" uid="uid://d368v0wdbfy83" path="res://Assets/Placeholders/arrow.png" id="1_57jjj"]
 [ext_resource type="Script" uid="uid://ce7klkj3k7t2e" path="res://Scenes/directional_arrow.gd" id="2_j8ccx"]
-[ext_resource type="Texture2D" uid="uid://c88q4fk7aqnoc" path="res://rightarrow.png" id="3_nhav6"]
-[ext_resource type="Texture2D" uid="uid://ofiwbm6m0v5h" path="res://downarrow.png" id="4_1c1jp"]
-[ext_resource type="Texture2D" uid="uid://briduyyojc78d" path="res://leftarrow.png" id="5_phuuy"]
+[ext_resource type="Texture2D" uid="uid://c88q4fk7aqnoc" path="res://Assets/Placeholders/rightarrow.png" id="3_nhav6"]
+[ext_resource type="Texture2D" uid="uid://ofiwbm6m0v5h" path="res://Assets/Placeholders/downarrow.png" id="4_1c1jp"]
+[ext_resource type="Texture2D" uid="uid://briduyyojc78d" path="res://Assets/Placeholders/leftarrow.png" id="5_phuuy"]
 
 [node name="DirectionalArrow" type="Control" unique_id=1292948288]
 custom_minimum_size = Vector2(50, 50)
