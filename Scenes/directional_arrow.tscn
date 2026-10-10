@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://6iyexce2xnd8"]
+
+[ext_resource type="Texture2D" uid="uid://d368v0wdbfy83" path="res://arrow.png" id="1_57jjj"]
+[ext_resource type="Script" uid="uid://ce7klkj3k7t2e" path="res://Scenes/directional_arrow.gd" id="2_j8ccx"]
+[ext_resource type="Texture2D" uid="uid://c88q4fk7aqnoc" path="res://rightarrow.png" id="3_nhav6"]
+[ext_resource type="Texture2D" uid="uid://ofiwbm6m0v5h" path="res://downarrow.png" id="4_1c1jp"]
+[ext_resource type="Texture2D" uid="uid://briduyyojc78d" path="res://leftarrow.png" id="5_phuuy"]
+
+[node name="DirectionalArrow" type="Control" unique_id=1292948288]
+custom_minimum_size = Vector2(50, 50)
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1102.0
+offset_bottom = -598.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_j8ccx")
+arrows = Array[Texture]([ExtResource("1_57jjj"), ExtResource("3_nhav6"), ExtResource("4_1c1jp"), ExtResource("5_phuuy")])
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=171108889]
+custom_minimum_size = Vector2(50, 50)
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_57jjj")
+expand_mode = 5

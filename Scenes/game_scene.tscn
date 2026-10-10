@@ -22,8 +22,9 @@ position = Vector2(596, 361)
 scale = Vector2(1.7024027, 2.1599998)
 texture = ExtResource("1_b6fju")
 
-[node name="PlayerController" parent="." unique_id=743970108 instance=ExtResource("1_x87qo")]
+[node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer") instance=ExtResource("1_x87qo")]
 position = Vector2(95, 64)
+vboxContainer = NodePath("../VBoxContainer")
 
 [node name="PlayerBounds" type="StaticBody2D" parent="." unique_id=955427512]
 
@@ -42,3 +43,12 @@ shape = SubResource("WorldBoundaryShape2D_yf5fn")
 position = Vector2(1100, 700)
 rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_6h5vk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=220851325]
+custom_minimum_size = Vector2(50, 50)
+propagate_maximum_size = false
+offset_left = 428.0
+offset_top = 58.0
+offset_right = 478.0
+offset_bottom = 758.0
+theme_override_constants/separation = 4
