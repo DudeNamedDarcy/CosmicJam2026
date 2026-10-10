@@ -1,18 +1,20 @@
 [gd_scene format=3 uid="uid://cwjnrld5dv08f"]
 
 [ext_resource type="Script" uid="uid://1xpuxdo2gxyj" path="res://Scenes/player_controller.gd" id="1_5ur5x"]
-[ext_resource type="Texture2D" uid="uid://ds50j8nkhow7n" path="res://ship.png" id="1_rd8vp"]
+[ext_resource type="Texture2D" uid="uid://ds50j8nkhow7n" path="res://Assets/Placeholders/ship.png" id="1_rd8vp"]
+[ext_resource type="Texture2D" uid="uid://b2xsuola2rld5" path="res://Assets/Placeholders/aimer.png" id="3_dl1v4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(59, 43)
 
-[node name="PlayerController" type="CharacterBody2D" unique_id=743970108 node_paths=PackedStringArray("sprite")]
+[node name="PlayerController" type="CharacterBody2D" unique_id=743970108 node_paths=PackedStringArray("aimArrow", "sprite")]
 motion_mode = 1
 script = ExtResource("1_5ur5x")
 maxMovementSpeed = 200.0
 acceleration = 150.0
 friction = 180.0
 maxCastPower = 4.0
+aimArrow = NodePath("AimRingPivot/Sprite2D")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1811173736]
@@ -29,3 +31,10 @@ limit_right = 1100
 limit_bottom = 700
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+
+[node name="AimRingPivot" type="Node2D" parent="." unique_id=186638772]
+
+[node name="Sprite2D" type="Sprite2D" parent="AimRingPivot" unique_id=702906683]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_dl1v4")
+offset = Vector2(75, 0)

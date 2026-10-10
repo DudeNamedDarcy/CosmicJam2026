@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caiem5b8o2slt"
-path="res://.godot/imported/360_F_546468872_b9emNBQeVDLbBqicXaFyoBUwutWcHmbl.jpg-adf7aa197804beeaedb56cae1f291aa6.ctex"
+uid="uid://b2xsuola2rld5"
+path="res://.godot/imported/aimer.png-d32fb016af918c2b4d435540928cc75b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://360_F_546468872_b9emNBQeVDLbBqicXaFyoBUwutWcHmbl.jpg"
-dest_files=["res://.godot/imported/360_F_546468872_b9emNBQeVDLbBqicXaFyoBUwutWcHmbl.jpg-adf7aa197804beeaedb56cae1f291aa6.ctex"]
+source_file="res://Assets/Placeholders/aimer.png"
+dest_files=["res://.godot/imported/aimer.png-d32fb016af918c2b4d435540928cc75b.ctex"]
 
 [params]
 

@@ -3,23 +3,43 @@ enum PlayerState { Idle, Moving, Casting, Fishing, Reeling }
 const DIRECTIONAL_ARROW = preload("res://Scenes/directional_arrow.tscn")
 
 #Upgradeable
+var bobbersList: Array[PackedScene] = [
+	preload("res://Scenes/Bobbers/Pluto.tscn")
+]
 @export var maxMovementSpeed: float
 @export var acceleration: float
 @export var friction: float
 @export var maxCastPower: float
 
+@export var aimArrow: Sprite2D
 @export var sprite: Sprite2D
 @export var vboxContainer: VBoxContainer
+@export var castDistance: float = 150.0
+
 var playerState: PlayerState = PlayerState.Idle
 var characterDirection: Vector2
 var castPower: float = 0.0
 var arrows: Array[DirectionalArrow] = []
+var fishList: Array[Fish] = []
 
+	
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("CastReel"):
 		castPower += delta
-	print(PlayerState.find_key(playerState))
+	#print(PlayerState.find_key(playerState))
+	# Mouse aiming
+	var mouse_direction = get_global_mouse_position() - global_position
 
+	# Right joystick aiming
+	var joy_direction = Vector2(Input.get_joy_axis(0, JOY_AXIS_RIGHT_X), Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y))
+
+	# Use the joystick when it's being moved; otherwise use the mouse
+	if joy_direction.length() > 0.2:
+		aimArrow.rotation = joy_direction.angle()
+	else:
+		aimArrow.rotation = mouse_direction.angle()
+	#print(aimArrow.rotation)
+		
 func _physics_process(delta: float) -> void:
 	characterDirection.x = Input.get_axis("MoveLeft", "MoveRight")
 	characterDirection.y = Input.get_axis("MoveUp", "MoveDown")
@@ -56,10 +76,15 @@ func _physics_process(delta: float) -> void:
 			velocity = velocity.slide(normal)
 
 func _input(event: InputEvent) -> void:
-	
 	if Input.is_action_just_released("CastReel") && playerState == PlayerState.Casting:
 		print("Total hold duration was: ", min(castPower, maxCastPower)) 
+		if min(castPower, maxCastPower) < 0.5:
+			EndFishing()
+			castPower = 0.0
+			return
+			
 		playerState = PlayerState.Fishing #the time spent waiting for fish
+		CastBobbers(min(castPower, maxCastPower))
 		castPower = 0.0 
 	elif event.is_action_pressed("CastReel"):
 		if playerState == PlayerState.Idle || playerState == PlayerState.Moving:
@@ -98,9 +123,20 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 	else:
 		EndFishing()
 
+func CastBobbers(castPower: float) -> void:
+	for bobberScene in bobbersList:
+		var bobber: Bobber = bobberScene.instantiate()
+		print(bobber.getBobberName())
+		add_child(bobber)
+	
+
 func StartReelingMinigame() -> void:
-	var numFish = randi_range(1, 5) #replace with getfish
-	var comboLength = 4 + numFish - 1
+	for i in bobbersList:
+		fishList.append_array(bobbersList[i].reelIn())
+	if fishList.size() == 0:
+		EndFishing()
+		return
+	var comboLength = 4 + fishList.size() - 1
 	for i in comboLength:
 		var arrow_instance = DIRECTIONAL_ARROW.instantiate()
 		arrows.append(arrow_instance)

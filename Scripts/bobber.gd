@@ -14,6 +14,9 @@ var orbitRadius: float
 var catchRadius: float
 var caughtFish: Array[Fish]
 
+func getBobberName() -> String:
+	return bobberType
+	
 func _ready() -> void:
 	orbitRadius = startingOrbitRadius
 	catchRadius = startingCatchRadius
