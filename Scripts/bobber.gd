@@ -62,9 +62,9 @@ func handleCasting(delta: float):
 func _draw() -> void:
 	if state == State.FISHING:
 		# Orbit Circle
-		draw_circle(position, orbitRadius, Color.WHITE, false, 5.0)
+		draw_circle(Vector2.ZERO, orbitRadius, Color.WHITE, false, 3.0)
 		# Catch Circle
-		draw_circle(position, catchRadius, Color.WHITE, false, 2.0)
+		draw_circle(Vector2.ZERO, catchRadius, Color.WHITE, false, 1.0)
 	
 # call this function to get fish in range, after calling this function, queue free bobber and fish from caller function
 func reelIn() -> Array[Fish]:
@@ -111,3 +111,4 @@ func startFishing():
 	state = State.FISHING
 	orbitArea.monitoring = true
 	catchArea.monitoring = true
+	queue_redraw()

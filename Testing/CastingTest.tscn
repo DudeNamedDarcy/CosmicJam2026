@@ -14,7 +14,6 @@
 [node name="Caster" type="Node2D" parent="." unique_id=1615851469]
 script = ExtResource("1_qcewj")
 bobbersList = Array[PackedScene]([ExtResource("2_s74hc"), ExtResource("2_s74hc"), ExtResource("2_s74hc"), ExtResource("2_s74hc")])
-castPower = 200.0
 castRandomSpread = 0.5
 castRandomPower = 75.0
 

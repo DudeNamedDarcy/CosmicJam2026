@@ -12,7 +12,7 @@ radius = 50.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_yysiv"]
 radius = 24.020824
 
-[node name="Pluto" type="CharacterBody2D" unique_id=2079869234 node_paths=PackedStringArray("bobberSprite", "orbitArea", "catchArea")]
+[node name="Pluto2" type="CharacterBody2D" unique_id=2079869234 node_paths=PackedStringArray("bobberSprite", "orbitArea", "catchArea")]
 collision_mask = 0
 script = ExtResource("1_0hars")
 bobberType = "Pluto"
