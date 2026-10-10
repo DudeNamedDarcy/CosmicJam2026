@@ -1,14 +1,36 @@
 [gd_scene format=3 uid="uid://chbnvl3ke5ij"]
 
 [ext_resource type="Script" uid="uid://bnomxs6v8sm6g" path="res://Scenes/Menus/credits_controller.gd" id="1_snsnl"]
+[ext_resource type="AudioStream" uid="uid://dn27r08fperji" path="res://Scenes/Audio/Music/endcredits_normal.mp3" id="2_vbr67"]
+[ext_resource type="VideoStream" uid="uid://d2666aeqc4t6k" path="res://Scenes/Video/dpu47-ydq5k.ogv" id="3_f0gr2"]
 
 [node name="WinCredits" type="Node2D" unique_id=1059538705]
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=728846895]
+visibility_layer = 2
 offset_right = 1155.0
 offset_bottom = 646.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer" unique_id=591619601]
+visibility_layer = 2
+layout_mode = 2
+offset_transform_scale = Vector2(9.935, 9.935)
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelContainer/PanelContainer2" unique_id=1436842999]
+layout_mode = 2
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="PanelContainer/PanelContainer2/AspectRatioContainer" unique_id=1914601642]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.715, 1.715)
+stream = ExtResource("3_f0gr2")
+volume_db = -11.1
+autoplay = true
+loop = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=140269366]
 layout_mode = 2
@@ -40,6 +62,7 @@ Katrina Frain
 
 Darcy Loane-Billings
 
+
 Visuals:
 
 Norah Wilcox
@@ -52,11 +75,14 @@ Tess Leblanc
 Simon Menad
 
 
-Thank you to CGD for organizing.
-
-Thank you to Renaud Bernier for being very handsome."
+Thank you to CGD for organizing."
 horizontal_alignment = 1
 vertical_alignment = 1
 max_lines_visible = 87
 script = ExtResource("1_snsnl")
 metadata/_edit_group_ = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="PanelContainer/VBoxContainer/Label" unique_id=35715337]
+stream = ExtResource("2_vbr67")
+autoplay = true
+parameters/looping = true
