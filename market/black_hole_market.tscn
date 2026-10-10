@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://bqx38paaff4tm"]
+
+[ext_resource type="Script" uid="uid://bxkqrhvxfy0ky" path="res://market/black_hole_market.gd" id="1_1x0ya"]
+[ext_resource type="AudioStream" uid="uid://dfjggw5mqn4k6" path="res://cha_ching_fixed.wav" id="2_a7kth"]
+
+[node name="BlackHoleMarket" type="CanvasLayer" unique_id=1787878085]
+script = ExtResource("1_1x0ya")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=592125901]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.60784316)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=426366291]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -301.0
+offset_right = 445.0
+offset_bottom = 301.0
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1812575564]
+layout_mode = 2
+text = "UPGRADES!!!
+1 GLORPILLION% OFF!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OrbitRadiusButton" type="Button" parent="VBoxContainer" unique_id=1910482011]
+layout_mode = 2
+text = "Upgrade Orbit Radius"
+
+[node name="OrbitRadiusProgress" type="ProgressBar" parent="VBoxContainer" unique_id=2120594186]
+layout_mode = 2
+
+[node name="CatchRadiusButton" type="Button" parent="VBoxContainer" unique_id=2122769251]
+layout_mode = 2
+text = "Upgrade Catch Radius"
+
+[node name="CatchRadiusProgress" type="ProgressBar" parent="VBoxContainer" unique_id=1156558673]
+layout_mode = 2
+
+[node name="FasterShipButton" type="Button" parent="VBoxContainer" unique_id=1399558802]
+layout_mode = 2
+text = "Faster Ship"
+
+[node name="FasterShipProgress" type="ProgressBar" parent="VBoxContainer" unique_id=258130769]
+layout_mode = 2
+
+[node name="LargerCombosButton" type="Button" parent="VBoxContainer" unique_id=742671000]
+layout_mode = 2
+text = "Larger Combos"
+
+[node name="LargerCombosProgress" type="ProgressBar" parent="VBoxContainer" unique_id=1765536743]
+layout_mode = 2
+
+[node name="LongerComboButton" type="Button" parent="VBoxContainer" unique_id=485726108]
+layout_mode = 2
+text = "Longer Combo Time"
+
+[node name="LongerComboProgress" type="ProgressBar" parent="VBoxContainer" unique_id=1980857853]
+layout_mode = 2
+
+[node name="LargerFuelButton" type="Button" parent="VBoxContainer" unique_id=1366612870]
+layout_mode = 2
+text = "Larger Fuel Tank
+"
+
+[node name="LargerFuelProgress" type="ProgressBar" parent="VBoxContainer" unique_id=691125284]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1678329034]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -447.0
+offset_top = -323.5
+offset_bottom = 323.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="MoneyLabel" type="Label" parent="VBoxContainer2" unique_id=1153007020]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Money: XXXX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WarningLabel" type="Label" parent="VBoxContainer2" unique_id=1007154275]
+unique_name_in_owner = true
+layout_mode = 2
+text = "WARNING HERE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChaChingAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=348422799]
+stream = ExtResource("2_a7kth")
+
+[connection signal="pressed" from="VBoxContainer/OrbitRadiusButton" to="." method="_on_orbit_radius_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/CatchRadiusButton" to="." method="_on_catch_radius_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/FasterShipButton" to="." method="_on_faster_ship_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/LargerCombosButton" to="." method="_on_larger_combos_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/LongerComboButton" to="." method="_on_longer_combo_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/LargerFuelButton" to="." method="_on_larger_fuel_button_pressed"]
