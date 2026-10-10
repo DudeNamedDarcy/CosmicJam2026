@@ -1,17 +1,20 @@
 extends CharacterBody2D
 enum PlayerState { Idle, Moving, Casting, Fishing, Reeling }
 
+#Upgradeable
+@export var maxMovementSpeed: float
+@export var acceleration: float
+@export var friction: float
+@export var maxCastPower: float
+
 @export var sprite: Sprite2D
-@export var maxMovementSpeed: float = 150.0
-@export var acceleration: float = 400.0
-@export var friction: float = 600.0
 var playerState: PlayerState = PlayerState.Idle
 var characterDirection: Vector2
-var holdDuration: float = 0.0
+var castPower: float = 0.0
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("CastReel"):
-		holdDuration += delta
+		castPower += delta
 	print(PlayerState.find_key(playerState))
 	
 func _physics_process(delta: float) -> void:
@@ -58,9 +61,9 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	
 	if Input.is_action_just_released("CastReel") && playerState == PlayerState.Casting:
-		print("Total hold duration was: ", holdDuration) 
+		print("Total hold duration was: ", min(castPower, maxCastPower)) 
 		playerState = PlayerState.Fishing #the time spent waiting for fish
-		holdDuration = 0.0 
+		castPower = 0.0 
 		
 	if event.is_action_pressed("CastReel"):
 		if playerState == PlayerState.Idle || playerState == PlayerState.Moving:
