@@ -1,11 +1,25 @@
-extends Node2D
+extends CharacterBody2D
 class_name Fish
 
 enum State { IDLE, ORBITING }
 
+@export_category("Fish Type Information")
 @export var typeName: String = "default"
 @export var value: float = 0.0
 @export var orbitManager: OrbitManager
+
+
+@export_category("Idle Movement")
+@export var IdleBurstTimer: Timer
+@export var idleBurstSpeed = 100.0
+@export var maxCooldownTime = 3.0
+@export var deceleration = 50
+
+var idleBurstDirection: Vector2
+var idleBurstDistance: float
+var inActiveBurst: bool = false
+var inCooldown: bool = false
+var idleSpeed: float
 
 var state: State
 var center: Node2D
@@ -26,7 +40,33 @@ func _process(delta: float) -> void:
 			handleOrbit(delta)
 	
 func handleIdle(delta: float):
-	pass
+	if inCooldown:
+		return
+
+	if not inActiveBurst:
+		idleSpeed = idleBurstSpeed
+		startBurst()
+	else:
+		velocity = idleBurstDirection * idleSpeed
+		idleSpeed = move_toward(idleSpeed, 0, deceleration * delta)
+
+		var collision = move_and_collide(velocity * delta)
+
+		if collision:
+			idleBurstDirection = idleBurstDirection.bounce(
+				collision.get_normal()
+			).normalized()
+
+		if idleSpeed <= 0.0:
+			inActiveBurst = false
+			inCooldown = true
+			var cooldown = randf_range(1.0, maxCooldownTime)
+			IdleBurstTimer.start(cooldown)
+			
+func startBurst():
+	print("starting burst")
+	idleBurstDirection = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)).normalized()
+	inActiveBurst = true
 	
 func handleOrbit(delta:float):
 	if center == null:
@@ -92,3 +132,7 @@ func setInCatchRadius(val: bool):
 	
 func getInCatchRadius() -> bool:
 	return inCatchRadius
+
+
+func _on_idle_burst_timer_timeout() -> void:
+	inCooldown = false
