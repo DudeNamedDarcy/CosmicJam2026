@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://gi43qa15fksh"]
+
+[ext_resource type="Texture2D" uid="uid://caiem5b8o2slt" path="res://360_F_546468872_b9emNBQeVDLbBqicXaFyoBUwutWcHmbl.jpg" id="1_b6fju"]
+[ext_resource type="PackedScene" uid="uid://cwjnrld5dv08f" path="res://Scenes/player_controller.tscn" id="1_x87qo"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_b6fju"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yf5fn"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6h5vk"]
+
+[node name="GameScene" type="Node2D" unique_id=459147446]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1596285265]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(596, 361)
+scale = Vector2(1.7024027, 2.1599998)
+texture = ExtResource("1_b6fju")
+
+[node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer") instance=ExtResource("1_x87qo")]
+position = Vector2(95, 64)
+vboxContainer = NodePath("../VBoxContainer")
+
+[node name="PlayerBounds" type="StaticBody2D" parent="." unique_id=955427512]
+
+[node name="WorldBoundTopLeft" type="CollisionShape2D" parent="PlayerBounds" unique_id=823435614]
+shape = SubResource("WorldBoundaryShape2D_g4v7s")
+
+[node name="WorldBoundTopLeft2" type="CollisionShape2D" parent="PlayerBounds" unique_id=1194345490]
+rotation = -1.5707964
+shape = SubResource("WorldBoundaryShape2D_b6fju")
+
+[node name="WorldBoundBottomRight" type="CollisionShape2D" parent="PlayerBounds" unique_id=56632311]
+position = Vector2(1100, 700)
+shape = SubResource("WorldBoundaryShape2D_yf5fn")
+
+[node name="WorldBoundBottomRight2" type="CollisionShape2D" parent="PlayerBounds" unique_id=1059188945]
+position = Vector2(1100, 700)
+rotation = -1.5707964
+shape = SubResource("WorldBoundaryShape2D_6h5vk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=220851325]
+custom_minimum_size = Vector2(50, 50)
+propagate_maximum_size = false
+offset_left = 428.0
+offset_top = 58.0
+offset_right = 478.0
+offset_bottom = 758.0
+theme_override_constants/separation = 4
