@@ -174,6 +174,7 @@ func StartReelingMinigame() -> void:
 	for activeBobber in activeBobbers:
 		fishList.append_array(activeBobber.reelIn())
 		print(fishList.size())
+		activeBobber.killAllFish()
 	if fishList.size() == 0:
 		EndFishing(false)
 		DeletePlanets()
@@ -195,6 +196,7 @@ func DeletePlanets() -> void:
 	#delete planets
 	for child in planetParent.get_children():
 		child.queue_free()
+	
 	activeBobbers.clear()
 	
 func EndFishing(success: bool) -> void:
