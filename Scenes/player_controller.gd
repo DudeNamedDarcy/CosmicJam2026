@@ -8,7 +8,15 @@ const COMBO_FISH = preload("res://Scenes/Fish/fish_combo_sprite.tscn")
 
 #Upgradeable
 var bobbersList: Array[PackedScene] = [
-	preload("res://Scenes/Bobbers/Pluto.tscn")
+	preload("res://Scenes/Bobbers/Pluto.tscn"),
+	#preload("res://Scenes/Bobbers/Mercury.tscn"),
+	#preload("res://Scenes/Bobbers/Venus.tscn"),
+	#preload("res://Scenes/Bobbers/Earth.tscn"),
+	#preload("res://Scenes/Bobbers/Mars.tscn"),
+	#preload("res://Scenes/Bobbers/Neptune.tscn"),
+	#preload("res://Scenes/Bobbers/Uranus.tscn"),
+	#preload("res://Scenes/Bobbers/Saturn.tscn"),
+	preload("res://Scenes/Bobbers/Jupiter.tscn")
 ]
 @export_category("Movement")
 @export var maxMovementSpeed: float
@@ -79,8 +87,8 @@ func _physics_process(delta: float) -> void:
 
 	# Smooth acceleration and deceleration
 	if characterDirection != Vector2.ZERO:
-		var target_velocity = characterDirection * maxMovementSpeed
-		velocity = velocity.move_toward(target_velocity, acceleration * delta)
+		var target_velocity = characterDirection * (maxMovementSpeed + (30 * (ScoreAndUpgrades.faster_ship_progress)))
+		velocity = velocity.move_toward(target_velocity, (acceleration + (50 * (ScoreAndUpgrades.faster_ship_progress))) * delta)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 

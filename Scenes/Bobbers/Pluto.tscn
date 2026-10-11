@@ -1,40 +1,39 @@
 [gd_scene format=3 uid="uid://n45whogjbh85"]
 
 [ext_resource type="Script" uid="uid://bk0w7ii4wq8ex" path="res://Scripts/bobber.gd" id="1_0hars"]
-[ext_resource type="Texture2D" uid="uid://pwuor40iyqfd" path="res://Assets/Placeholders/planet_bobber.png" id="2_t5nd4"]
+[ext_resource type="Texture2D" uid="uid://2u4t8pcme6ak" path="res://Scenes/Bobbers/planets-pluto.png" id="3_t5nd4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gem73"]
-radius = 150.0
+radius = 40.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6vkj"]
-radius = 50.0
+radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yysiv"]
-radius = 24.020824
+radius = 6.0
 
 [node name="Pluto2" type="CharacterBody2D" unique_id=2079869234 node_paths=PackedStringArray("bobberSprite", "orbitArea", "catchArea")]
 collision_mask = 0
 script = ExtResource("1_0hars")
 bobberType = "Pluto"
-bobberTexture = ExtResource("2_t5nd4")
-startingOrbitRadius = 150.0
-startingCatchRadius = 50.0
+bobberTexture = ExtResource("3_t5nd4")
 bobberSprite = NodePath("Planet")
 orbitArea = NodePath("Orbit Area")
 catchArea = NodePath("Catch Area")
 
 [node name="Orbit Area" type="Area2D" parent="." unique_id=1929446688 groups=["Bobbers"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Orbit Area" unique_id=1940686577]
+[node name="OrbitAreaCollision" type="CollisionShape2D" parent="Orbit Area" unique_id=1940686577]
 shape = SubResource("CircleShape2D_gem73")
 
 [node name="Planet" type="Sprite2D" parent="." unique_id=1052726689]
-scale = Vector2(0.023500001, 0.023500001)
-texture = ExtResource("2_t5nd4")
+z_index = 5
+scale = Vector2(2, 2)
+texture = ExtResource("3_t5nd4")
 
 [node name="Catch Area" type="Area2D" parent="." unique_id=239105006]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Catch Area" unique_id=1099348346]
+[node name="CatchAreaCollision" type="CollisionShape2D" parent="Catch Area" unique_id=1099348346]
 shape = SubResource("CircleShape2D_d6vkj")
 debug_color = Color(0.9077675, 0.24772924, 0.44506162, 0.41960785)
 

@@ -41,6 +41,9 @@ var purchase_dialogue: Array[String] = ["Finally!",
 "Just big and greedy, you are"
 ]
 
+var broke_dialogue: Array[String] = ["Imagine being broke LOL",
+"Come back when you're a little... richer!"]
+
 var totalMoney = (ScoreAndUpgrades.money)
 
 var out_of_money_bool = true
@@ -90,7 +93,7 @@ func _handle_money(given_progress_bar: ProgressBar, moneyAmount:int, given_butto
 		activate_buy_dialogue()
 		print("enough money!")
 		totalMoney -= moneyAmount
-		given_progress_bar.value += 25
+		given_progress_bar.value += 50
 		cha_ching_audio_stream_player.play()
 		if given_progress_bar.value >= 100:
 			given_button.text = "Sold Out!"

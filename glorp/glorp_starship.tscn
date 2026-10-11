@@ -1,27 +1,70 @@
 [gd_scene format=3 uid="uid://bvboagsrhp2c7"]
 
 [ext_resource type="Script" uid="uid://b65ugcwrx4434" path="res://glorp/glorp_starship.gd" id="1_i1ns5"]
-[ext_resource type="Texture2D" uid="uid://lgvcj031rd7t" path="res://icon.svg" id="1_qkx32"]
+[ext_resource type="Texture2D" uid="uid://bct0vb0d3stvf" path="res://glorp/glorps-craft.png" id="2_i1ns5"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_768q2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7mqc"]
+atlas = ExtResource("2_i1ns5")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyaj0"]
+atlas = ExtResource("2_i1ns5")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmv15"]
+atlas = ExtResource("2_i1ns5")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kj1c"]
+atlas = ExtResource("2_i1ns5")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nd0cn"]
+atlas = ExtResource("2_i1ns5")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmdvt"]
+atlas = ExtResource("2_i1ns5")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3b8x7"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_qkx32")
+"texture": SubResource("AtlasTexture_y7mqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyaj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmv15")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kj1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nd0cn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmdvt")
 }],
 "loop": 1,
-"name": &"default",
-"speed": 5.0
+"name": &"hover",
+"speed": 6.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_768q2"]
-radius = 167.36188
+radius = 130.0
 
 [node name="GlorpStarship" type="Node2D" unique_id=1172553172]
 script = ExtResource("1_i1ns5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1943480814]
-sprite_frames = SubResource("SpriteFrames_768q2")
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_3b8x7")
+animation = &"hover"
+autoplay = "hover"
+frame_progress = 0.81959695
 
 [node name="Area2D" type="Area2D" parent="." unique_id=937238418]
 
