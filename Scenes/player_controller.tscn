@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://d0d4myx373kr1" path="res://Assets/Final/boat-move.png" id="4_3b8x7"]
 [ext_resource type="Texture2D" uid="uid://cwncb0hdu7ay6" path="res://Assets/Final/aimer.png" id="5_1esxm"]
 [ext_resource type="Script" uid="uid://f5wiuad0pepu" path="res://Scenes/follow_camera.gd" id="5_3b8x7"]
-[ext_resource type="PackedScene" uid="uid://bqx38paaff4tm" path="res://market/black_hole_market.tscn" id="7_53kst"]
 [ext_resource type="Texture2D" uid="uid://ttch4ompine3" path="res://market/a-button.png" id="8_1cmmd"]
 [ext_resource type="Texture2D" uid="uid://c5wn4mxv08165" path="res://market/e-button.png" id="8_iy555"]
 
@@ -325,8 +324,6 @@ offset = Vector2(50, 0)
 [node name="AreaCollision" type="CollisionShape2D" parent="Area2D" unique_id=1705928021]
 scale = Vector2(1.1, 1.1)
 shape = SubResource("RectangleShape2D_g4v7s")
-
-[node name="BlackHoleMarket" parent="." unique_id=1787878085 instance=ExtResource("7_53kst")]
 
 [node name="InputButton" type="AnimatedSprite2D" parent="." unique_id=1040862489]
 position = Vector2(0, -39.999996)
