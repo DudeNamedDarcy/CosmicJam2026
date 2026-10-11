@@ -2,69 +2,7 @@
 
 [ext_resource type="Script" uid="uid://px7q08a74a0y" path="res://Scripts/fish.gd" id="1_o1kyx"]
 [ext_resource type="Texture2D" uid="uid://ba1xwshqevdfa" path="res://Assets/Final/goldfish.png" id="2_o1kyx"]
-[ext_resource type="Texture2D" uid="uid://g48vbhsqoua7" path="res://Assets/Final/fish stars/shiny.png" id="3_o1kyx"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b483y"]
-atlas = ExtResource("3_o1kyx")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c4blg"]
-atlas = ExtResource("3_o1kyx")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7myxm"]
-atlas = ExtResource("3_o1kyx")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bbhp1"]
-atlas = ExtResource("3_o1kyx")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7rwdv"]
-atlas = ExtResource("3_o1kyx")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y1vu6"]
-atlas = ExtResource("3_o1kyx")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_whgp4"]
-atlas = ExtResource("3_o1kyx")
-region = Rect2(192, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_gem73"]
-animations = [{
-"frames": [],
-"loop": 1,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b483y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c4blg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7myxm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bbhp1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7rwdv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y1vu6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_whgp4")
-}],
-"loop": 1,
-"name": &"new_animation",
-"speed": 5.0
-}]
+[ext_resource type="PackedScene" uid="uid://bqsd77la320wk" path="res://Scenes/Fish/fish_star_animation.tscn" id="3_o1kyx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gem73"]
 size = Vector2(15, 13)
@@ -81,10 +19,7 @@ fishTexture = ExtResource("2_o1kyx")
 probabilityWeight = 10
 IdleBurstTimer = NodePath("IdleBurstTimer")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1257187087]
-scale = Vector2(0.008, 0.008)
-sprite_frames = SubResource("SpriteFrames_gem73")
-animation = &"new_animation"
+[node name="Fish Star Animation" parent="." unique_id=196298808 instance=ExtResource("3_o1kyx")]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=889486571]
 

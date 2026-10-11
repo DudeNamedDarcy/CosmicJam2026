@@ -29,6 +29,9 @@ func _ready() -> void:
 	state = State.IDLE
 	center = null
 	inCatchRadius = false
+	$"Fish Star Animation".scale = Vector2(0,0)
+	var tween = get_tree().create_tween()
+	tween.tween_property($"Fish Star Animation", "scale", Vector2(1,1), 1.0)
 
 func _process(delta: float) -> void:
 	match state:

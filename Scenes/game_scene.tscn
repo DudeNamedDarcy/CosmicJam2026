@@ -12,10 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://co5te5e76e4vk" path="res://Scenes/Fish/patrick_starfish.tscn" id="8_ldntv"]
 [ext_resource type="PackedScene" uid="uid://w7gafq2uiia1" path="res://Scenes/Fish/gold_fish.tscn" id="9_w8jfd"]
 [ext_resource type="PackedScene" uid="uid://wgsgx4i8wbue" path="res://Scenes/Fish/big_fish.tscn" id="10_a7fet"]
-[ext_resource type="Texture2D" uid="uid://dgqiixt65f3lo" path="res://Assets/Final/big-asteroid.png" id="13_w8jfd"]
 [ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="13_wywco"]
-[ext_resource type="Texture2D" uid="uid://cll5bs5f8a81p" path="res://Assets/Final/medium-asteroid.png" id="14_a7fet"]
-[ext_resource type="Texture2D" uid="uid://wb6i18c7r4pi" path="res://Assets/Final/small-asteroid.png" id="15_8m72m"]
 [ext_resource type="Texture2D" uid="uid://co5l18et1fp0f" path="res://Assets/Final/nebulae/barfcoloured-nebula.png" id="16_vtwju"]
 [ext_resource type="Texture2D" uid="uid://67jw5hhk1xk6" path="res://Assets/Final/nebulae/blue-nebula.png" id="17_fnr0w"]
 [ext_resource type="Texture2D" uid="uid://b5qgb54g2bdhj" path="res://Assets/Final/nebulae/eye-nebula.png" id="18_gqlrj"]
@@ -23,7 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://ocvuuc3kyadf" path="res://Assets/Final/nebulae/puple-nebula.png" id="20_m8c54"]
 [ext_resource type="Texture2D" uid="uid://y1d3540brc2h" path="res://Assets/Final/nebulae/purple-yellow-nebula.png" id="21_5q52j"]
 [ext_resource type="Texture2D" uid="uid://3b8yixiru3hp" path="res://Assets/Final/nebulae/rainbow-nebula.png" id="22_e624q"]
-[ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="13_wywco"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
 normal = Vector2(0, 1)
@@ -59,6 +55,7 @@ scale = Vector2(1.7024027, 2.1599998)
 texture = ExtResource("1_b6fju")
 
 [node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer", "moneyVboxContainer", "fishSpawner") instance=ExtResource("1_x87qo")]
+z_index = 1
 collision_layer = 4
 collision_mask = 0
 vboxContainer = NodePath("ComboVboxContainer")
