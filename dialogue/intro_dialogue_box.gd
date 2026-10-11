@@ -17,23 +17,26 @@ var pluto_dialogue: Array[String] = ["Ok. All I'm giving you is this tiny dwarf 
 
 var mercury_dialogue: Array[String] = ["Huh. You're doing better than I thought.",
 "Ok, here's a larger bobber for you. Name's Mercury.",
-"There's even larger ones from where that iron ball came from if you keep this up!"]
+"Now, I want some Moon Jelly! Get me some and I'll give you a bobber even larger than this hunk of iron!"]
 
-var mars_dialogue: Array[String] = ["COD DAMN!! For a pathetic little starfisher, you’ve got guts! Those Red Dwarf Herring are a real pita bread.
-", "You’re far from done, son. Now, I want a big tasty Angler Fish. 
-Oh, and you’ll need this."]
+var mars_dialogue: Array[String] = ["Wow! Color me zorped!",
+"That's what impressed means in my language!",
+"Now, with the Red Planet bobber I'm giving you, I'm in the mood for some Red Dwarf Herring!"]
 
-var venus_dialogue: Array[String] = ["Whoa! That was quick! My kitty stomach barely started growling.
-", "Bring me r.dia. You’re gonna need this here Venus."]
+var venus_dialogue: Array[String] = ["COD DAMN!! For a pathetic little starfisher, you’ve got guts! Those Red Dwarf Herring are a real pita bread.
+", "You’re far from done, son. Now, I want a big tasty Angler Fish.", 
+"Oh, and feel free to have this Venus bobber!"]
 
-var earth_dialogue: Array[String] = ["YAAYYYY!! r.dia !! My fifth favourite…:
+
+var earth_dialogue: Array[String] = ["Whoa! That was quick! My kitty stomach barely started growling.",
+"Bring me r.dia. You’re gonna need this Venus bobber to reel them in!"]
+
+var neptune_dialogue: Array[String] = ["YAAYYYY!! r.dia !! My fifth favourite…:
 ", "Close behind Gas Giant Squid!"]
 
-var neptune_dialogue: Array[String] = ["You’re not getting tired of this, are you? STILL DON’T CARE!!
+var uranus_dialogue: Array[String] = ["You’re not getting tired of this, are you? STILL DON’T CARE!!
 ", "Cold temp surface for a nice cold Patrick Starfish (licks upper lip with both tongues)."]
 
-var uranus_dialogue: Array[String] = ["DINNER TIIIIME!! Hehehe.
-", "Alright, big leagues now, m’boy. Gold Fish."]
 
 var saturn_dialogue: Array[String] = ["That caviar gave me dire dire diarrhea!!
 ", "I need another Gold Fish to rehydrate."]
