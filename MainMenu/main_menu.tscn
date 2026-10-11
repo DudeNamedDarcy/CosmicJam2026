@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://b4obqg1s8xc7s"]
 
 [ext_resource type="Script" uid="uid://cgk5p01hihcku" path="res://MainMenu/main_menu.gd" id="1_3w4mj"]
-[ext_resource type="AudioStream" uid="uid://k05nkoq65th6" path="res://MainMenu/menu_105bpm.wav" id="1_nhkf3"]
 [ext_resource type="Script" uid="uid://b61kk0hg6mbb2" path="res://MainMenu/start_game_button.gd" id="2_po2gx"]
 [ext_resource type="Script" uid="uid://clyovkxg4cj4f" path="res://MainMenu/addons/perspective_quads/scripts/nodes/perspective_viewport_container_2d.gd" id="3_5de1l"]
+[ext_resource type="AudioStream" uid="uid://tj7s3l3plkm4" path="res://MainMenu/menu_105bpm.mp3" id="3_po2gx"]
 [ext_resource type="PackedScene" uid="uid://dsiq0ku6hhr" path="res://MainMenu/second_menu_part.tscn" id="4_ajn5b"]
 
 [node name="MainMenu" type="Control" unique_id=402787751 node_paths=PackedStringArray("screenFade")]
@@ -75,7 +75,7 @@ layout_mode = 2
 text = "Quit Game"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1039320173]
-stream = ExtResource("1_nhkf3")
+stream = ExtResource("3_po2gx")
 autoplay = true
 
 [node name="PerspectiveViewportContainer2D" type="Node2D" parent="." unique_id=1891585155]
