@@ -40,10 +40,19 @@ var arrows: Array[DirectionalArrow] = []
 var fishList: Array[Fish] = []
 var activeBobbers: Array[Bobber] = []
 var comboFishList: Array[FishComboSprite] = []
-	
+var aim_arrow_base_scale: float
+
+func _ready() -> void:
+	aim_arrow_base_scale = aimArrow.scale.x
+
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("CastReel"):
 		castPower += delta
+	var charge_ratio: float = 0.0
+	if maxCastPower > 0.0:
+		charge_ratio = clamp(castPower / maxCastPower, 0.0, 1.0)
+
+	aimArrow.scale = Vector2(aim_arrow_base_scale * (1.0 + charge_ratio), aim_arrow_base_scale * (1.0 + charge_ratio))
 	#print(PlayerState.find_key(playerState))
 	AimMouse()
 		
@@ -151,6 +160,8 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 
 func CastBobbers(castPower: float) -> void:
 	aimArrow.hide()
+	aimArrow.scale = Vector2(aim_arrow_base_scale, aim_arrow_base_scale)
+
 	var cast_direction: Vector2 = Vector2.RIGHT.rotated(aimArrow.global_rotation).normalized()
 	for bobberScene in bobbersList:
 		var bobber: Bobber = bobberScene.instantiate()
