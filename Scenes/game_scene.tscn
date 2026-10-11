@@ -5,8 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://diga0gfwjyvcg" path="res://Scenes/Fish/moon_jelly.tscn" id="3_rgj8m"]
 [ext_resource type="PackedScene" uid="uid://d3oxvy0grl375" path="res://Scenes/Fish/red_dwarf_herring.tscn" id="4_2fmhe"]
 [ext_resource type="PackedScene" uid="uid://bvboagsrhp2c7" path="res://glorp/glorp_starship.tscn" id="6_2fmhe"]
+[ext_resource type="PackedScene" uid="uid://b7m36bfujolqs" path="res://Scenes/Fish/supermassive_squid.tscn" id="6_4xiap"]
 [ext_resource type="Script" uid="uid://c4evtl6kbwuw2" path="res://Scenes/fish_spawner.gd" id="6_rgj8m"]
 [ext_resource type="Texture2D" uid="uid://ck5uv4d76r727" path="res://Assets/Final/Parallax/stars.png" id="7_2fmhe"]
+[ext_resource type="PackedScene" uid="uid://dgyunkaa44mbx" path="res://Scenes/Fish/starfish.tscn" id="7_wywco"]
+[ext_resource type="PackedScene" uid="uid://co5te5e76e4vk" path="res://Scenes/Fish/patrick_starfish.tscn" id="8_ldntv"]
+[ext_resource type="PackedScene" uid="uid://w7gafq2uiia1" path="res://Scenes/Fish/gold_fish.tscn" id="9_w8jfd"]
+[ext_resource type="PackedScene" uid="uid://wgsgx4i8wbue" path="res://Scenes/Fish/big_fish.tscn" id="10_a7fet"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
 normal = Vector2(0, 1)
@@ -41,12 +46,13 @@ position = Vector2(596, 361)
 scale = Vector2(1.7024027, 2.1599998)
 texture = ExtResource("1_b6fju")
 
-[node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer") instance=ExtResource("1_x87qo")]
+[node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer", "fishSpawner") instance=ExtResource("1_x87qo")]
 position = Vector2(95, 64)
 collision_layer = 4
 collision_mask = 0
 castRandomSpread = 0.77
 vboxContainer = NodePath("VBoxContainer")
+fishSpawner = NodePath("../Fish Spawner")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PlayerController" unique_id=220851325]
 custom_minimum_size = Vector2(50, 50)
@@ -82,12 +88,17 @@ position = Vector2(576, 93)
 script = ExtResource("6_rgj8m")
 fishDict = Dictionary[PackedScene, int]({
 ExtResource("3_rgj8m"): 1,
-ExtResource("4_2fmhe"): 1
+ExtResource("4_2fmhe"): 1,
+ExtResource("6_4xiap"): 1,
+ExtResource("7_wywco"): 1,
+ExtResource("8_ldntv"): 1,
+ExtResource("9_w8jfd"): 1,
+ExtResource("10_a7fet"): 1
 })
 spawnableArea = NodePath("../SpawnableArea")
 
 [node name="Spawn Timer" type="Timer" parent="Fish Spawner" unique_id=1446234030]
-wait_time = 3.0
+wait_time = 0.2
 
 [node name="SpawnableArea" type="Polygon2D" parent="." unique_id=1898762879]
 visible = false
