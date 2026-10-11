@@ -63,6 +63,13 @@ var quit_pressed: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	visibility_changed.connect(_on_visibility_changed)
+
+func _on_visibility_changed() -> void:
+	if visible:
+		initialize_market()
+
+func initialize_market() -> void:
 	broke_alert_label.hide()
 	dialogue_box.dialogue = intro_dialogue
 	dialogue_box.current_dialogue_index = randi_range(0, len(intro_dialogue) -1)
@@ -178,4 +185,6 @@ func _leave_market() -> void:
 	dialogue_box.current_dialogue_index = randi_range(0, len(leave_dialogue) -1)
 	dialogue_box.show_text(dialogue_box.dialogue)
 	await get_tree().create_timer((len(leave_dialogue[dialogue_box.current_dialogue_index]) / 16.0) + 1.5).timeout
-	get_tree().quit()
+	quit_pressed = false
+	ScoreAndUpgrades.in_market = false
+	visible = false

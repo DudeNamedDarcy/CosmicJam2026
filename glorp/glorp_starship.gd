@@ -9,12 +9,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	print("ScoreAndUpgrades.in_market is: " + str(ScoreAndUpgrades.in_market))
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("interact"):
 		if ship_at_market:
-			get_tree().change_scene_to_file("res://market/black_hole_market.tscn")
+			ScoreAndUpgrades.in_market = true
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:

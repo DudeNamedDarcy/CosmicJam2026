@@ -59,10 +59,14 @@ var elapsedComboTime: float
 @export var maxComboTime: float = 1.0
 var comboSize: float
 func _ready() -> void:
+	black_hole_market.visible = false
 	aim_arrow_base_scale = aimArrow.scale.x
 	area_2d.name = "starship"
 
 func _process(delta: float) -> void:
+	if ScoreAndUpgrades.in_market == true:
+		black_hole_market.visible = true
+
 	if playerState == PlayerState.Reeling:
 		elapsedComboTime += delta
 		if elapsedComboTime >= maxComboTime:
