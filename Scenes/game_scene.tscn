@@ -46,16 +46,12 @@ position = Vector2(596, 361)
 scale = Vector2(1.7024027, 2.1599998)
 texture = ExtResource("1_b6fju")
 
-[node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer", "fishSpawner") instance=ExtResource("1_x87qo")]
-[node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer", "moneyVboxContainer") instance=ExtResource("1_x87qo")]
-position = Vector2(95, 64)
+[node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer", "moneyVboxContainer", "fishSpawner") instance=ExtResource("1_x87qo")]
 collision_layer = 4
 collision_mask = 0
-castRandomSpread = 0.77
-vboxContainer = NodePath("VBoxContainer")
-fishSpawner = NodePath("../Fish Spawner")
 vboxContainer = NodePath("ComboVboxContainer")
 moneyVboxContainer = NodePath("TextVboxContainer")
+fishSpawner = NodePath("../Fish Spawner")
 
 [node name="TextVboxContainer" type="VBoxContainer" parent="PlayerController" unique_id=1776896156]
 custom_minimum_size = Vector2(100, 100)
