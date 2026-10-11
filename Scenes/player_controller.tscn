@@ -231,7 +231,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(56, 46)
 
-[node name="PlayerController" type="CharacterBody2D" unique_id=743970108 node_paths=PackedStringArray("aimArrow", "sprite", "planetParent", "castingPoint")]
+[node name="PlayerController" type="CharacterBody2D" unique_id=743970108 node_paths=PackedStringArray("aimArrow", "sprite", "planetParent", "castingPointLeft", "castingPointRight")]
 motion_mode = 1
 script = ExtResource("1_5ur5x")
 maxMovementSpeed = 200.0
@@ -243,7 +243,8 @@ castRandomPower = 1.0
 aimArrow = NodePath("AimRingPivot/Sprite2D")
 sprite = NodePath("AnimatedSprite2D")
 planetParent = NodePath("PlanetParent")
-castingPoint = NodePath("Casting Point")
+castingPointLeft = NodePath("Casting Point")
+castingPointRight = NodePath("Flip H Casting Point")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1706531453]
 z_index = 10
@@ -281,3 +282,6 @@ shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="Casting Point" type="Marker2D" parent="." unique_id=358627330]
 position = Vector2(-29, -19)
+
+[node name="Flip H Casting Point" type="Marker2D" parent="." unique_id=445897015]
+position = Vector2(30, -19)

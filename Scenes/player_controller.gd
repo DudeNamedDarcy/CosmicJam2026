@@ -36,7 +36,8 @@ var castPower: float = 0.0
 @export var moneyVboxContainer: VBoxContainer
 @export var planetParent: Node2D
 @export var fishSpawner: FishSpawner
-@export var castingPoint: Marker2D
+@export var castingPointLeft: Marker2D
+@export var castingPointRight: Marker2D
 
 @onready var area_2d: Area2D = $Area2D
 
@@ -47,6 +48,7 @@ var fishList: Array[Fish] = []
 var activeBobbers: Array[Bobber] = []
 var comboFishList: Array[FishComboSprite] = []
 var aim_arrow_base_scale: float
+var castingPoint: Marker2D
 
 # Quest
 var fishNeededForQuest: String = ""
@@ -58,6 +60,7 @@ var comboSize: float
 func _ready() -> void:
 	aim_arrow_base_scale = aimArrow.scale.x
 	area_2d.name = "starship"
+	castingPoint = castingPointLeft
 
 func _process(delta: float) -> void:
 	if playerState == PlayerState.Reeling:
@@ -89,7 +92,6 @@ func AimMouse() -> void:
 		aimArrow.rotation = mouse_direction.angle()
 	
 func _physics_process(delta: float) -> void:
-	print("Fuel: %.2f" % (ScoreAndUpgrades.fuel_quantity))
 	#thanks to this article: https://forum.godotengine.org/t/how-to-display-a-float-with-two-decimal-points/133086/3
 	characterDirection.x = Input.get_axis("MoveLeft", "MoveRight")
 	characterDirection.y = Input.get_axis("MoveUp", "MoveDown")
@@ -108,8 +110,10 @@ func _physics_process(delta: float) -> void:
 	# Flip sprite TODO: Add squash and stretch
 	if characterDirection.x > 0:
 		sprite.flip_h = true
+		castingPoint = castingPointRight
 	elif characterDirection.x < 0:
 		sprite.flip_h = false
+		castingPoint = castingPointLeft
 
 	# Smooth acceleration and deceleration
 	if characterDirection != Vector2.ZERO:
