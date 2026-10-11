@@ -1,5 +1,5 @@
 extends Node
-var money: float = 1400
+var money: float = 200
 
 var in_market: bool = false
 
