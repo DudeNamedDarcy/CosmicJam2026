@@ -8,6 +8,7 @@ extends AudioStreamPlayer2D
 @export var start: AudioStream = preload("res://Scenes/Audio/SFX/v2/start.mp3")
 @export var success: AudioStream = preload("res://Scenes/Audio/SFX/v2/success_combo.mp3")
 @export var win_plateau: AudioStream = preload("res://Scenes/Audio/SFX/v2/win_plateau.mp3")
+@export var combo_plateau: AudioStream = preload("res://Scenes/Audio/SFX/v2/combo_plateau.mp3")
 
 var comboCount
 var winCount = 0
@@ -53,8 +54,12 @@ func losing():
 		
 func comboing():
 	comboCount+=1
-	stream = combo
-	pitch_scale = 1+float(1+comboCount)/10 if comboCount<9 else 2
+	if comboCount<9:
+		stream = combo
+		pitch_scale = 1+float(1+comboCount)/10 
+	else:
+		pitch_scale = 1
+		stream = combo_plateau
 	play()
 	
 func reeling(reelTime):

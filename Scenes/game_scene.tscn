@@ -179,7 +179,7 @@ spawnableArea = NodePath("../SpawnableArea")
 maxFishInLevel = 1000
 
 [node name="Spawn Timer" type="Timer" parent="Fish Spawner" unique_id=1446234030]
-wait_time = 0.1
+wait_time = 0.011
 
 [node name="SpawnableArea" type="Polygon2D" parent="." unique_id=1898762879]
 visible = false
