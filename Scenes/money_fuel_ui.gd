@@ -8,6 +8,11 @@ extends CanvasLayer
 var shake_tween: Tween
 var previous_fuel: float = 100.0
 
+func _process(delta: float) -> void:
+	if(ScoreAndUpgrades.in_market):
+		visible = false
+	else:
+		visible = true
 
 func UpdateMoneyText() -> void:
 	moneyText.text = "$%.2f" % ScoreAndUpgrades.money

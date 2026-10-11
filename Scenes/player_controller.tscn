@@ -336,10 +336,11 @@ animation = &"E_button"
 autoplay = "E_button"
 frame_progress = 0.51284575
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
 [node name="Casting Point" type="Marker2D" parent="." unique_id=358627330]
 position = Vector2(-29, -19)
 
 [node name="Flip H Casting Point" type="Marker2D" parent="." unique_id=445897015]
 position = Vector2(30, -19)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
