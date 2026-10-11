@@ -2,6 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://caiem5b8o2slt" path="res://Assets/Placeholders/360_F_546468872_b9emNBQeVDLbBqicXaFyoBUwutWcHmbl.jpg" id="1_b6fju"]
 [ext_resource type="PackedScene" uid="uid://cwjnrld5dv08f" path="res://Scenes/player_controller.tscn" id="1_x87qo"]
+[ext_resource type="Script" uid="uid://xiufvpalhvi1" path="res://Scripts/orbit_manager.gd" id="4_fiftr"]
+[ext_resource type="PackedScene" uid="uid://d3oxvy0grl375" path="res://Scenes/Fish/red_dwarf_herring.tscn" id="4_rgj8m"]
+[ext_resource type="PackedScene" uid="uid://b7m36bfujolqs" path="res://Scenes/Fish/supermassive_squid.tscn" id="5_2fmhe"]
+[ext_resource type="PackedScene" uid="uid://diga0gfwjyvcg" path="res://Scenes/Fish/moon_jelly.tscn" id="6_7iton"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
 normal = Vector2(0, 1)
@@ -26,6 +30,7 @@ texture = ExtResource("1_b6fju")
 position = Vector2(95, 64)
 collision_layer = 4
 collision_mask = 0
+castRandomSpread = 0.77
 vboxContainer = NodePath("VBoxContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PlayerController" unique_id=220851325]
@@ -57,3 +62,22 @@ shape = SubResource("WorldBoundaryShape2D_6h5vk")
 
 [node name="Planet" type="Node2D" parent="." unique_id=797403716]
 position = Vector2(576, 93)
+
+[node name="manager" type="Node2D" parent="." unique_id=1542540264]
+script = ExtResource("4_fiftr")
+
+[node name="Red Dwarf Herring" parent="." unique_id=843615539 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_rgj8m")]
+position = Vector2(233, 213)
+orbitManager = NodePath("../manager")
+
+[node name="Supermassive Squid" parent="." unique_id=674465445 node_paths=PackedStringArray("orbitManager") instance=ExtResource("5_2fmhe")]
+position = Vector2(350, 176)
+orbitManager = NodePath("../manager")
+
+[node name="Red Dwarf Herring2" parent="." unique_id=1837972840 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_rgj8m")]
+position = Vector2(250, 172)
+orbitManager = NodePath("../manager")
+
+[node name="Moon Jelly2" parent="." unique_id=1404079117 node_paths=PackedStringArray("orbitManager") instance=ExtResource("6_7iton")]
+position = Vector2(309, 193)
+orbitManager = NodePath("../manager")

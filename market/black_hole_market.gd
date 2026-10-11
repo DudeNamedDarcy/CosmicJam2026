@@ -93,7 +93,7 @@ func _handle_money(given_progress_bar: ProgressBar, moneyAmount:int, given_butto
 		activate_buy_dialogue()
 		print("enough money!")
 		totalMoney -= moneyAmount
-		given_progress_bar.value += 25
+		given_progress_bar.value += 50
 		cha_ching_audio_stream_player.play()
 		if given_progress_bar.value >= 100:
 			given_button.text = "Sold Out!"

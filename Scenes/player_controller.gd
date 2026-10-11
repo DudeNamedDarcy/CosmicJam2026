@@ -7,7 +7,15 @@ const DIRECTIONAL_ARROW = preload("res://Scenes/directional_arrow.tscn")
 
 #Upgradeable
 var bobbersList: Array[PackedScene] = [
-	preload("res://Scenes/Bobbers/Pluto.tscn")
+	preload("res://Scenes/Bobbers/Pluto.tscn"),
+	#preload("res://Scenes/Bobbers/Mercury.tscn"),
+	#preload("res://Scenes/Bobbers/Venus.tscn"),
+	#preload("res://Scenes/Bobbers/Earth.tscn"),
+	#preload("res://Scenes/Bobbers/Mars.tscn"),
+	#preload("res://Scenes/Bobbers/Neptune.tscn"),
+	#preload("res://Scenes/Bobbers/Uranus.tscn"),
+	#preload("res://Scenes/Bobbers/Saturn.tscn"),
+	preload("res://Scenes/Bobbers/Jupiter.tscn")
 ]
 @export_category("Movement")
 @export var maxMovementSpeed: float

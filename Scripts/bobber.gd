@@ -5,8 +5,8 @@ enum State { UNCASTED, CASTING, FISHING }
 
 @export var bobberType: String
 @export var bobberTexture: Texture2D
-@export var startingOrbitRadius: float
-@export var startingCatchRadius: float
+var startingOrbitRadius: float
+var startingCatchRadius: float
 
 @export var bobberSprite: Sprite2D
 @export var orbitArea: Area2D
@@ -23,12 +23,23 @@ var castPower: float
 var castDeceleration: float
 var castLine: Line2D
 
+@onready var orbit_area_collision: CollisionShape2D = $"Orbit Area/OrbitAreaCollision"
+@onready var catch_area_collision: CollisionShape2D = $"Catch Area/CatchAreaCollision"
+
+
 func getBobberName() -> String:
 	return bobberType
 	
 func _ready() -> void:
-	orbitRadius = startingOrbitRadius
-	catchRadius = startingCatchRadius
+	startingOrbitRadius = orbit_area_collision.shape.radius 
+	startingCatchRadius = catch_area_collision.shape.radius
+	print(startingOrbitRadius)
+	print(startingCatchRadius)
+	print(ScoreAndUpgrades.orbit_radius_progress)
+	orbitRadius = startingOrbitRadius + (10 * (ScoreAndUpgrades.orbit_radius_progress))
+	catchRadius = startingCatchRadius + (10 * (ScoreAndUpgrades.catch_radius_progress))
+	print(orbitRadius)
+	print(catchRadius)
 	bobberSprite.texture = bobberTexture
 	orbitArea.monitoring = false
 	catchArea.monitoring = false
@@ -62,9 +73,9 @@ func handleCasting(delta: float):
 func _draw() -> void:
 	if state == State.FISHING:
 		# Orbit Circle
-		draw_circle(Vector2.ZERO, orbitRadius, Color.WHITE, false, 3.0)
+		draw_circle(Vector2.ZERO, orbitRadius, Color(1,1,1,0.66), false, 3.0)
 		# Catch Circle
-		draw_circle(Vector2.ZERO, catchRadius, Color.WHITE, false, 1.0)
+		draw_circle(Vector2.ZERO, catchRadius, Color(1,1,1,0.33), false, 1.0)
 	
 # call this function to get fish in range, after calling this function, queue free bobber and fish from caller function
 func reelIn() -> Array[Fish]:
