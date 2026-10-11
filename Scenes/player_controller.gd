@@ -3,6 +3,7 @@ class_name PlayerController
 enum PlayerState { Idle, Moving, Casting, Fishing, Reeling }
 const DIRECTIONAL_ARROW = preload("res://Scenes/directional_arrow.tscn")
 const COMBO_FISH = preload("res://Scenes/Fish/fish_combo_sprite.tscn")
+const MONEY_GAIN_TEXT = preload("res://Scenes/fish_money_text.tscn")
 
 #Upgradeable
 var bobbersList: Array[PackedScene] = [
@@ -32,6 +33,7 @@ var castPower: float = 0.0
 @export var aimArrow: Sprite2D
 @export var sprite: AnimatedSprite2D
 @export var vboxContainer: VBoxContainer
+@export var moneyVboxContainer: VBoxContainer
 @export var planetParent: Node2D
 
 var playerState: PlayerState = PlayerState.Idle
@@ -61,7 +63,6 @@ func _process(delta: float) -> void:
 		charge_ratio = clamp(castPower / maxCastPower, 0.0, 1.0)
 
 	aimArrow.scale = Vector2(aim_arrow_base_scale * (1.0 + charge_ratio), aim_arrow_base_scale * (1.0 + charge_ratio))
-	#print(PlayerState.find_key(playerState))
 	AimMouse()
 		
 
@@ -77,7 +78,6 @@ func AimMouse() -> void:
 		aimArrow.rotation = joy_direction.angle()
 	else:
 		aimArrow.rotation = mouse_direction.angle()
-	#print(aimArrow.rotation)
 	
 func _physics_process(delta: float) -> void:
 	characterDirection.x = Input.get_axis("MoveLeft", "MoveRight")
@@ -235,10 +235,15 @@ func EndFishing(success: bool) -> void:
 	if success:
 		await get_tree().create_timer(0.2).timeout 
 	for fish in comboFishList.duplicate():
+		print(fish)
 		if is_instance_valid(fish):
 			if success:
 				await get_tree().create_timer(0.2).timeout	
+				var moneyText = MONEY_GAIN_TEXT.instantiate()
+				moneyVboxContainer.add_child(moneyText)
+				moneyText.DisplayText(fish.value)
 			fish.KillFish(success)
+			
 	
 	comboFishList.clear()
 	fishList.clear()

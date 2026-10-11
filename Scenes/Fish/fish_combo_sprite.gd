@@ -2,10 +2,11 @@ extends Control
 class_name FishComboSprite
 @export var sprite: Sprite2D
 var fishData:Fish
-
+var value: float
 
 func PopulateData(f: Fish) -> void:
 	fishData = f
+	value = f.value
 	sprite.texture = f.fishTexture
 
 func KillFish(success: bool = true) -> void:
