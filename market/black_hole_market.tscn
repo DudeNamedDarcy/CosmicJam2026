@@ -194,6 +194,9 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=967035777]
+autoplay = true
+
 [connection signal="pressed" from="VBoxContainer/OrbitRadiusButton" to="." method="_on_orbit_radius_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/CatchRadiusButton" to="." method="_on_catch_radius_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/FasterShipButton" to="." method="_on_faster_ship_button_pressed"]

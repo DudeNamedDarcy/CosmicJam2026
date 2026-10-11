@@ -4,10 +4,16 @@ extends CanvasLayer
 @export var fuelTextControl: Control
 @export var moneyText: RichTextLabel
 @export var fuelText: RichTextLabel
+@export var glorp: VisualShaderNodeBooleanParameter
 
 var shake_tween: Tween
 var previous_fuel: float = 100.0
 
+func _process(delta: float) -> void:
+	if(ScoreAndUpgrades.in_market):
+		visible = false
+	else:
+		visible = true
 
 func UpdateMoneyText() -> void:
 	moneyText.text = "$%.2f" % ScoreAndUpgrades.money
