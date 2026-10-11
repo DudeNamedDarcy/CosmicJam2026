@@ -54,15 +54,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_768q2"]
-radius = 96.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gem73"]
-radius = 33.0
-height = 90.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i1ns5"]
-radius = 18.053944
-height = 122.00264
+radius = 133.0
 
 [node name="GlorpStarship" type="Node2D" unique_id=1172553172]
 script = ExtResource("1_i1ns5")
@@ -78,22 +70,6 @@ frame_progress = 0.81959695
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=624480608]
 shape = SubResource("CircleShape2D_768q2")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1824351717]
-collision_layer = 2
-collision_mask = 15
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=641626293]
-shape = SubResource("CapsuleShape2D_gem73")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1984897213]
-collision_layer = 2
-collision_mask = 15
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=1896602096]
-position = Vector2(2.0000038, 21.999998)
-rotation = -1.6022123
-shape = SubResource("CapsuleShape2D_i1ns5")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

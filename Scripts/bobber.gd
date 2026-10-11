@@ -33,8 +33,13 @@ func getBobberName() -> String:
 func _ready() -> void:
 	startingOrbitRadius = orbit_area_collision.shape.radius 
 	startingCatchRadius = catch_area_collision.shape.radius
+	print(startingOrbitRadius)
+	print(startingCatchRadius)
+	print(ScoreAndUpgrades.orbit_radius_progress)
 	orbitRadius = startingOrbitRadius + (10 * (ScoreAndUpgrades.orbit_radius_progress))
 	catchRadius = startingCatchRadius + (10 * (ScoreAndUpgrades.catch_radius_progress))
+	print(orbitRadius)
+	print(catchRadius)
 	bobberSprite.texture = bobberTexture
 	orbitArea.monitoring = false
 	catchArea.monitoring = false
@@ -55,6 +60,7 @@ func handleCasting(delta: float):
 	castLine.add_point(position)
 	velocity = castDirection * castPower
 	castPower = move_toward(castPower, 0, castDeceleration * delta)
+	scale
 
 	var collision = move_and_collide(velocity * delta)
 
@@ -69,12 +75,14 @@ func handleCasting(delta: float):
 func _draw() -> void:
 	if state == State.FISHING:
 		# Orbit Circle
-		draw_circle(Vector2.ZERO, orbitRadius, Color(0.862, 0.196, 0.285, 0.33), false, 2.0)
+		draw_circle(Vector2.ZERO, orbitRadius, Color(1,1,1,0.66), false, 3.0)
 		# Catch Circle
-		draw_circle(Vector2.ZERO, catchRadius, Color(0.617, 0.218, 0.413, 0.66), false, 1.0)
+		draw_circle(Vector2.ZERO, catchRadius, Color(1,1,1,0.33), false, 1.0)
 	
 # call this function to get fish in range, after calling this function, queue free bobber and fish from caller function
 func reelIn() -> Array[Fish]:
+	for fish in caughtFish:
+		print("Fish Name: ", fish.typeName, ", Value: ", fish.value)
 	return caughtFish
 
 func killAllFish() -> void:
@@ -85,7 +93,6 @@ func cast(direction: Vector2, power: float, deceleration: float, line: Line2D):
 	castDirection = direction
 	castPower = power
 	castLine = line
-	castLine.default_color = Color(0.3,0.3,0.4)
 	castDeceleration = deceleration
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 1.0)
@@ -94,6 +101,7 @@ func cast(direction: Vector2, power: float, deceleration: float, line: Line2D):
 func _on_orbit_area_area_entered(area: Area2D) -> void:
 	if area.get_parent() is Fish:
 		var fish: Fish = area.get_parent()
+
 		register_fish_in_orbit(fish)
 
 func _on_catch_area_entered(area: Area2D) -> void:
@@ -101,11 +109,13 @@ func _on_catch_area_entered(area: Area2D) -> void:
 		var fish: Fish = area.get_parent()
 
 		register_fish_in_orbit(fish)
-		
-		if fish not in caughtFish && fish in fishInOrbit:
-			caughtFish.append(fish)
 
-		if not fish.inCatchRadius && fish in fishInOrbit:
+		if fish not in caughtFish:
+			print("appending fish")
+			caughtFish.append(fish)
+			print(caughtFish.size())
+
+		if not fish.inCatchRadius:
 			fish.inCatchRadius = true
 			fish.modulate = Color.RED
 			
@@ -115,6 +125,7 @@ func register_fish_in_orbit(fish: Fish) -> void:
 		fish.state = Fish.State.ORBITING
 		if fish not in fishInOrbit:
 			fishInOrbit.append(fish)
+			print(self.name, "Added fish to orbit list: ", fish.name)
 
 			
 func startFishing():
