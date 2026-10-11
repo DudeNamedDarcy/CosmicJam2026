@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://b4obqg1s8xc7s"]
 
 [ext_resource type="Script" uid="uid://cgk5p01hihcku" path="res://MainMenu/main_menu.gd" id="1_3w4mj"]
-[ext_resource type="AudioStream" uid="uid://k05nkoq65th6" path="res://MainMenu/menu_105bpm.wav" id="1_nhkf3"]
 [ext_resource type="Texture2D" uid="uid://byyy1xe8quruc" path="res://MainMenu/starterscreen.png" id="2_jdgnk"]
 [ext_resource type="Script" uid="uid://b61kk0hg6mbb2" path="res://MainMenu/start_game_button.gd" id="2_po2gx"]
 [ext_resource type="FontFile" uid="uid://btm21rgep3rct" path="res://fonts/Silkscreen/Silkscreen-Regular.ttf" id="3_jdgnk"]
+[ext_resource type="AudioStream" uid="uid://tj7s3l3plkm4" path="res://MainMenu/menu_105bpm.mp3" id="3_po3gx"]
 [ext_resource type="Theme" uid="uid://t2kcdkvabp2d" path="res://dialogue/dialogue_box.tres" id="4_ajn5b"]
 [ext_resource type="StyleBox" uid="uid://buan5y4legray" path="res://texture.tres" id="4_jdgnk"]
 
@@ -104,7 +104,7 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1039320173]
-stream = ExtResource("1_nhkf3")
+stream = ExtResource("3_po3gx")
 autoplay = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=83643428]

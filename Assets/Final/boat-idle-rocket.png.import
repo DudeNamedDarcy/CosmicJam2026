@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://r8nfl3wtq8mw"
-path="res://.godot/imported/star_2.png-b3680d6fbf196ce31d891a150223302d.ctex"
+uid="uid://2xsxnbd12qyq"
+path="res://.godot/imported/boat-idle-rocket.png-410785e37e08d1c18fa76a5d0d9a47bb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Placeholders/star_2.png"
-dest_files=["res://.godot/imported/star_2.png-b3680d6fbf196ce31d891a150223302d.ctex"]
+source_file="res://Assets/Final/boat-idle-rocket.png"
+dest_files=["res://.godot/imported/boat-idle-rocket.png-410785e37e08d1c18fa76a5d0d9a47bb.ctex"]
 
 [params]
 

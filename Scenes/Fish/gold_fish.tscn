@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://w7gafq2uiia1"]
 
 [ext_resource type="Script" uid="uid://px7q08a74a0y" path="res://Scripts/fish.gd" id="1_o1kyx"]
-[ext_resource type="Texture2D" uid="uid://ba1xwshqevdfa" path="res://Assets/Final/goldfish.png" id="2_o1kyx"]
+[ext_resource type="Texture2D" uid="uid://bkhai7qojcy05" path="res://Assets/Final/glowing-goldfish.png" id="2_o1kyx"]
 [ext_resource type="PackedScene" uid="uid://bqsd77la320wk" path="res://Scenes/Fish/fish_star_animation.tscn" id="3_o1kyx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gem73"]
@@ -10,9 +10,10 @@ size = Vector2(15, 13)
 [sub_resource type="CircleShape2D" id="CircleShape2D_gem73"]
 radius = 5.0
 
-[node name="Gold Fish" type="CharacterBody2D" unique_id=1404079117 node_paths=PackedStringArray("IdleBurstTimer")]
+[node name="Gold Fish" type="CharacterBody2D" unique_id=1404079117 node_paths=PackedStringArray("animated_sprite_2d", "IdleBurstTimer")]
 collision_mask = 2
 script = ExtResource("1_o1kyx")
+animated_sprite_2d = NodePath("Fish Star Animation")
 typeName = "Gold Fish"
 value = 100.0
 fishTexture = ExtResource("2_o1kyx")

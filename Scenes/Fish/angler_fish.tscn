@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://debkpvo4akucv"]
+[gd_scene format=3 uid="uid://b05brc3bel6c1"]
 
 [ext_resource type="Script" uid="uid://px7q08a74a0y" path="res://Scripts/fish.gd" id="1_fl7b5"]
 [ext_resource type="Texture2D" uid="uid://b2oxbwkh61mi7" path="res://Assets/Final/anglerfish.png" id="2_oa8xh"]
