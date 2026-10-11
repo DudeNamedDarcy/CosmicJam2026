@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Fish
 
 enum State { IDLE, ORBITING }
-
+@onready var animated_sprite_2d: AnimatedSprite2D = $"Fish Star Animation"
 @export_category("Fish Type Information")
 @export var typeName: String = "default"
 @export var value: float = 0.0
@@ -65,8 +65,16 @@ func handleIdle(delta: float):
 			IdleBurstTimer.start(cooldown)
 			
 func startBurst():
+	squash_and_stretch()
 	idleBurstDirection = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)).normalized()
 	inActiveBurst = true
+	
+
+func squash_and_stretch():
+	var tween = create_tween()
+	tween.tween_property(animated_sprite_2d, "scale", Vector2(1.15, 0.85), 0.08)
+	tween.tween_property(animated_sprite_2d, "scale", Vector2(0.9, 1.1), 0.08)
+	tween.tween_property(animated_sprite_2d, "scale", Vector2(1.0, 1.0), 0.08)
 	
 func handleOrbit(delta:float):
 	if center == null:

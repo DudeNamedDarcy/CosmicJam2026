@@ -67,6 +67,8 @@ var elapsedComboTime: float
 @export var maxComboTime: float = 1.0
 var comboSize: float
 var closeToShop: bool = false
+var last_direction := 0
+
 
 func _ready() -> void:
 	aim_arrow_base_scale = aimArrow.scale.x
@@ -124,14 +126,7 @@ func _physics_process(delta: float) -> void:
 			playerState = PlayerState.Moving
 			SetMove()
 
-	# Flip sprite TODO: Add squash and stretch
-	if characterDirection.x > 0:
-		sprite.flip_h = true
-		castingPoint = castingPointRight
-	elif characterDirection.x < 0:
-		sprite.flip_h = false
-		castingPoint = castingPointLeft
-
+	update_facing()
 	# Smooth acceleration and deceleration
 	if characterDirection != Vector2.ZERO:
 		boat_audio.accelerating()
@@ -151,6 +146,31 @@ func _physics_process(delta: float) -> void:
 
 		if velocity.dot(normal) < 0:
 			velocity = velocity.slide(normal)
+
+func update_facing():
+	if characterDirection.x > 0:
+		sprite.flip_h = true
+		castingPoint = castingPointRight
+
+		if last_direction == -1:
+			squash_and_stretch()
+
+		last_direction = 1
+
+	elif characterDirection.x < 0:
+		sprite.flip_h = false
+		castingPoint = castingPointLeft
+
+		if last_direction == 1:
+			squash_and_stretch()
+
+		last_direction = -1
+		
+func squash_and_stretch():
+	var tween = create_tween()
+	tween.tween_property(sprite, "scale", Vector2(1.15, 0.85), 0.08)
+	tween.tween_property(sprite, "scale", Vector2(0.9, 1.1), 0.08)
+	tween.tween_property(sprite, "scale", Vector2(1.0, 1.0), 0.08)
 	
 func _input(event: InputEvent) -> void:
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
@@ -215,7 +235,7 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 		elapsedComboTime = 0.0
 
 	else:
-		LevelManager.shakeCamera(7.0)
+		#LevelManager.shakeCamera(20.0, 0.5)
 		rod_audio.losing()
 		EndFishing(false)
 
@@ -310,7 +330,8 @@ func EndFishing(success: bool) -> void:
 				#fishvalue *comboSize * 1.1
 			uiController.UpdateMoneyText()
 			fish.KillFish(success)
-	
+	if (!success):
+		LevelManager.shakeCamera(20.0, 0.5)
 	LevelManager.shakeCameraComboClear()
 	comboFishList.clear()
 	fishList.clear()

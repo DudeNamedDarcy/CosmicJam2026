@@ -10,9 +10,10 @@ size = Vector2(15, 13)
 [sub_resource type="CircleShape2D" id="CircleShape2D_gem73"]
 radius = 5.0
 
-[node name="Concordia Game Dev Cube" type="CharacterBody2D" unique_id=1404079117 node_paths=PackedStringArray("IdleBurstTimer")]
+[node name="Concordia Game Dev Cube" type="CharacterBody2D" unique_id=1404079117 node_paths=PackedStringArray("animated_sprite_2d", "IdleBurstTimer")]
 collision_mask = 2
 script = ExtResource("1_u4d8y")
+animated_sprite_2d = NodePath("Fish Star Animation")
 typeName = "r.dia"
 value = 50.0
 fishTexture = ExtResource("2_u4d8y")
