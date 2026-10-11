@@ -257,6 +257,7 @@ func DeletePlanets() -> void:
 	activeBobbers.clear()
 	
 func EndFishing(success: bool) -> void:
+	var fishTotal = 0
 	playerState = PlayerState.Idle
 
 	for arrow in arrows.duplicate():
@@ -274,9 +275,10 @@ func EndFishing(success: bool) -> void:
 				var moneyText = MONEY_GAIN_TEXT.instantiate()
 				moneyVboxContainer.add_child(moneyText)
 				moneyText.DisplayText(fish.value)
+				ScoreAndUpgrades.money += fish.value
+				fishTotal += fish.value
 			fish.KillFish(success)
 			
-	
 	comboFishList.clear()
 	fishList.clear()
 	comboSize = 0
