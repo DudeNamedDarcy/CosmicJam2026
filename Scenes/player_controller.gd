@@ -185,7 +185,6 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 			LevelManager.shakeCamera(2.0)
 			print("Combo complete! Combo size", comboSize)
 			EndFishing(true)
-			rod_audio.winning()
 		else:
 			arrows[0].TurnRed()
 		elapsedComboTime = 0.0
@@ -220,6 +219,7 @@ func CastBobbers(castPower: float) -> void:
 	
 func StartReelingMinigame() -> void:
 	rod_audio.stop_reeling()
+	rod_audio.start_fishing()
 	for activeBobber in activeBobbers:
 		fishList.append_array(activeBobber.reelIn())
 		activeBobber.killAllFish()
@@ -262,9 +262,11 @@ func EndFishing(success: bool) -> void:
 	for arrow in arrows.duplicate():
 		if is_instance_valid(arrow):
 			arrow.KillArrow()
+			rod_audio.losing()
 	
 	arrows.clear()
 	if success:
+		rod_audio.combo_win()
 		await get_tree().create_timer(0.2).timeout 
 	for fish in comboFishList.duplicate():
 		print(fish)
@@ -272,6 +274,7 @@ func EndFishing(success: bool) -> void:
 			if success:
 				await get_tree().create_timer(0.2).timeout	
 				var moneyText = MONEY_GAIN_TEXT.instantiate()
+				rod_audio.winning()
 				moneyVboxContainer.add_child(moneyText)
 				moneyText.DisplayText(fish.value)
 			fish.KillFish(success)

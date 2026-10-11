@@ -5,8 +5,11 @@ extends AudioStreamPlayer2D
 @export var lose: AudioStream = preload("res://Scenes/Audio/SFX/v2/lose_fish.mp3")
 @export var combo: AudioStream = preload("res://Scenes/Audio/SFX/v2/combo.mp3")
 @export var reel: AudioStream = preload("res://Scenes/Audio/SFX/v2/reeling.mp3")
+@export var start: AudioStream = preload("res://Scenes/Audio/SFX/v2/start.mp3")
+@export var success: AudioStream = preload("res://Scenes/Audio/SFX/v2/success_combo.mp3")
 
 var comboCount
+var winCount = 0
 var reelMax
 var reelPossible = true
 
@@ -23,13 +26,15 @@ func _process(delta: float) -> void:
 	pass
 
 func throwing():
+	winCount = 0
 	comboCount = 0
 	stream = throw
 	if(not playing):
 		play()
 
 func winning():
-	pitch_scale = 1
+	pitch_scale = 1+float(1+winCount)/10 if winCount<20 else 3
+	winCount+=1
 	stream = win
 	if(not playing):
 		play()
@@ -43,8 +48,7 @@ func losing():
 func comboing():
 	comboCount+=1
 	stream = combo
-	pitch_scale = 1+float(1+comboCount)/10 if comboCount<7 else 1.8
-	print(pitch_scale)
+	pitch_scale = 1+float(1+comboCount)/10 if comboCount<9 else 2
 	play()
 	
 func reeling(reelTime):
@@ -60,8 +64,14 @@ func stop_reeling():
 		stop()
 	pass
 	
-func fuck_reeling():
-	reelPossible = false;
-
-func yes_reeling():
-	reelPossible = true;
+func start_fishing():
+	pitch_scale = randf_range(1,1.3)
+	stream = start
+	if(not playing):
+		play()
+		
+func combo_win():
+	pitch_scale = randf_range(1,1.05)
+	stream = success
+	if(not playing):
+		play()
