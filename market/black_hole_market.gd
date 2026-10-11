@@ -76,6 +76,7 @@ func initialize_market() -> void:
 	dialogue_box.dialogue = intro_dialogue
 	dialogue_box.current_dialogue_index = randi_range(0, len(intro_dialogue) -1)
 	dialogue_box.show_text(dialogue_box.dialogue)
+	orbit_radius_button.grab_focus()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -135,6 +136,9 @@ func _on_larger_fuel_button_pressed() -> void:
 
 
 func _handle_money(given_progress_bar: ProgressBar, moneyAmount:int, given_button: Button):
+	print(ScoreAndUpgrades.money)
+	print(moneyAmount)
+	print(given_progress_bar)
 	if (ScoreAndUpgrades.money) >= moneyAmount and given_progress_bar.value < 100:
 		activate_buy_dialogue()
 		print("enough money!")
