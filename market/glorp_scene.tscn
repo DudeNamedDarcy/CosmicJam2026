@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cs88wese704sl"]
 
-[ext_resource type="Texture2D" uid="uid://lgvcj031rd7t" path="res://icon.svg" id="1_6kb6w"]
+[ext_resource type="Texture2D" uid="uid://t1dc2pbkxolm" path="res://glorp/glorp.png" id="1_6kb6w"]
 
 [sub_resource type="Environment" id="Environment_81d4i"]
 
@@ -48,10 +48,12 @@ ambient_light_source = 1
 [node name="GlorpScene" type="Node3D" unique_id=1403479836]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1065541664]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.3032206)
 environment = SubResource("Environment_81d4i")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1921561783]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.8463652)
+texture_filter = 0
 texture = ExtResource("1_6kb6w")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1840024728]
