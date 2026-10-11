@@ -4,28 +4,24 @@
 [ext_resource type="PackedScene" uid="uid://diga0gfwjyvcg" path="res://Scenes/Fish/moon_jelly.tscn" id="2_xe4is"]
 [ext_resource type="PackedScene" uid="uid://d3oxvy0grl375" path="res://Scenes/Fish/red_dwarf_herring.tscn" id="3_so58k"]
 [ext_resource type="PackedScene" uid="uid://b7m36bfujolqs" path="res://Scenes/Fish/supermassive_squid.tscn" id="4_lmqij"]
-[ext_resource type="PackedScene" uid="uid://n45whogjbh85" path="res://Scenes/Bobbers/Pluto.tscn" id="5_vv1m1"]
+[ext_resource type="PackedScene" uid="uid://cwjnrld5dv08f" path="res://Scenes/player_controller.tscn" id="5_8ewqw"]
 
 [node name="VortexScene" type="Node2D" unique_id=1546059107]
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=717309842]
 
 [node name="OrbitManager" type="Node2D" parent="." unique_id=1953657359]
 script = ExtResource("1_8ewqw")
 
-[node name="Moon Jelly" parent="." unique_id=700072511 node_paths=PackedStringArray("orbitManager") instance=ExtResource("2_xe4is")]
+[node name="Moon Jelly" parent="." unique_id=700072511 instance=ExtResource("2_xe4is")]
 position = Vector2(-76, 116)
-orbitManager = NodePath("../OrbitManager")
 
 [node name="Red Dwarf Herring" parent="." unique_id=1483481110 instance=ExtResource("3_so58k")]
-position = Vector2(116, 25)
+position = Vector2(18, -1)
 
 [node name="Supermassive Squid" parent="." unique_id=1149122933 instance=ExtResource("4_lmqij")]
 position = Vector2(-76, -78)
 
-[node name="Moon Jelly2" parent="." unique_id=1033593923 node_paths=PackedStringArray("orbitManager") instance=ExtResource("2_xe4is")]
-position = Vector2(56, 114)
-orbitManager = NodePath("../OrbitManager")
+[node name="Moon Jelly2" parent="." unique_id=1033593923 instance=ExtResource("2_xe4is")]
+position = Vector2(61, 140)
 
 [node name="Button" type="Button" parent="." unique_id=154003982]
 offset_left = -474.0
@@ -34,6 +30,5 @@ offset_right = -362.0
 offset_bottom = 263.0
 text = "Reel In"
 
-[node name="Pluto" parent="." unique_id=1409956748 instance=ExtResource("5_vv1m1")]
-
-[connection signal="pressed" from="Button" to="Pluto" method="reelIn"]
+[node name="PlayerController" parent="." unique_id=743970108 instance=ExtResource("5_8ewqw")]
+position = Vector2(-159, -7)
