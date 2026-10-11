@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://c4evtl6kbwuw2" path="res://Scenes/fish_spawner.gd" id="6_rgj8m"]
 [ext_resource type="Texture2D" uid="uid://ck5uv4d76r727" path="res://Assets/Final/Parallax/stars.png" id="7_2fmhe"]
 [ext_resource type="PackedScene" uid="uid://dgyunkaa44mbx" path="res://Scenes/Fish/starfish.tscn" id="7_wywco"]
-[ext_resource type="PackedScene" uid="uid://debkpvo4akucv" path="res://Scenes/Fish/angler_fish.tscn" id="8_5q52j"]
+[ext_resource type="PackedScene" uid="uid://b05brc3bel6c1" path="res://Scenes/Fish/angler_fish.tscn" id="8_5q52j"]
 [ext_resource type="PackedScene" uid="uid://co5te5e76e4vk" path="res://Scenes/Fish/patrick_starfish.tscn" id="8_ldntv"]
 [ext_resource type="PackedScene" uid="uid://w7gafq2uiia1" path="res://Scenes/Fish/gold_fish.tscn" id="9_w8jfd"]
 [ext_resource type="PackedScene" uid="uid://wgsgx4i8wbue" path="res://Scenes/Fish/big_fish.tscn" id="10_a7fet"]
