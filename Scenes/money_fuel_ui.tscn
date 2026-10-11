@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://buf18n2jp25y4"]
+
+[ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="1_ebmla"]
+[ext_resource type="Script" uid="uid://borjumllejliy" path="res://Scenes/money_fuel_ui.gd" id="1_vhiju"]
+
+[node name="MoneyFuelUI" type="CanvasLayer" unique_id=1013169491 node_paths=PackedStringArray("moneyTextControl", "fuelTextControl")]
+script = ExtResource("1_vhiju")
+moneyTextControl = NodePath("MoneyUI")
+fuelTextControl = NodePath("FuelUI")
+
+[node name="MoneyUI" type="Control" parent="." unique_id=364832241]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_right = 400.0
+offset_bottom = 33.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MoneyUI" unique_id=1859071307]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 33.0
+theme_override_fonts/normal_font = ExtResource("1_ebmla")
+theme_override_font_sizes/normal_font_size = 25
+text = "$100000000000000"
+fit_content = true
+
+[node name="FuelUI" type="Control" parent="." unique_id=346783724]
+z_index = 10
+propagate_maximum_size = true
+layout_mode = 3
+anchors_preset = 0
+offset_top = 33.0
+offset_right = 400.0
+offset_bottom = 66.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="FuelUI" unique_id=1204431138]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 33.0
+theme_override_fonts/normal_font = ExtResource("1_ebmla")
+theme_override_font_sizes/normal_font_size = 25
+text = "Fuel: 100%"
+fit_content = true

@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://co5te5e76e4vk" path="res://Scenes/Fish/patrick_starfish.tscn" id="8_ldntv"]
 [ext_resource type="PackedScene" uid="uid://w7gafq2uiia1" path="res://Scenes/Fish/gold_fish.tscn" id="9_w8jfd"]
 [ext_resource type="PackedScene" uid="uid://wgsgx4i8wbue" path="res://Scenes/Fish/big_fish.tscn" id="10_a7fet"]
+[ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="13_wywco"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
 normal = Vector2(0, 1)
@@ -46,21 +47,33 @@ position = Vector2(596, 361)
 scale = Vector2(1.7024027, 2.1599998)
 texture = ExtResource("1_b6fju")
 
-[node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer", "fishSpawner") instance=ExtResource("1_x87qo")]
-position = Vector2(95, 64)
+[node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer", "moneyVboxContainer", "fishSpawner") instance=ExtResource("1_x87qo")]
 collision_layer = 4
 collision_mask = 0
-castRandomSpread = 0.77
-vboxContainer = NodePath("VBoxContainer")
+vboxContainer = NodePath("ComboVboxContainer")
+moneyVboxContainer = NodePath("TextVboxContainer")
 fishSpawner = NodePath("../Fish Spawner")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerController" unique_id=220851325]
+[node name="TextVboxContainer" type="VBoxContainer" parent="PlayerController" unique_id=1776896156]
+custom_minimum_size = Vector2(100, 100)
+custom_maximum_size = Vector2(100, 100)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -70.0
+offset_right = 68.0
+offset_bottom = -20.0
+grow_vertical = 0
+alignment = 2
+
+[node name="ComboVboxContainer" type="VBoxContainer" parent="PlayerController" unique_id=220851325]
 custom_minimum_size = Vector2(50, 50)
 propagate_maximum_size = false
 offset_left = -25.0
-offset_top = -3.0
+offset_top = 16.0
 offset_right = 25.0
-offset_bottom = 697.0
+offset_bottom = 716.0
 metadata/_edit_use_anchors_ = true
 
 [node name="PlayerBounds" type="StaticBody2D" parent="." unique_id=955427512]
@@ -142,5 +155,41 @@ offset_bottom = -36.71998
 scale = Vector2(27.631252, 16.451735)
 color = Color(0.09112144, 0.09112146, 0.09112144, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1888502825]
+
+[node name="MoneyUI" type="Control" parent="CanvasLayer" unique_id=969162968]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_right = 400.0
+offset_bottom = 33.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MoneyUI" unique_id=1241626468]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 33.0
+theme_override_fonts/normal_font = ExtResource("13_wywco")
+theme_override_font_sizes/normal_font_size = 25
+text = "$100000000000000"
+fit_content = true
+
+[node name="FuelUI" type="Control" parent="CanvasLayer" unique_id=2131385606]
+z_index = 10
+propagate_maximum_size = true
+layout_mode = 3
+anchors_preset = 0
+offset_top = 33.0
+offset_right = 400.0
+offset_bottom = 66.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/FuelUI" unique_id=623553988]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 33.0
+theme_override_fonts/normal_font = ExtResource("13_wywco")
+theme_override_font_sizes/normal_font_size = 25
+text = "Fuel: 100%"
+fit_content = true
 
 [connection signal="timeout" from="Fish Spawner/Spawn Timer" to="Fish Spawner" method="_on_spawn_timer_timeout"]
