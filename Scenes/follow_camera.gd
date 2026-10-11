@@ -16,9 +16,12 @@ func ApplyShake(str: float,  time: float = 0.2):
 
 func FishComboShake():
 	comboCount += 1
+
 	var time = 0.1
-	ApplyShake(min(2.0*(comboCount*2), 5.0), time)
-	Input.start_joy_vibration(0, 0.5, 0.8, time)
+	var vibration_strength = min(comboCount * 0.15, 1.0)
+
+	ApplyShake(min(2.0 * (comboCount * 2), 5.0), time)
+	Input.start_joy_vibration(0, vibration_strength, vibration_strength, time)
 
 	
 
