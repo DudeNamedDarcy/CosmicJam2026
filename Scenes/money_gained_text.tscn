@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cy27tjgl8wyfj"]
+
+[ext_resource type="FontFile" uid="uid://btm21rgep3rct" path="res://fonts/Silkscreen/Silkscreen-Regular.ttf" id="1_w6a5l"]
+
+[sub_resource type="GDScript" id="GDScript_w6a5l"]
+script/source = "extends RichTextLabel
+
+
+func DisplayText(money: float) -> void:
+	text = \"+$%.2f\" % money
+"
+
+[node name="MoneyGainedText" type="RichTextLabel" unique_id=1381569694]
+theme_override_fonts/normal_font = ExtResource("1_w6a5l")
+text = "+$1000"
+fit_content = true
+vertical_alignment = 1
+script = SubResource("GDScript_w6a5l")

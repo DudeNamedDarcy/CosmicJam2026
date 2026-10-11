@@ -47,20 +47,36 @@ scale = Vector2(1.7024027, 2.1599998)
 texture = ExtResource("1_b6fju")
 
 [node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer", "fishSpawner") instance=ExtResource("1_x87qo")]
+[node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer", "moneyVboxContainer") instance=ExtResource("1_x87qo")]
 position = Vector2(95, 64)
 collision_layer = 4
 collision_mask = 0
 castRandomSpread = 0.77
 vboxContainer = NodePath("VBoxContainer")
 fishSpawner = NodePath("../Fish Spawner")
+vboxContainer = NodePath("ComboVboxContainer")
+moneyVboxContainer = NodePath("TextVboxContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerController" unique_id=220851325]
+[node name="TextVboxContainer" type="VBoxContainer" parent="PlayerController" unique_id=1776896156]
+custom_minimum_size = Vector2(100, 100)
+custom_maximum_size = Vector2(100, 100)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -70.0
+offset_right = 68.0
+offset_bottom = -20.0
+grow_vertical = 0
+alignment = 2
+
+[node name="ComboVboxContainer" type="VBoxContainer" parent="PlayerController" unique_id=220851325]
 custom_minimum_size = Vector2(50, 50)
 propagate_maximum_size = false
 offset_left = -25.0
-offset_top = -3.0
+offset_top = 16.0
 offset_right = 25.0
-offset_bottom = 697.0
+offset_bottom = 716.0
 metadata/_edit_use_anchors_ = true
 
 [node name="PlayerBounds" type="StaticBody2D" parent="." unique_id=955427512]
