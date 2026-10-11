@@ -152,8 +152,8 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 		return
 
 	if arrow.GetArrowType() == input_arrow:
-		rod_audio.comboing()
 		LevelManager.shakeCamera(2.0)
+		rod_audio.comboing()
 		arrows.pop_front()
 		arrow.KillArrow()
 
@@ -161,6 +161,7 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 			LevelManager.shakeCamera(2.0)
 			print("Combo complete!")
 			EndFishing(true)
+			rod_audio.winning()
 	else:
 		LevelManager.shakeCamera(7.0)
 		rod_audio.losing()
