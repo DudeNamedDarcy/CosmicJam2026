@@ -68,7 +68,7 @@ var elapsedComboTime: float
 var comboSize: float
 var closeToShop: bool = false
 var last_direction := 0
-
+var isScoring: bool = false
 
 func _ready() -> void:
 	aim_arrow_base_scale = aimArrow.scale.x
@@ -109,6 +109,8 @@ func AimMouse() -> void:
 		aimArrow.rotation = mouse_direction.angle()
 	
 func _physics_process(delta: float) -> void:
+	if isScoring:
+		return
 	maxComboTime = (ScoreAndUpgrades.longer_combo_progress + 1)
 	uiController.UpdateFuelText()
 	#thanks to this article: https://forum.godotengine.org/t/how-to-display-a-float-with-two-decimal-points/133086/3
@@ -303,7 +305,7 @@ func DeletePlanets() -> void:
 func EndFishing(success: bool) -> void:
 	rod_audio.stop_reeling()
 	playerState = PlayerState.Idle
-
+	isScoring = true
 	for arrow in arrows.duplicate():
 		if is_instance_valid(arrow):
 			arrow.KillArrow()
@@ -346,6 +348,7 @@ func EndFishing(success: bool) -> void:
 	comboSize = 0
 	aimArrow.show()
 	CompleteQuest()
+	isScoring = false
 	await get_tree().create_timer(0.4).timeout
 	input_button.visible = closeToShop
 	

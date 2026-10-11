@@ -17,7 +17,7 @@ func DisplayTotalEarnings(money: float) -> void:
 	shake_tween.tween_property(self, "position:x", position.x, 0.05)
 
 	# Remove the text after one second
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(2.0).timeout
 	label.text = ""
 	queue_free()
 
