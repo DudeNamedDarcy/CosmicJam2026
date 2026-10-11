@@ -99,13 +99,13 @@ func _on_catch_area_entered(area: Area2D) -> void:
 			fish.modulate = Color.RED
 			
 func register_fish_in_orbit(fish: Fish) -> void:
-	if fish not in fishInOrbit:
-		fishInOrbit.append(fish)
-		print("Added fish to orbit list: ", fish.name)
-
 	if fish.center == null or fish.center == self:
 		fish.center = self
 		fish.state = Fish.State.ORBITING
+		if fish not in fishInOrbit:
+			fishInOrbit.append(fish)
+			print(self.name, "Added fish to orbit list: ", fish.name)
+
 			
 func startFishing():
 	state = State.FISHING

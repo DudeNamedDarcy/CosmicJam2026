@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bxkqrhvxfy0ky" path="res://market/black_hole_market.gd" id="1_1x0ya"]
 [ext_resource type="AudioStream" uid="uid://dfjggw5mqn4k6" path="res://sounds_market/cha_ching_fixed.wav" id="2_a7kth"]
+[ext_resource type="Theme" uid="uid://t2kcdkvabp2d" path="res://dialogue/dialogue_box.tres" id="2_nn7dx"]
 [ext_resource type="PackedScene" uid="uid://cs88wese704sl" path="res://market/glorp_scene.tscn" id="3_81d4i"]
 [ext_resource type="AudioStream" uid="uid://l4ihbu6r3bhk" path="res://sounds_market/broke_boy_alam_fix.wav" id="4_bq372"]
+[ext_resource type="PackedScene" uid="uid://t3fxorjxcvtt" path="res://dialogue/dialogue_box.tscn" id="5_w6kuu"]
 
 [node name="BlackHoleMarket" type="CanvasLayer" unique_id=1787878085]
 script = ExtResource("1_1x0ya")
@@ -20,61 +22,77 @@ color = Color(0, 0, 0, 0.60784316)
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -301.0
-offset_right = 445.0
-offset_bottom = 254.0
+offset_left = 27.0
+offset_top = -339.5
+offset_right = 457.0
+offset_bottom = 336.5
 grow_vertical = 2
 theme_override_constants/separation = 12
 
 [node name="Label" type="Label" parent="VBoxContainer" unique_id=1812575564]
 layout_mode = 2
-text = "UPGRADES!!!
-1 GLORPILLION% OFF!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="OrbitRadiusButton" type="Button" parent="VBoxContainer" unique_id=1910482011]
 layout_mode = 2
+theme = ExtResource("2_nn7dx")
 text = "Upgrade Orbit Radius - $200"
 
 [node name="OrbitRadiusProgress" type="ProgressBar" parent="VBoxContainer" unique_id=2120594186]
 layout_mode = 2
+theme = ExtResource("2_nn7dx")
 
 [node name="CatchRadiusButton" type="Button" parent="VBoxContainer" unique_id=2122769251]
 layout_mode = 2
+theme = ExtResource("2_nn7dx")
 text = "Upgrade Catch Radius - $200"
 
 [node name="CatchRadiusProgress" type="ProgressBar" parent="VBoxContainer" unique_id=1156558673]
 layout_mode = 2
+theme = ExtResource("2_nn7dx")
 
 [node name="FasterShipButton" type="Button" parent="VBoxContainer" unique_id=1399558802]
 layout_mode = 2
+theme = ExtResource("2_nn7dx")
 text = "Faster Ship - $200"
 
 [node name="FasterShipProgress" type="ProgressBar" parent="VBoxContainer" unique_id=258130769]
 layout_mode = 2
+theme = ExtResource("2_nn7dx")
 
 [node name="LargerCombosButton" type="Button" parent="VBoxContainer" unique_id=742671000]
 layout_mode = 2
+theme = ExtResource("2_nn7dx")
 text = "Larger Combos - $200"
 
 [node name="LargerCombosProgress" type="ProgressBar" parent="VBoxContainer" unique_id=1765536743]
 layout_mode = 2
+theme = ExtResource("2_nn7dx")
 
 [node name="LongerComboButton" type="Button" parent="VBoxContainer" unique_id=485726108]
 layout_mode = 2
+theme = ExtResource("2_nn7dx")
 text = "Longer Combo Time - $200"
 
 [node name="LongerComboProgress" type="ProgressBar" parent="VBoxContainer" unique_id=1980857853]
 layout_mode = 2
+theme = ExtResource("2_nn7dx")
 
 [node name="LargerFuelButton" type="Button" parent="VBoxContainer" unique_id=1366612870]
 layout_mode = 2
+theme = ExtResource("2_nn7dx")
 text = "Larger Fuel Tank - $200
 "
 
 [node name="LargerFuelProgress" type="ProgressBar" parent="VBoxContainer" unique_id=691125284]
 layout_mode = 2
+theme = ExtResource("2_nn7dx")
+
+[node name="Label2" type="Label" parent="VBoxContainer" unique_id=1938969813]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1678329034]
 anchors_preset = 6
@@ -82,10 +100,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -1152.0
-offset_top = 246.0
-offset_right = -707.0
-offset_bottom = 323.5
+offset_left = -480.0
+offset_top = -295.0
+offset_right = -35.0
+offset_bottom = -217.5
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/separation = 8
@@ -124,6 +142,12 @@ render_target_update_mode = 4
 
 [node name="NoMoneyStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=320706738]
 stream = ExtResource("4_bq372")
+
+[node name="DialogueBox" parent="." unique_id=1166612431 instance=ExtResource("5_w6kuu")]
+offset_left = 654.0
+offset_top = 451.0
+offset_right = -15.0
+offset_bottom = -20.0
 
 [connection signal="pressed" from="VBoxContainer/OrbitRadiusButton" to="." method="_on_orbit_radius_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/CatchRadiusButton" to="." method="_on_catch_radius_button_pressed"]

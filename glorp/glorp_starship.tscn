@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bvboagsrhp2c7"]
+
+[ext_resource type="Script" uid="uid://b65ugcwrx4434" path="res://glorp/glorp_starship.gd" id="1_i1ns5"]
+[ext_resource type="Texture2D" uid="uid://lgvcj031rd7t" path="res://icon.svg" id="1_qkx32"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_768q2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qkx32")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_768q2"]
+radius = 167.36188
+
+[node name="GlorpStarship" type="Node2D" unique_id=1172553172]
+script = ExtResource("1_i1ns5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1943480814]
+sprite_frames = SubResource("SpriteFrames_768q2")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=937238418]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=624480608]
+shape = SubResource("CircleShape2D_768q2")
