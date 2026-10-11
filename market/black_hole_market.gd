@@ -10,8 +10,8 @@ extends CanvasLayer
 @onready var larger_combos_progress: ProgressBar = $VBoxContainer/LargerCombosProgress
 @onready var longer_combo_button: Button = $VBoxContainer/LongerComboButton
 @onready var longer_combo_progress: ProgressBar = $VBoxContainer/LongerComboProgress
-@onready var larger_fuel_button: Button = $VBoxContainer/LargerFuelButton
-@onready var larger_fuel_progress: ProgressBar = $VBoxContainer/LargerFuelProgress
+#@onready var larger_fuel_button: Button = $VBoxContainer/LargerFuelButton
+#@onready var larger_fuel_progress: ProgressBar = $VBoxContainer/LargerFuelProgress
 
 @onready var money_label: Label = %MoneyLabel
 @onready var broke_alert_label: RichTextLabel = %BrokeAlertLabel
@@ -24,6 +24,8 @@ extends CanvasLayer
 @onready var cha_ching_audio_stream_player: AudioStreamPlayer = $ChaChingAudioStreamPlayer
 @onready var no_money_stream_player: AudioStreamPlayer = $NoMoneyStreamPlayer
 @onready var dialogue_box: Control = $DialogueBox
+
+@onready var uiController = get_node("/root/GameScene/MoneyFuelUI")
 
 
 #Shoutout to Gwizz for the tutorial on subViewportContainers:
@@ -98,39 +100,37 @@ func _out_of_money() -> void:
 func _on_orbit_radius_button_pressed() -> void:
 	if ScoreAndUpgrades.orbit_radius_progress < 2 and (ScoreAndUpgrades.money) > 0:
 		ScoreAndUpgrades.orbit_radius_progress += 1
-	print(ScoreAndUpgrades.orbit_radius_progress)
+	#print(ScoreAndUpgrades.orbit_radius_progress)
 	_handle_money(orbit_radius_progress, 200, orbit_radius_button)
 
 func _on_catch_radius_button_pressed() -> void:
 	if ScoreAndUpgrades.catch_radius_progress < 2 and (ScoreAndUpgrades.money) > 0:
 		ScoreAndUpgrades.catch_radius_progress += 1
-	print(ScoreAndUpgrades.catch_radius_progress)
+	#print(ScoreAndUpgrades.catch_radius_progress)
 	_handle_money(catch_radius_progress, 200, catch_radius_button)
 
 func _on_faster_ship_button_pressed() -> void:
 	if ScoreAndUpgrades.faster_ship_progress < 2 and (ScoreAndUpgrades.money) > 0:
 		ScoreAndUpgrades.faster_ship_progress += 1
-	print(ScoreAndUpgrades.faster_ship_progress)
+	#print(ScoreAndUpgrades.faster_ship_progress)
 	_handle_money(faster_ship_progress, 200, faster_ship_button)
 
 func _on_larger_combos_button_pressed() -> void:
 	if ScoreAndUpgrades.larger_combo_progress < 2 and (ScoreAndUpgrades.money) > 0:
 		ScoreAndUpgrades.larger_combo_progress += 1
-	print(ScoreAndUpgrades.larger_combo_progress)
+	#print(ScoreAndUpgrades.larger_combo_progress)
 	_handle_money(larger_combos_progress, 200, larger_combos_button)
 
 func _on_longer_combo_button_pressed() -> void:
 	if ScoreAndUpgrades.longer_combo_progress < 2 and (ScoreAndUpgrades.money) > 0:
 		ScoreAndUpgrades.longer_combo_progress += 1
-	print(ScoreAndUpgrades.longer_combo_progress)
+	#print(ScoreAndUpgrades.longer_combo_progress)
 	_handle_money(longer_combo_progress, 200, longer_combo_button)
 
 
 func _on_larger_fuel_button_pressed() -> void:
-	if ScoreAndUpgrades.larger_fuel_progress < 2 and (ScoreAndUpgrades.money) > 0:
-		ScoreAndUpgrades.larger_fuel_progress += 1
-	print(ScoreAndUpgrades.larger_fuel_progress)
-	_handle_money(larger_fuel_progress, 200, larger_fuel_button)
+	pass
+
 
 
 
@@ -169,6 +169,8 @@ func _add_fuel() -> void:
 			_out_of_money()
 	else:
 		ScoreAndUpgrades.fuel_quantity += 20
+		if ScoreAndUpgrades.fuel_quantity > 100.0:
+			ScoreAndUpgrades.fuel_quantity = 100
 		(ScoreAndUpgrades.money) -= 200
 		cha_ching_audio_stream_player.play()
 
@@ -180,6 +182,7 @@ func _on_quit_button_pressed() -> void:
 		pass
 
 func _leave_market() -> void:
+	uiController.UpdateMoneyText()
 	quit_pressed = true
 	dialogue_box.dialogue = leave_dialogue
 	dialogue_box.current_dialogue_index = randi_range(0, len(leave_dialogue) -1)

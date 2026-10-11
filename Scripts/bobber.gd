@@ -5,6 +5,8 @@ enum State { UNCASTED, CASTING, FISHING }
 
 @export var bobberType: String
 @export var bobberTexture: Texture2D
+@export var bounceNoise: AudioStreamPlayer2D
+
 var startingOrbitRadius: float
 var startingCatchRadius: float
 
@@ -31,6 +33,11 @@ func getBobberName() -> String:
 	return bobberType
 	
 func _ready() -> void:
+	if bounceNoise == null:
+		bounceNoise = AudioStreamPlayer2D.new()
+		add_child(bounceNoise)
+
+	bounceNoise.stream = preload("res://Scenes/Audio/SFX/v2/asteroid_bump.mp3")
 	startingOrbitRadius = orbit_area_collision.shape.radius 
 	startingCatchRadius = catch_area_collision.shape.radius
 	orbitRadius = startingOrbitRadius + (10 * (ScoreAndUpgrades.orbit_radius_progress))
@@ -59,6 +66,8 @@ func handleCasting(delta: float):
 	var collision = move_and_collide(velocity * delta)
 
 	if collision:
+		
+		bounceNoise.play()
 		castDirection = castDirection.bounce(
 			collision.get_normal()
 		).normalized()

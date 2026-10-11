@@ -60,6 +60,7 @@ var castingPoint: Marker2D
 @onready var input_button: AnimatedSprite2D = $InputButton
 
 # Quest
+var questStep: int = 0
 var fishNeededForQuest: String = ""
 var caughtFishForQuest = false
 
@@ -69,6 +70,7 @@ var comboSize: float
 var closeToShop: bool = false
 var last_direction := 0
 var isScoring: bool = false
+
 
 func _ready() -> void:
 	aim_arrow_base_scale = aimArrow.scale.x
@@ -93,7 +95,37 @@ func _process(delta: float) -> void:
 
 	aimArrow.scale = Vector2(aim_arrow_base_scale * (1.0 + charge_ratio), aim_arrow_base_scale * (1.0 + charge_ratio))
 	AimMouse()
-		
+
+func _handle_quests() -> void:
+	match questStep:
+		0:
+			fishNeededForQuest = "Starfish" #Pluto
+			uiController.UpdateQuestText(fishNeededForQuest)
+		1:
+			fishNeededForQuest = "Moon Jelly" #Mercury
+			uiController.UpdateQuestText(fishNeededForQuest)
+		2:
+			fishNeededForQuest = "Red Dwarf Herring" #Mars
+			uiController.UpdateQuestText(fishNeededForQuest)
+		3:
+			fishNeededForQuest = "Angler Fish" #Venus
+			uiController.UpdateQuestText(fishNeededForQuest)
+		4:
+			fishNeededForQuest = "r.dia" #Earth
+			uiController.UpdateQuestText(fishNeededForQuest)
+		5:
+			fishNeededForQuest = "Supermassive Squid" #Neptune
+			uiController.UpdateQuestText(fishNeededForQuest)
+		6:
+			fishNeededForQuest = "Patrick Starfish" #Uranus
+			uiController.UpdateQuestText(fishNeededForQuest)
+		7:
+			fishNeededForQuest = "Gold Fish" #Saturn
+			uiController.UpdateQuestText(fishNeededForQuest)
+		8:
+			fishNeededForQuest = "Gold Fish" #Jupiter
+			uiController.UpdateQuestText(fishNeededForQuest)
+
 
 func AimMouse() -> void:
 	# Mouse aiming
@@ -109,6 +141,7 @@ func AimMouse() -> void:
 		aimArrow.rotation = mouse_direction.angle()
 	
 func _physics_process(delta: float) -> void:
+	_handle_quests()
 	if isScoring:
 		return
 	maxComboTime = (ScoreAndUpgrades.longer_combo_progress + 1)
@@ -183,7 +216,7 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("CastReel") && playerState == PlayerState.Casting:
 		rod_audio.stop_reeling()
 		rod_audio.throwing()
-		print("Total hold duration was: ", min(castPower, maxCastPower)) 
+		#print("Total hold duration was: ", min(castPower, maxCastPower)) 
 		if min(castPower, maxCastPower) < 0.3:
 			EndFishing(false)
 			castPower = 0.0
@@ -230,7 +263,7 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 
 		if arrows.is_empty():
 			LevelManager.shakeCamera(2.0)
-			print("Combo complete! Combo size", comboSize)
+			#print("Combo complete! Combo size", comboSize)
 			EndFishing(true)
 		else:
 			arrows[0].TurnRed((ScoreAndUpgrades.longer_combo_progress) + 1)
@@ -262,7 +295,7 @@ func CastBobbers(castPower: float) -> void:
 		bobber.cast(randomizedDirection, randomizedPower, castDeceleration, bobberLine)
 
 		activeBobbers.append(bobber)
-		print(bobber.bobberType)
+		#print(bobber.bobberType)
 	
 func StartReelingMinigame() -> void:
 	rod_audio.stop_reeling()
@@ -288,7 +321,8 @@ func StartReelingMinigame() -> void:
 	for fish in fishList:
 		if fish.name == fishNeededForQuest:
 			caughtFishForQuest = true
-		
+			print("caughtFishForQuest!")
+			
 		var fish_instance = COMBO_FISH.instantiate()
 		fish_instance.PopulateData(fish)
 		comboFishList.append(fish_instance)
@@ -317,7 +351,7 @@ func EndFishing(success: bool) -> void:
 		await get_tree().create_timer(0.2).timeout
 	var totalMoney: float = 0 
 	for fish in comboFishList.duplicate():
-		print(fish)
+		#print(fish)
 		if is_instance_valid(fish):
 			if success:
 				await get_tree().create_timer(0.2).timeout	
@@ -347,20 +381,24 @@ func EndFishing(success: bool) -> void:
 	fishList.clear()
 	comboSize = 0
 	aimArrow.show()
-	CompleteQuest()
 	isScoring = false
+	if caughtFishForQuest:
+		CompleteQuest()
 	await get_tree().create_timer(0.4).timeout
 	input_button.visible = closeToShop
 	
 func CompleteQuest():
 	print("quest complete")
 	caughtFishForQuest = false
-	fishNeededForQuest = ""
+	questStep += 1
+	LevelManager.next_level()
+	LevelManager.level_up.connect(AddNewQuest)
 	# start popup for next quest
 	
 # call this to add a new quest fish
-func AddNewQuestFish(fishName: String):
+func AddNewQuest(fishName: String):
 	fishNeededForQuest = fishName
+	uiController.updateDialogue()
 
 func SetIdle():
 	if ScoreAndUpgrades.faster_ship_progress == 0:

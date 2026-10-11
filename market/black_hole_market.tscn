@@ -88,16 +88,6 @@ text = "Longer Combo Time - $200"
 layout_mode = 2
 theme = ExtResource("2_nn7dx")
 
-[node name="LargerFuelButton" type="Button" parent="VBoxContainer" unique_id=1366612870]
-layout_mode = 2
-theme = ExtResource("2_nn7dx")
-text = "Larger Fuel Tank - $200
-"
-
-[node name="LargerFuelProgress" type="ProgressBar" parent="VBoxContainer" unique_id=691125284]
-layout_mode = 2
-theme = ExtResource("2_nn7dx")
-
 [node name="Label2" type="Label" parent="VBoxContainer" unique_id=1938969813]
 layout_mode = 2
 horizontal_alignment = 1
@@ -203,6 +193,5 @@ autoplay = true
 [connection signal="pressed" from="VBoxContainer/FasterShipButton" to="." method="_on_faster_ship_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/LargerCombosButton" to="." method="_on_larger_combos_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/LongerComboButton" to="." method="_on_longer_combo_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/LargerFuelButton" to="." method="_on_larger_fuel_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/FuelButton" to="." method="_on_fuel_button_pressed"]
 [connection signal="pressed" from="VBoxContainer2/QuitButton" to="." method="_on_quit_button_pressed"]

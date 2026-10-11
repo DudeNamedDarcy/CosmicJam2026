@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://clyovkxg4cj4f" path="res://MainMenu/addons/perspective_quads/scripts/nodes/perspective_viewport_container_2d.gd" id="3_5de1l"]
 [ext_resource type="PackedScene" uid="uid://dsiq0ku6hhr" path="res://MainMenu/second_menu_part.tscn" id="4_ajn5b"]
 
-[node name="MainMenu" type="Control" unique_id=402787751]
+[node name="MainMenu" type="Control" unique_id=402787751 node_paths=PackedStringArray("screenFade")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3w4mj")
+screenFade = NodePath("Screen Fade")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2130187908]
 layout_mode = 1
@@ -89,6 +90,16 @@ metadata/_custom_type_script = "uid://clyovkxg4cj4f"
 [node name="SubViewport" type="SubViewport" parent="PerspectiveViewportContainer2D" unique_id=1565281900]
 
 [node name="SecondPart" parent="PerspectiveViewportContainer2D/SubViewport" unique_id=1191171838 instance=ExtResource("4_ajn5b")]
+
+[node name="Screen Fade" type="ColorRect" parent="." unique_id=391013446]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
 
 [connection signal="pressed" from="CenterContainer/Control/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="CenterContainer/Control/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
