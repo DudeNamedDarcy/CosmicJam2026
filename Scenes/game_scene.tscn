@@ -30,11 +30,11 @@ glow_hdr_threshold = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2fmhe"]
 atlas = ExtResource("7_2fmhe")
-region = Rect2(256, 0, 128, 128)
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gem73"]
 atlas = ExtResource("7_2fmhe")
-region = Rect2(128, 0, 128, 128)
+region = Rect2(256, 0, 128, 128)
 
 [node name="GameScene" type="Node2D" unique_id=459147446]
 
@@ -110,7 +110,7 @@ ExtResource("10_a7fet"): 1
 spawnableArea = NodePath("../SpawnableArea")
 
 [node name="Spawn Timer" type="Timer" parent="Fish Spawner" unique_id=1446234030]
-wait_time = 0.2
+wait_time = 1.5
 
 [node name="SpawnableArea" type="Polygon2D" parent="." unique_id=1898762879]
 visible = false
