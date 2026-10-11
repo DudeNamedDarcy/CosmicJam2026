@@ -207,6 +207,7 @@ func EndFishing(success: bool) -> void:
 			arrow.KillArrow()
 
 	arrows.clear()
+	await get_tree().create_timer(0.2).timeout 
 	for fish in comboFishList.duplicate():
 		if is_instance_valid(fish):
 			fish.KillFish(success)
