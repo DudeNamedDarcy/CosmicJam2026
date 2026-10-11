@@ -63,7 +63,7 @@ func show_text(array: Array[String]) -> void:
 	
 	var current_text = array[current_dialogue_index]
 	rich_text_label.text = current_text
-	var tween_duration: float = current_text.length() / 10.0
+	var tween_duration: float = current_text.length() / 16.0
 	
 	var sound_offset = max(0.0, audio_stream_player.stream.get_length() - tween_duration) #so sound doesn't cut off
 	var sound_start_position = randf() * sound_offset 

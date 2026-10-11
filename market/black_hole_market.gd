@@ -43,13 +43,19 @@ var purchase_dialogue: Array[String] = ["Eh, that upgrade's okay, I guess!",
 "Good boy",
 "Holy mackerel! Took you long enough!",
 "A worthless purchase",
-"Just big and greedy, you are"
+"Just big and greedy, you are",
+"Bogos binted?"
+]
+
+var leave_dialogue: Array[String] = ["zeep zorp",
+"Best of luck on those catches!"
 ]
 
 var broke_dialogue: Array[String] = ["Imagine being broke LOL",
 "Come back when you're a little... richer!"]
 
-var out_of_money_bool = true
+var out_of_money_bool: bool = true
+var quit_pressed: bool = false
 
 
 
@@ -69,6 +75,11 @@ func _process(delta: float) -> void:
 func _out_of_money() -> void:
 	out_of_money_bool = false
 	no_money_stream_player.play()
+
+	dialogue_box.dialogue = broke_dialogue
+	dialogue_box.current_dialogue_index = randi_range(0, len(broke_dialogue) -1)
+	dialogue_box.show_text(dialogue_box.dialogue)
+
 	broke_alert_label.show()
 	await get_tree().create_timer(1.5).timeout
 	#shoutout this video for making me remember await and making timers in code: https://www.youtube.com/watch?v=1sYgGvrDYag&t=851s
@@ -154,4 +165,15 @@ func _add_fuel() -> void:
 
 
 func _on_quit_button_pressed() -> void:
+	if quit_pressed == false:
+		_leave_market()
+	else:
+		pass
+
+func _leave_market() -> void:
+	quit_pressed = true
+	dialogue_box.dialogue = leave_dialogue
+	dialogue_box.current_dialogue_index = randi_range(0, len(leave_dialogue) -1)
+	dialogue_box.show_text(dialogue_box.dialogue)
+	await get_tree().create_timer((len(leave_dialogue[dialogue_box.current_dialogue_index]) / 16.0) + 1.5).timeout
 	get_tree().quit()
