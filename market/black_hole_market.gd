@@ -14,7 +14,11 @@ extends CanvasLayer
 @onready var larger_fuel_progress: ProgressBar = $VBoxContainer/LargerFuelProgress
 
 @onready var money_label: Label = %MoneyLabel
-@onready var warning_label: Label = %WarningLabel
+@onready var broke_alert_label: RichTextLabel = %BrokeAlertLabel
+@onready var fuel_label: Label = %FuelLabel
+@onready var fuel_button: Button = $VBoxContainer2/FuelButton
+
+
 
 @onready var cha_ching_audio_stream_player: AudioStreamPlayer = $ChaChingAudioStreamPlayer
 @onready var no_money_stream_player: AudioStreamPlayer = $NoMoneyStreamPlayer
@@ -52,7 +56,7 @@ var out_of_money_bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	warning_label.text = ""
+	broke_alert_label.hide()
 	var chosen_index: int = randi_range(0, len(intro_dialogue) -1)
 	dialogue_box.dialogue = intro_dialogue.slice(chosen_index, (chosen_index+1))
 	dialogue_box.show_text(dialogue_box.dialogue)
@@ -60,14 +64,16 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	money_label.text = "Money: $" + str(totalMoney)
+	fuel_label.text = "Fuel: " + str(ScoreAndUpgrades.fuel_quantity) + "%"
+	
 
 func _out_of_money() -> void:
 	out_of_money_bool = false
 	no_money_stream_player.play()
-	warning_label.text = "Hey! You don't have enough money to buy that!"
-	await get_tree().create_timer(3).timeout
+	broke_alert_label.show()
+	await get_tree().create_timer(1.5).timeout
 	#shoutout this video for making me remember await and making timers in code: https://www.youtube.com/watch?v=1sYgGvrDYag&t=851s
-	warning_label.text = ""
+	broke_alert_label.hide()
 	out_of_money_bool = true
 
 func _on_orbit_radius_button_pressed() -> void:
@@ -107,3 +113,21 @@ func activate_buy_dialogue() -> void:
 	var chosen_index: int = randi_range(0, len(purchase_dialogue) -1)
 	dialogue_box.dialogue = purchase_dialogue.slice(chosen_index, (chosen_index+1))
 	dialogue_box.show_text(dialogue_box.dialogue)
+
+
+func _on_fuel_button_pressed() -> void:
+	_add_fuel()
+
+func _add_fuel() -> void:
+	if ScoreAndUpgrades.fuel_quantity >= 100 and totalMoney >= 200:
+		return
+	elif ScoreAndUpgrades.fuel_quantity < 100 and totalMoney < 200:
+		if out_of_money_bool:
+			_out_of_money()
+	elif ScoreAndUpgrades.fuel_quantity >= 100 and totalMoney < 200:
+		if out_of_money_bool:
+			_out_of_money()
+	else:
+		ScoreAndUpgrades.fuel_quantity += 20
+		totalMoney -= 200
+		cha_ching_audio_stream_player.play()
