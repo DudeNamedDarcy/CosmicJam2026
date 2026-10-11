@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://t2kcdkvabp2d" path="res://dialogue/dialogue_box.tres" id="1_yvd7p"]
 [ext_resource type="Script" uid="uid://c5x0npa0pwsbs" path="res://dialogue/intro_dialogue_box.gd" id="2_yvd7p"]
-[ext_resource type="AudioStream" uid="uid://cs33gpy7nqym6" path="res://dialogue/dialogue_sfx/glorp_blabble_test2.wav" id="3_1ey51"]
+[ext_resource type="AudioStream" uid="uid://c4nk0v4v7dgp8" path="res://dialogue/dialogue_sfx/glorp_blabble_test2.wav" id="3_1ey51"]
 [ext_resource type="Texture2D" uid="uid://t1dc2pbkxolm" path="res://glorp/glorp.png" id="4_0nd35"]
 
 [node name="IntroDialogueBox" type="Control" unique_id=1166612431]
