@@ -256,6 +256,7 @@ shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="FollowCamera" type="Camera2D" parent="." unique_id=813711711]
 zoom = Vector2(1.5, 1.5)
+limit_enabled = false
 limit_left = 0
 limit_top = 0
 limit_right = 1100
