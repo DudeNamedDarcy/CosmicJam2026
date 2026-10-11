@@ -1,10 +1,15 @@
 [gd_scene format=3 uid="uid://b4obqg1s8xc7s"]
 
 [ext_resource type="Script" uid="uid://cgk5p01hihcku" path="res://MainMenu/main_menu.gd" id="1_3w4mj"]
+[ext_resource type="Texture2D" uid="uid://byyy1xe8quruc" path="res://MainMenu/starterscreen.png" id="2_jdgnk"]
 [ext_resource type="Script" uid="uid://b61kk0hg6mbb2" path="res://MainMenu/start_game_button.gd" id="2_po2gx"]
-[ext_resource type="Script" uid="uid://clyovkxg4cj4f" path="res://MainMenu/addons/perspective_quads/scripts/nodes/perspective_viewport_container_2d.gd" id="3_5de1l"]
-[ext_resource type="AudioStream" uid="uid://tj7s3l3plkm4" path="res://MainMenu/menu_105bpm.mp3" id="3_po2gx"]
-[ext_resource type="PackedScene" uid="uid://dsiq0ku6hhr" path="res://MainMenu/second_menu_part.tscn" id="4_ajn5b"]
+[ext_resource type="FontFile" uid="uid://btm21rgep3rct" path="res://fonts/Silkscreen/Silkscreen-Regular.ttf" id="3_jdgnk"]
+[ext_resource type="AudioStream" uid="uid://tj7s3l3plkm4" path="res://MainMenu/menu_105bpm.mp3" id="3_po3gx"]
+[ext_resource type="Theme" uid="uid://t2kcdkvabp2d" path="res://dialogue/dialogue_box.tres" id="4_ajn5b"]
+[ext_resource type="StyleBox" uid="uid://buan5y4legray" path="res://texture.tres" id="4_jdgnk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jdgnk"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="MainMenu" type="Control" unique_id=402787751 node_paths=PackedStringArray("screenFade")]
 layout_mode = 3
@@ -30,12 +35,56 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 728.0
-offset_top = 147.0
-offset_right = -120.0
-offset_bottom = -168.0
+offset_left = -20.0
+offset_right = 616.0
+offset_bottom = 324.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.67, 0.67)
+texture = ExtResource("2_jdgnk")
+
+[node name="StartGameButton" type="Button" parent="." unique_id=2089890686]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 440.0
+offset_right = 820.0
+offset_bottom = 558.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_jdgnk")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = ExtResource("4_jdgnk")
+theme_override_styles/pressed = ExtResource("4_jdgnk")
+theme_override_styles/hover = ExtResource("4_jdgnk")
+text = "PLAY"
+script = ExtResource("2_po2gx")
+
+[node name="CreditsButton" type="Button" parent="." unique_id=610206053]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 500.0
+offset_right = 820.0
+offset_bottom = 618.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_jdgnk")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = ExtResource("4_jdgnk")
+theme_override_styles/pressed = ExtResource("4_jdgnk")
+theme_override_styles/hover = ExtResource("4_jdgnk")
+text = "Credits"
+
+[node name="QuitButton" type="Button" parent="." unique_id=185556139]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 560.0
+offset_right = 820.0
+offset_bottom = 678.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_jdgnk")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = ExtResource("4_jdgnk")
+theme_override_styles/pressed = ExtResource("4_jdgnk")
+theme_override_styles/hover = ExtResource("4_jdgnk")
+text = "Quit Game"
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=327940219]
 layout_mode = 1
@@ -45,62 +94,45 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -576.0
-offset_top = -50.5
+offset_top = 142.0
 offset_right = 576.0
-offset_bottom = 50.5
+offset_bottom = 274.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="CenterContainer" unique_id=726007084]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=2101989938]
 layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Control" unique_id=2101989938]
-layout_mode = 0
-offset_left = -48.0
-offset_top = -50.0
-offset_right = 48.0
-offset_bottom = 51.0
-
-[node name="StartGameButton" type="Button" parent="CenterContainer/Control/VBoxContainer" unique_id=2089890686]
-layout_mode = 2
-text = "Start Game"
-script = ExtResource("2_po2gx")
-
-[node name="CreditsButton" type="Button" parent="CenterContainer/Control/VBoxContainer" unique_id=610206053]
-layout_mode = 2
-text = "Credits"
-
-[node name="QuitButton" type="Button" parent="CenterContainer/Control/VBoxContainer" unique_id=185556139]
-layout_mode = 2
-text = "Quit Game"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1039320173]
-stream = ExtResource("3_po2gx")
+stream = ExtResource("3_po3gx")
 autoplay = true
 
-[node name="PerspectiveViewportContainer2D" type="Node2D" parent="." unique_id=1891585155]
-position = Vector2(251, 324)
-script = ExtResource("3_5de1l")
-corner_top_left = Vector2(0, -0.135)
-corner_top_right = Vector2(1, 0.15)
-corner_bottom_right = Vector2(1, 0.85)
-corner_bottom_left = Vector2(0, 1.135)
-metadata/_custom_type_script = "uid://clyovkxg4cj4f"
-
-[node name="SubViewport" type="SubViewport" parent="PerspectiveViewportContainer2D" unique_id=1565281900]
-
-[node name="SecondPart" parent="PerspectiveViewportContainer2D/SubViewport" unique_id=1191171838 instance=ExtResource("4_ajn5b")]
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=83643428]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 179.0
+offset_right = 579.0
+offset_bottom = 220.0
+theme = ExtResource("4_ajn5b")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jdgnk")
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=5.0 connected=1]Project: Mail Hary presents![/wave]"
+fit_content = true
 
 [node name="Screen Fade" type="ColorRect" parent="." unique_id=391013446]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = -3.0
+offset_right = -22.0
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
-[connection signal="pressed" from="CenterContainer/Control/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
-[connection signal="pressed" from="CenterContainer/Control/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
-[connection signal="pressed" from="CenterContainer/Control/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
