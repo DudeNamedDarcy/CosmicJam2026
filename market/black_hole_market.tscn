@@ -64,7 +64,7 @@ theme = ExtResource("2_nn7dx")
 [node name="LargerCombosButton" type="Button" parent="VBoxContainer" unique_id=742671000]
 layout_mode = 2
 theme = ExtResource("2_nn7dx")
-text = "Larger Combos - $200"
+text = "Larger Combo Value - $200"
 
 [node name="LargerCombosProgress" type="ProgressBar" parent="VBoxContainer" unique_id=1765536743]
 layout_mode = 2

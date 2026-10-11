@@ -4,11 +4,17 @@ enum PlayerState { Idle, Moving, Casting, Fishing, Reeling }
 const DIRECTIONAL_ARROW = preload("res://Scenes/directional_arrow.tscn")
 const COMBO_FISH = preload("res://Scenes/Fish/fish_combo_sprite.tscn")
 
-@onready var cameraController = $FollowCamera
-
 #Upgradeable
 var bobbersList: Array[PackedScene] = [
-	preload("res://Scenes/Bobbers/Pluto.tscn")
+	preload("res://Scenes/Bobbers/Pluto.tscn"),
+	#preload("res://Scenes/Bobbers/Mercury.tscn"),
+	#preload("res://Scenes/Bobbers/Venus.tscn"),
+	#preload("res://Scenes/Bobbers/Earth.tscn"),
+	#preload("res://Scenes/Bobbers/Mars.tscn"),
+	#preload("res://Scenes/Bobbers/Neptune.tscn"),
+	#preload("res://Scenes/Bobbers/Uranus.tscn"),
+	#preload("res://Scenes/Bobbers/Saturn.tscn"),
+	preload("res://Scenes/Bobbers/Jupiter.tscn")
 ]
 @export_category("Movement")
 @export var maxMovementSpeed: float
@@ -36,10 +42,20 @@ var activeBobbers: Array[Bobber] = []
 
 @onready var boat_audio: AudioStreamPlayer2D = $BoatNoise
 @onready var rod_audio: AudioStreamPlayer2D = $RodNoise
+var comboFishList: Array[FishComboSprite] = []
+var aim_arrow_base_scale: float
+
+func _ready() -> void:
+	aim_arrow_base_scale = aimArrow.scale.x
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("CastReel"):
 		castPower += delta
+	var charge_ratio: float = 0.0
+	if maxCastPower > 0.0:
+		charge_ratio = clamp(castPower / maxCastPower, 0.0, 1.0)
+
+	aimArrow.scale = Vector2(aim_arrow_base_scale * (1.0 + charge_ratio), aim_arrow_base_scale * (1.0 + charge_ratio))
 	#print(PlayerState.find_key(playerState))
 	AimMouse()
 		
@@ -82,8 +98,8 @@ func _physics_process(delta: float) -> void:
 	# Smooth acceleration and deceleration
 	if characterDirection != Vector2.ZERO:
 		boat_audio.accelerating()
-		var target_velocity = characterDirection * maxMovementSpeed
-		velocity = velocity.move_toward(target_velocity, acceleration * delta)
+		var target_velocity = characterDirection * (maxMovementSpeed + (30 * (ScoreAndUpgrades.faster_ship_progress)))
+		velocity = velocity.move_toward(target_velocity, (acceleration + (50 * (ScoreAndUpgrades.faster_ship_progress))) * delta)
 	else:
 		boat_audio.decelerating()
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
@@ -103,7 +119,7 @@ func _input(event: InputEvent) -> void:
 		rod_audio.throwing()
 		print("Total hold duration was: ", min(castPower, maxCastPower)) 
 		if min(castPower, maxCastPower) < 0.3:
-			EndFishing()
+			EndFishing(false)
 			castPower = 0.0
 			return
 		playerState = PlayerState.Fishing #the time spent waiting for fish
@@ -136,23 +152,24 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 		return
 
 	if arrow.GetArrowType() == input_arrow:
-		cameraController.ApplyShake(2.0)
 		rod_audio.comboing()
+		LevelManager.shakeCamera(2.0)
 		arrows.pop_front()
 		arrow.KillArrow()
 
 		if arrows.is_empty():
-			cameraController.ApplyShake(2.0)
+			LevelManager.shakeCamera(2.0)
 			print("Combo complete!")
-			rod_audio.winning()
-			EndFishing()
+			EndFishing(true)
 	else:
-		cameraController.ApplyShake(7.0)
+		LevelManager.shakeCamera(7.0)
 		rod_audio.losing()
-		EndFishing()
+		EndFishing(false)
 
 func CastBobbers(castPower: float) -> void:
 	aimArrow.hide()
+	aimArrow.scale = Vector2(aim_arrow_base_scale, aim_arrow_base_scale)
+
 	var cast_direction: Vector2 = Vector2.RIGHT.rotated(aimArrow.global_rotation).normalized()
 	for bobberScene in bobbersList:
 		var bobber: Bobber = bobberScene.instantiate()
@@ -175,9 +192,11 @@ func CastBobbers(castPower: float) -> void:
 func StartReelingMinigame() -> void:
 	for activeBobber in activeBobbers:
 		fishList.append_array(activeBobber.reelIn())
-		
+		print(fishList.size())
+		activeBobber.killAllFish()
 	if fishList.size() == 0:
-		EndFishing()
+		EndFishing(false)
+		DeletePlanets()
 		return
 	var comboLength = 4 + fishList.size() - 1
 
@@ -188,12 +207,18 @@ func StartReelingMinigame() -> void:
 	for fish in fishList:
 		var fish_instance = COMBO_FISH.instantiate()
 		fish_instance.PopulateData(fish)
+		comboFishList.append(fish_instance)
 		vboxContainer.add_child(fish_instance)
+	DeletePlanets()
+
+func DeletePlanets() -> void:
+	#delete planets
 	for child in planetParent.get_children():
 		child.queue_free()
+	
 	activeBobbers.clear()
-
-func EndFishing() -> void:
+	
+func EndFishing(success: bool) -> void:
 	playerState = PlayerState.Idle
 
 	for arrow in arrows.duplicate():
@@ -201,5 +226,13 @@ func EndFishing() -> void:
 			arrow.KillArrow()
 
 	arrows.clear()
-
+	await get_tree().create_timer(0.2).timeout 
+	for fish in comboFishList.duplicate():
+		if is_instance_valid(fish):
+			fish.KillFish(success)
+	
+	comboFishList.clear()
+	fishList.clear()
+		
+			
 	aimArrow.show()

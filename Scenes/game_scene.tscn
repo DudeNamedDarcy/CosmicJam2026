@@ -5,8 +5,12 @@
 [ext_resource type="Script" uid="uid://dd8xfjhdnaicb" path="res://Scenes/fishing_music.gd" id="2_fiftr"]
 [ext_resource type="Script" uid="uid://b4dpoqejtr8d5" path="res://Scenes/boat_noises.gd" id="3_6h5vk"]
 [ext_resource type="Script" uid="uid://xiufvpalhvi1" path="res://Scripts/orbit_manager.gd" id="3_fiftr"]
-[ext_resource type="PackedScene" uid="uid://diga0gfwjyvcg" path="res://Scenes/Fish/moon_jelly.tscn" id="4_1ixah"]
 [ext_resource type="Script" uid="uid://dqlo4uebgxkyw" path="res://Scenes/rod_noise.gd" id="5_2fmhe"]
+[ext_resource type="PackedScene" uid="uid://diga0gfwjyvcg" path="res://Scenes/Fish/moon_jelly.tscn" id="3_rgj8m"]
+[ext_resource type="PackedScene" uid="uid://d3oxvy0grl375" path="res://Scenes/Fish/red_dwarf_herring.tscn" id="4_2fmhe"]
+[ext_resource type="PackedScene" uid="uid://bvboagsrhp2c7" path="res://glorp/glorp_starship.tscn" id="6_2fmhe"]
+[ext_resource type="Script" uid="uid://c4evtl6kbwuw2" path="res://Scenes/fish_spawner.gd" id="6_rgj8m"]
+[ext_resource type="Texture2D" uid="uid://ck5uv4d76r727" path="res://Assets/Final/Parallax/stars.png" id="7_2fmhe"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
 normal = Vector2(0, 1)
@@ -18,9 +22,23 @@ normal = Vector2(0, 1)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6h5vk"]
 
+[sub_resource type="Environment" id="Environment_gem73"]
+background_mode = 3
+glow_enabled = true
+glow_hdr_threshold = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fmhe"]
+atlas = ExtResource("7_2fmhe")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gem73"]
+atlas = ExtResource("7_2fmhe")
+region = Rect2(128, 0, 128, 128)
+
 [node name="GameScene" type="Node2D" unique_id=459147446]
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1596285265]
+visible = false
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(596, 361)
@@ -35,6 +53,7 @@ script = ExtResource("2_fiftr")
 position = Vector2(95, 64)
 collision_layer = 4
 collision_mask = 0
+castRandomSpread = 0.77
 vboxContainer = NodePath("VBoxContainer")
 
 [node name="BoatNoise" type="AudioStreamPlayer2D" parent="PlayerController" unique_id=1464942758]
@@ -51,6 +70,7 @@ offset_left = -25.0
 offset_top = -3.0
 offset_right = 25.0
 offset_bottom = 697.0
+metadata/_edit_use_anchors_ = true
 
 [node name="PlayerBounds" type="StaticBody2D" parent="." unique_id=955427512]
 
@@ -76,27 +96,61 @@ position = Vector2(576, 93)
 [node name="OrbitManager" type="Node2D" parent="Planet" unique_id=1894180204]
 script = ExtResource("3_fiftr")
 metadata/_custom_type_script = "uid://xiufvpalhvi1"
+[node name="Fish Spawner" type="Node2D" parent="." unique_id=1574152278 node_paths=PackedStringArray("spawnableArea")]
+script = ExtResource("6_rgj8m")
+fishDict = Dictionary[PackedScene, int]({
+ExtResource("3_rgj8m"): 1,
+ExtResource("4_2fmhe"): 1
+})
+spawnableArea = NodePath("../SpawnableArea")
 
-[node name="Moon Jelly" parent="." unique_id=1404079117 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_1ixah")]
-position = Vector2(576, 363)
-orbitManager = NodePath("../Planet/OrbitManager")
+[node name="Spawn Timer" type="Timer" parent="Fish Spawner" unique_id=1446234030]
+wait_time = 3.0
 
-[node name="Moon Jelly2" parent="." unique_id=138465252 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_1ixah")]
-position = Vector2(576, 363)
-orbitManager = NodePath("../Planet/OrbitManager")
+[node name="SpawnableArea" type="Polygon2D" parent="." unique_id=1898762879]
+visible = false
+polygon = PackedVector2Array(1146, 2, 1146, 694, 9, 699, 622, 468, 747, 468, 750, 276, 619, 281, 619, 443, 6, 680, 9, 4)
 
-[node name="Moon Jelly3" parent="." unique_id=444781375 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_1ixah")]
-position = Vector2(576, 363)
-orbitManager = NodePath("../Planet/OrbitManager")
+[node name="GlorpStarship" parent="." unique_id=1172553172 instance=ExtResource("6_2fmhe")]
+position = Vector2(689, 369)
 
-[node name="Moon Jelly4" parent="." unique_id=1271048047 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_1ixah")]
-position = Vector2(576, 363)
-orbitManager = NodePath("../Planet/OrbitManager")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937637144]
+environment = SubResource("Environment_gem73")
 
-[node name="Moon Jelly5" parent="." unique_id=1878490318 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_1ixah")]
-position = Vector2(576, 363)
-orbitManager = NodePath("../Planet/OrbitManager")
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=50502159]
+scroll_base_offset = Vector2(20, 20)
+scroll_ignore_camera_zoom = true
+
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxBackground" unique_id=1608117694]
+scroll_scale = Vector2(2, 2)
+repeat_size = Vector2(256, 256)
+repeat_times = 20
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Parallax2D" unique_id=1468262979]
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_2fmhe")
+
+[node name="Parallax2D2" type="Parallax2D" parent="ParallaxBackground" unique_id=398456648]
+scroll_scale = Vector2(2.5, 2.5)
+repeat_size = Vector2(256, 256)
+repeat_times = 20
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Parallax2D2" unique_id=865953587]
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_gem73")
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground" unique_id=47073576]
+z_index = -500
+z_as_relative = false
+offset_left = -133.0
+offset_top = -90.99997
+offset_right = -80.0889
+offset_bottom = -36.71998
+scale = Vector2(27.631252, 16.451735)
+color = Color(0.09112144, 0.09112146, 0.09112144, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="Moon Jelly6" parent="." unique_id=1435106380 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_1ixah")]
 position = Vector2(576, 363)
 orbitManager = NodePath("../Planet/OrbitManager")
+[connection signal="timeout" from="Fish Spawner/Spawn Timer" to="Fish Spawner" method="_on_spawn_timer_timeout"]

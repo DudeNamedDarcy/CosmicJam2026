@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dji82wv0ax74n"]
+
+[ext_resource type="Script" uid="uid://bk0w7ii4wq8ex" path="res://Scripts/bobber.gd" id="1_c5h7x"]
+[ext_resource type="Texture2D" uid="uid://cuelgnqn86jgp" path="res://Scenes/Bobbers/planets-jupiter.png" id="2_c5h7x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gem73"]
+radius = 80.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d6vkj"]
+radius = 60.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yysiv"]
+radius = 33.0
+
+[node name="Jupiter" type="CharacterBody2D" unique_id=2079869234 node_paths=PackedStringArray("bobberSprite", "orbitArea", "catchArea")]
+collision_mask = 0
+script = ExtResource("1_c5h7x")
+bobberType = "Jupiter"
+bobberTexture = ExtResource("2_c5h7x")
+bobberSprite = NodePath("Planet")
+orbitArea = NodePath("Orbit Area")
+catchArea = NodePath("Catch Area")
+
+[node name="Orbit Area" type="Area2D" parent="." unique_id=1929446688 groups=["Bobbers"]]
+
+[node name="OrbitAreaCollision" type="CollisionShape2D" parent="Orbit Area" unique_id=1940686577]
+shape = SubResource("CircleShape2D_gem73")
+
+[node name="Planet" type="Sprite2D" parent="." unique_id=1052726689]
+z_index = 5
+position = Vector2(-0.3050001, 1.93)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("2_c5h7x")
+
+[node name="Catch Area" type="Area2D" parent="." unique_id=239105006]
+
+[node name="CatchAreaCollision" type="CollisionShape2D" parent="Catch Area" unique_id=1099348346]
+shape = SubResource("CircleShape2D_d6vkj")
+debug_color = Color(0.9077675, 0.24772924, 0.44506162, 0.41960785)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=379185242]
+shape = SubResource("CircleShape2D_yysiv")
+
+[connection signal="area_entered" from="Orbit Area" to="." method="_on_orbit_area_area_entered"]
+[connection signal="area_entered" from="Catch Area" to="." method="_on_catch_area_entered"]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ckjrs5i3ajm7v"]
 
-[ext_resource type="Script" uid="uid://xiufvpalhvi1" path="res://Scripts/orbit_manager.gd" id="1_8ewqw"]
+[ext_resource type="Script" uid="uid://xiufvpalhvi1" path="res://singletons/orbit_manager.gd" id="1_8ewqw"]
 [ext_resource type="PackedScene" uid="uid://diga0gfwjyvcg" path="res://Scenes/Fish/moon_jelly.tscn" id="2_xe4is"]
 [ext_resource type="PackedScene" uid="uid://d3oxvy0grl375" path="res://Scenes/Fish/red_dwarf_herring.tscn" id="3_so58k"]
 [ext_resource type="PackedScene" uid="uid://b7m36bfujolqs" path="res://Scenes/Fish/supermassive_squid.tscn" id="4_lmqij"]
@@ -12,8 +12,6 @@
 
 [node name="OrbitManager" type="Node2D" parent="." unique_id=1953657359]
 script = ExtResource("1_8ewqw")
-radial_gain = 0.3
-max_inward_speed = 50.0
 
 [node name="Moon Jelly" parent="." unique_id=700072511 node_paths=PackedStringArray("orbitManager") instance=ExtResource("2_xe4is")]
 position = Vector2(-76, 116)

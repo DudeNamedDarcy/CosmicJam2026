@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bsl6rs66kavfc" path="res://Testing/test.gd" id="1_3e3w2"]
 [ext_resource type="PackedScene" uid="uid://diga0gfwjyvcg" path="res://Scenes/Fish/moon_jelly.tscn" id="2_tll1q"]
-[ext_resource type="Script" uid="uid://xiufvpalhvi1" path="res://Scripts/orbit_manager.gd" id="3_3e3w2"]
+[ext_resource type="Script" uid="uid://xiufvpalhvi1" path="res://singletons/orbit_manager.gd" id="3_3e3w2"]
 [ext_resource type="PackedScene" uid="uid://d3oxvy0grl375" path="res://Scenes/Fish/red_dwarf_herring.tscn" id="4_7ps7b"]
 [ext_resource type="PackedScene" uid="uid://b7m36bfujolqs" path="res://Scenes/Fish/supermassive_squid.tscn" id="5_8fcry"]
 
@@ -14,9 +14,8 @@ script = ExtResource("1_3e3w2")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=730163826]
 
-[node name="Moon Jelly" parent="." unique_id=1060731580 node_paths=PackedStringArray("orbitManager") instance=ExtResource("2_tll1q")]
+[node name="Moon Jelly" parent="." unique_id=1060731580 instance=ExtResource("2_tll1q")]
 position = Vector2(-4, 7)
-orbitManager = NodePath("../Node2D")
 
 [node name="TextEdit" type="TextEdit" parent="." unique_id=801115250]
 offset_left = -502.0
@@ -69,20 +68,16 @@ offset_bottom = 275.0
 [node name="Node2D" type="Node2D" parent="." unique_id=516935250]
 script = ExtResource("3_3e3w2")
 
-[node name="Red Dwarf Herring" parent="." unique_id=843615539 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_7ps7b")]
+[node name="Red Dwarf Herring" parent="." unique_id=843615539 instance=ExtResource("4_7ps7b")]
 position = Vector2(-41, 40)
-orbitManager = NodePath("../Node2D")
 
-[node name="Supermassive Squid" parent="." unique_id=674465445 node_paths=PackedStringArray("orbitManager") instance=ExtResource("5_8fcry")]
+[node name="Supermassive Squid" parent="." unique_id=674465445 instance=ExtResource("5_8fcry")]
 position = Vector2(76, 3)
-orbitManager = NodePath("../Node2D")
 
-[node name="Red Dwarf Herring2" parent="." unique_id=1468583391 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_7ps7b")]
+[node name="Red Dwarf Herring2" parent="." unique_id=1468583391 instance=ExtResource("4_7ps7b")]
 position = Vector2(-24, -1)
-orbitManager = NodePath("../Node2D")
 
-[node name="Moon Jelly2" parent="." unique_id=1404079117 node_paths=PackedStringArray("orbitManager") instance=ExtResource("2_tll1q")]
+[node name="Moon Jelly2" parent="." unique_id=1404079117 instance=ExtResource("2_tll1q")]
 position = Vector2(35, 20)
-orbitManager = NodePath("../Node2D")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
