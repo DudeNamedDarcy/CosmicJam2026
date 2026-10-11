@@ -14,6 +14,8 @@ func GetArrowType() -> ArrowType:
 func _ready() -> void:
 	arrowType = randi_range(0, 3)
 	sprite.rotation_degrees = arrowType*90
+	if sprite.rotation_degrees == 180:
+		sprite.flip_h = true
 	sprite.animation = "Idle"
 
 func KillArrow() -> void:
