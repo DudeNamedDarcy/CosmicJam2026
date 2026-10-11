@@ -1,6 +1,6 @@
 extends Control
 class_name FishComboSprite
-@export var sprite: Sprite2D
+@export var sprite: TextureRect
 var fishData:Fish
 var value: float
 
