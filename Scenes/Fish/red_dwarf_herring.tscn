@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://px7q08a74a0y" path="res://Scripts/fish.gd" id="1_f6omv"]
 [ext_resource type="Texture2D" uid="uid://tcjoic168o8r" path="res://Assets/Final/reddwarfherring.png" id="2_vb3eg"]
+[ext_resource type="PackedScene" uid="uid://bqsd77la320wk" path="res://Scenes/Fish/fish_star_animation.tscn" id="3_vb3eg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gem73"]
 size = Vector2(26, 25)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ca3a7"]
-radius = 5.0
+radius = 9.0
 
 [node name="Red Dwarf Herring" type="CharacterBody2D" unique_id=843615539 node_paths=PackedStringArray("IdleBurstTimer")]
 collision_mask = 2
@@ -18,9 +19,7 @@ fishTexture = ExtResource("2_vb3eg")
 probabilityWeight = 70
 IdleBurstTimer = NodePath("IdleBurstTimer")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2019505940]
-scale = Vector2(0.008, 0.008)
-texture = ExtResource("2_vb3eg")
+[node name="Fish Star Animation" parent="." unique_id=196298808 instance=ExtResource("3_vb3eg")]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=889486571]
 

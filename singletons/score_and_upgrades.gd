@@ -1,5 +1,4 @@
 extends Node
-
 var money: float = 1400
 
 var in_market: bool = false

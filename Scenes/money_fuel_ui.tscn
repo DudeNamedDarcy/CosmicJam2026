@@ -3,10 +3,12 @@
 [ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="1_ebmla"]
 [ext_resource type="Script" uid="uid://borjumllejliy" path="res://Scenes/money_fuel_ui.gd" id="1_vhiju"]
 
-[node name="MoneyFuelUI" type="CanvasLayer" unique_id=1013169491 node_paths=PackedStringArray("moneyTextControl", "fuelTextControl")]
+[node name="MoneyFuelUI" type="CanvasLayer" unique_id=1013169491 node_paths=PackedStringArray("moneyTextControl", "fuelTextControl", "moneyText", "fuelText")]
 script = ExtResource("1_vhiju")
 moneyTextControl = NodePath("MoneyUI")
 fuelTextControl = NodePath("FuelUI")
+moneyText = NodePath("MoneyUI/RichTextLabel")
+fuelText = NodePath("FuelUI/RichTextLabel")
 
 [node name="MoneyUI" type="Control" parent="." unique_id=364832241]
 z_index = 10

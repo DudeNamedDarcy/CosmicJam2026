@@ -36,16 +36,23 @@ var castPower: float = 0.0
 @export var moneyVboxContainer: VBoxContainer
 @export var planetParent: Node2D
 @export var fishSpawner: FishSpawner
+@export var castingPointLeft: Marker2D
+@export var castingPointRight: Marker2D
 
 @onready var area_2d: Area2D = $Area2D
+@onready var uiController = get_node("/root/GameScene/MoneyFuelUI")
 
 var playerState: PlayerState = PlayerState.Idle
 var characterDirection: Vector2
 var arrows: Array[DirectionalArrow] = []
 var fishList: Array[Fish] = []
 var activeBobbers: Array[Bobber] = []
+
+@onready var boat_audio: AudioStreamPlayer2D = $BoatNoise
+@onready var rod_audio: AudioStreamPlayer2D = $RodNoise
 var comboFishList: Array[FishComboSprite] = []
 var aim_arrow_base_scale: float
+var castingPoint: Marker2D
 
 #Market
 @onready var black_hole_market: CanvasLayer = $BlackHoleMarket
@@ -64,6 +71,10 @@ func _ready() -> void:
 	aim_arrow_base_scale = aimArrow.scale.x
 	input_button.visible = false
 	area_2d.name = "starship"
+	castingPoint = castingPointLeft
+	uiController.UpdateMoneyText()
+	uiController.UpdateFuelText()
+
 
 func _process(delta: float) -> void:
 	if ScoreAndUpgrades.in_market == true:
@@ -98,7 +109,8 @@ func AimMouse() -> void:
 		aimArrow.rotation = mouse_direction.angle()
 	
 func _physics_process(delta: float) -> void:
-	#print("Fuel: %.2f" % (ScoreAndUpgrades.fuel_quantity))
+	maxComboTime = (ScoreAndUpgrades.longer_combo_progress + 1)
+	uiController.UpdateFuelText()
 	#thanks to this article: https://forum.godotengine.org/t/how-to-display-a-float-with-two-decimal-points/133086/3
 	characterDirection.x = Input.get_axis("MoveLeft", "MoveRight")
 	characterDirection.y = Input.get_axis("MoveUp", "MoveDown")
@@ -117,15 +129,19 @@ func _physics_process(delta: float) -> void:
 	# Flip sprite TODO: Add squash and stretch
 	if characterDirection.x > 0:
 		sprite.flip_h = true
+		castingPoint = castingPointRight
 	elif characterDirection.x < 0:
 		sprite.flip_h = false
+		castingPoint = castingPointLeft
 
 	# Smooth acceleration and deceleration
 	if characterDirection != Vector2.ZERO:
+		boat_audio.accelerating()
 		ScoreAndUpgrades.fuel_quantity -= 0.075
 		var target_velocity = characterDirection * (maxMovementSpeed + (50 * (ScoreAndUpgrades.faster_ship_progress)))
 		velocity = velocity.move_toward(target_velocity, (acceleration + (50 * (ScoreAndUpgrades.faster_ship_progress))) * delta)
 	else:
+		boat_audio.decelerating()
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 
 	move_and_slide()
@@ -145,6 +161,8 @@ func _input(event: InputEvent) -> void:
 		input_button.play("E_button")
 
 	if Input.is_action_just_released("CastReel") && playerState == PlayerState.Casting:
+		rod_audio.stop_reeling()
+		rod_audio.throwing()
 		print("Total hold duration was: ", min(castPower, maxCastPower)) 
 		if min(castPower, maxCastPower) < 0.3:
 			EndFishing(false)
@@ -154,12 +172,15 @@ func _input(event: InputEvent) -> void:
 		CastBobbers(min(castPower, maxCastPower))
 		castPower = 0.0 
 	elif event.is_action_pressed("CastReel"):
+		#if(playerState == PlayerState.Reeling):
+		rod_audio.reeling(maxCastPower)			
 		if playerState == PlayerState.Idle || playerState == PlayerState.Moving:
 				playerState = PlayerState.Casting
 		elif playerState == PlayerState.Fishing:
 			playerState = PlayerState.Reeling
 			StartReelingMinigame()
 	elif playerState == PlayerState.Reeling:
+		rod_audio.stop_reeling()
 		if event.is_action_pressed("ComboUp"):
 			CheckArrow(DirectionalArrow.ArrowType.Up)
 		elif event.is_action_pressed("ComboRight"):
@@ -181,6 +202,7 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 
 	if arrow.GetArrowType() == input_arrow:
 		LevelManager.shakeCamera(2.0)
+		rod_audio.comboing()
 		arrows.pop_front()
 		arrow.KillArrow()
 		comboSize += 1
@@ -190,11 +212,12 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 			print("Combo complete! Combo size", comboSize)
 			EndFishing(true)
 		else:
-			arrows[0].TurnRed()
+			arrows[0].TurnRed((ScoreAndUpgrades.longer_combo_progress) + 1)
 		elapsedComboTime = 0.0
 
 	else:
 		LevelManager.shakeCamera(7.0)
+		rod_audio.losing()
 		EndFishing(false)
 
 func CastBobbers(castPower: float) -> void:
@@ -209,7 +232,7 @@ func CastBobbers(castPower: float) -> void:
 
 		planetParent.add_child(bobber)
 		planetParent.add_child(bobberLine)
-		bobber.global_position = global_position
+		bobber.global_position = castingPoint.global_position
 		
 		var randomAngle = randf_range(-castRandomSpread, castRandomSpread)
 		var randomizedDirection = cast_direction.rotated(randomAngle)
@@ -221,6 +244,8 @@ func CastBobbers(castPower: float) -> void:
 		print(bobber.bobberType)
 	
 func StartReelingMinigame() -> void:
+	rod_audio.stop_reeling()
+	rod_audio.start_fishing()
 	for activeBobber in activeBobbers:
 		fishList.append_array(activeBobber.reelIn())
 		activeBobber.killAllFish()
@@ -238,7 +263,7 @@ func StartReelingMinigame() -> void:
 		arrows.append(arrow_instance)
 		vboxContainer.add_child(arrow_instance)
 		if i == 0:
-			arrows[0].TurnRed()
+			arrows[0].TurnRed((ScoreAndUpgrades.longer_combo_progress) + 1)
 	for fish in fishList:
 		if fish.name == fishNeededForQuest:
 			caughtFishForQuest = true
@@ -258,14 +283,17 @@ func DeletePlanets() -> void:
 	
 func EndFishing(success: bool) -> void:
 	var fishTotal = 0
+	rod_audio.stop_reeling()
 	playerState = PlayerState.Idle
 
 	for arrow in arrows.duplicate():
 		if is_instance_valid(arrow):
 			arrow.KillArrow()
+			rod_audio.losing()
 	
 	arrows.clear()
 	if success:
+		rod_audio.combo_win()
 		await get_tree().create_timer(0.2).timeout 
 	for fish in comboFishList.duplicate():
 		print(fish)
@@ -273,12 +301,18 @@ func EndFishing(success: bool) -> void:
 			if success:
 				await get_tree().create_timer(0.2).timeout	
 				var moneyText = MONEY_GAIN_TEXT.instantiate()
+				rod_audio.winning()
 				moneyVboxContainer.add_child(moneyText)
-				moneyText.DisplayText(fish.value)
-				ScoreAndUpgrades.money += fish.value
-				fishTotal += fish.value
+				var fishValueWithUpgrade = (fish.value) + ((ScoreAndUpgrades.larger_combo_progress) * ((fish.value)/5))
+				moneyText.DisplayText(fishValueWithUpgrade)
+				ScoreAndUpgrades.money += fishValueWithUpgrade
+				fishTotal += fishValueWithUpgrade
 			fish.KillFish(success)
-			
+				#fishvalue *comboSize * 1.1
+			uiController.UpdateMoneyText()
+			fish.KillFish(success)
+	
+	LevelManager.shakeCameraComboClear()
 	comboFishList.clear()
 	fishList.clear()
 	comboSize = 0
