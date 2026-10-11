@@ -119,10 +119,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		if characterDirection == Vector2.ZERO:
 			playerState = PlayerState.Idle
-			sprite.animation = "Idle"
+			SetIdle()
 		else:
 			playerState = PlayerState.Moving
-			sprite.animation = "Move"
+			SetMove()
 
 	# Flip sprite TODO: Add squash and stretch
 	if characterDirection.x > 0:
@@ -330,7 +330,20 @@ func CompleteQuest():
 func AddNewQuestFish(fishName: String):
 	fishNeededForQuest = fishName
 
+func SetIdle():
+	if ScoreAndUpgrades.faster_ship_progress == 0:
+		sprite.animation = "Idle"
+	else:
+		sprite.animation = "IdleUpgraded"
 
+func SetMove():
+	if ScoreAndUpgrades.faster_ship_progress == 0:
+		sprite.animation = "Move"
+	else:
+		sprite.animation = "MoveUpgraded"
+
+
+		
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.name == "market":
 		input_button.visible = true
