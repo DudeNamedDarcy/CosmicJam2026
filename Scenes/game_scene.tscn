@@ -16,11 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://co5te5e76e4vk" path="res://Scenes/Fish/patrick_starfish.tscn" id="8_ldntv"]
 [ext_resource type="PackedScene" uid="uid://w7gafq2uiia1" path="res://Scenes/Fish/gold_fish.tscn" id="9_w8jfd"]
 [ext_resource type="PackedScene" uid="uid://wgsgx4i8wbue" path="res://Scenes/Fish/big_fish.tscn" id="10_a7fet"]
-[ext_resource type="Texture2D" uid="uid://dgqiixt65f3lo" path="res://Assets/Final/big-asteroid.png" id="13_w8jfd"]
 [ext_resource type="PackedScene" uid="uid://buf18n2jp25y4" path="res://Scenes/money_fuel_ui.tscn" id="13_wywco"]
-[ext_resource type="Texture2D" uid="uid://cll5bs5f8a81p" path="res://Assets/Final/medium-asteroid.png" id="14_a7fet"]
-[ext_resource type="Texture2D" uid="uid://wb6i18c7r4pi" path="res://Assets/Final/small-asteroid.png" id="15_8m72m"]
-[ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="13_wywco"]
 [ext_resource type="Texture2D" uid="uid://co5l18et1fp0f" path="res://Assets/Final/nebulae/barfcoloured-nebula.png" id="16_vtwju"]
 [ext_resource type="Texture2D" uid="uid://67jw5hhk1xk6" path="res://Assets/Final/nebulae/blue-nebula.png" id="17_fnr0w"]
 [ext_resource type="Texture2D" uid="uid://b5qgb54g2bdhj" path="res://Assets/Final/nebulae/eye-nebula.png" id="18_gqlrj"]
@@ -67,8 +63,8 @@ volume_db = 7.94
 script = ExtResource("2_fiftr")
 
 [node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer", "moneyVboxContainer", "fishSpawner") instance=ExtResource("1_x87qo")]
-position = Vector2(95, 64)
 z_index = 1
+position = Vector2(95, 64)
 collision_layer = 4
 collision_mask = 0
 vboxContainer = NodePath("ComboVboxContainer")
@@ -145,7 +141,7 @@ ExtResource("10_a7fet"): 1
 spawnableArea = NodePath("../SpawnableArea")
 
 [node name="Spawn Timer" type="Timer" parent="Fish Spawner" unique_id=1446234030]
-wait_time = 0.009999999999999998
+wait_time = 0.00999999999999999
 
 [node name="SpawnableArea" type="Polygon2D" parent="." unique_id=1898762879]
 visible = false
@@ -191,6 +187,7 @@ color = Color(0.09112144, 0.09112146, 0.09112144, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Parallax2D3" type="Parallax2D" parent="ParallaxBackground" unique_id=1985957334]
+
 [node name="Nebulae" type="Node2D" parent="." unique_id=770759183]
 z_index = -101
 
@@ -235,8 +232,6 @@ modulate = Color(1, 1, 1, 0.30588236)
 position = Vector2(625, 237)
 scale = Vector2(4, 4)
 texture = ExtResource("22_e624q")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1888502825]
 
 [node name="MoneyFuelUI" parent="." unique_id=1013169491 instance=ExtResource("13_wywco")]
 
