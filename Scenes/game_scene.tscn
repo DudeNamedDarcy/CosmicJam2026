@@ -9,13 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://d3oxvy0grl375" path="res://Scenes/Fish/red_dwarf_herring.tscn" id="4_2fmhe"]
 [ext_resource type="Script" uid="uid://dqlo4uebgxkyw" path="res://Scenes/rod_noise.gd" id="5_2fmhe"]
 [ext_resource type="PackedScene" uid="uid://bvboagsrhp2c7" path="res://glorp/glorp_starship.tscn" id="6_2fmhe"]
-[ext_resource type="PackedScene" uid="uid://b7m36bfujolqs" path="res://Scenes/Fish/supermassive_squid.tscn" id="6_4xiap"]
 [ext_resource type="Script" uid="uid://c4evtl6kbwuw2" path="res://Scenes/fish_spawner.gd" id="6_rgj8m"]
 [ext_resource type="Texture2D" uid="uid://ck5uv4d76r727" path="res://Assets/Final/Parallax/stars.png" id="7_2fmhe"]
 [ext_resource type="PackedScene" uid="uid://dgyunkaa44mbx" path="res://Scenes/Fish/starfish.tscn" id="7_wywco"]
+[ext_resource type="PackedScene" uid="uid://b05brc3bel6c1" path="res://Scenes/Fish/angler_fish.tscn" id="8_5q52j"]
 [ext_resource type="PackedScene" uid="uid://co5te5e76e4vk" path="res://Scenes/Fish/patrick_starfish.tscn" id="8_ldntv"]
 [ext_resource type="PackedScene" uid="uid://w7gafq2uiia1" path="res://Scenes/Fish/gold_fish.tscn" id="9_w8jfd"]
 [ext_resource type="PackedScene" uid="uid://wgsgx4i8wbue" path="res://Scenes/Fish/big_fish.tscn" id="10_a7fet"]
+[ext_resource type="PackedScene" uid="uid://d3misjkjktbfc" path="res://Scenes/Fish/cgd_cube.tscn" id="10_e624q"]
 [ext_resource type="Texture2D" uid="uid://dgqiixt65f3lo" path="res://Assets/Final/big-asteroid.png" id="13_w8jfd"]
 [ext_resource type="PackedScene" uid="uid://buf18n2jp25y4" path="res://Scenes/money_fuel_ui.tscn" id="13_wywco"]
 [ext_resource type="Texture2D" uid="uid://cll5bs5f8a81p" path="res://Assets/Final/medium-asteroid.png" id="14_a7fet"]
@@ -27,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://ocvuuc3kyadf" path="res://Assets/Final/nebulae/puple-nebula.png" id="20_m8c54"]
 [ext_resource type="Texture2D" uid="uid://y1d3540brc2h" path="res://Assets/Final/nebulae/purple-yellow-nebula.png" id="21_5q52j"]
 [ext_resource type="Texture2D" uid="uid://3b8yixiru3hp" path="res://Assets/Final/nebulae/rainbow-nebula.png" id="22_e624q"]
+[ext_resource type="PackedScene" uid="uid://bqx38paaff4tm" path="res://market/black_hole_market.tscn" id="28_5q52j"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
 normal = Vector2(0, 1)
@@ -91,10 +93,11 @@ scale = Vector2(1.7024027, 2.1599998)
 texture = ExtResource("1_b6fju")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Background" unique_id=684806575]
+process_mode = 3
 volume_db = 7.94
 script = ExtResource("2_fiftr")
 
-[node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer", "moneyVboxContainer", "fishSpawner") instance=ExtResource("1_x87qo")]
+[node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer", "moneyVboxContainer", "fishSpawner", "black_hole_market") instance=ExtResource("1_x87qo")]
 z_index = 1
 position = Vector2(95, 64)
 collision_layer = 4
@@ -102,6 +105,7 @@ collision_mask = 2
 vboxContainer = NodePath("ComboVboxContainer")
 moneyVboxContainer = NodePath("TextVboxContainer")
 fishSpawner = NodePath("../Fish Spawner")
+black_hole_market = NodePath("../BlackHoleMarket")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PlayerController" unique_id=220851325]
 
@@ -162,13 +166,14 @@ metadata/_custom_type_script = "uid://xiufvpalhvi1"
 [node name="Fish Spawner" type="Node2D" parent="." unique_id=1574152278 node_paths=PackedStringArray("spawnableArea")]
 script = ExtResource("6_rgj8m")
 fishDict = Dictionary[PackedScene, int]({
-ExtResource("3_rgj8m"): 1,
-ExtResource("4_2fmhe"): 1,
-ExtResource("6_4xiap"): 1,
-ExtResource("7_wywco"): 1,
-ExtResource("8_ldntv"): 1,
+ExtResource("8_5q52j"): 1,
+ExtResource("10_a7fet"): 1,
+ExtResource("10_e624q"): 1,
 ExtResource("9_w8jfd"): 1,
-ExtResource("10_a7fet"): 1
+ExtResource("3_rgj8m"): 1,
+ExtResource("8_ldntv"): 1,
+ExtResource("4_2fmhe"): 1,
+ExtResource("7_wywco"): 1
 })
 spawnableArea = NodePath("../SpawnableArea")
 maxFishInLevel = 1000
@@ -180,8 +185,10 @@ wait_time = 0.1
 visible = false
 polygon = PackedVector2Array(2192, -485, 2216, 1297, -823, 1295, 622, 468, 770, 470, 767, 276, 619, 281, 619, 443, -839, 1277, -827, -479)
 
-[node name="GlorpStarship" parent="." unique_id=1172553172 instance=ExtResource("6_2fmhe")]
+[node name="GlorpStarship" parent="." unique_id=1172553172 node_paths=PackedStringArray("market") instance=ExtResource("6_2fmhe")]
+process_mode = 3
 position = Vector2(689, 369)
+market = NodePath("../BlackHoleMarket")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937637144]
 environment = SubResource("Environment_gem73")
@@ -302,5 +309,9 @@ scale = Vector2(4, 4)
 texture = ExtResource("22_e624q")
 
 [node name="MoneyFuelUI" parent="." unique_id=1013169491 instance=ExtResource("13_wywco")]
+process_mode = 3
+
+[node name="BlackHoleMarket" parent="." unique_id=1787878085 instance=ExtResource("28_5q52j")]
+visible = false
 
 [connection signal="timeout" from="Fish Spawner/Spawn Timer" to="Fish Spawner" method="_on_spawn_timer_timeout"]

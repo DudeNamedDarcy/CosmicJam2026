@@ -188,3 +188,4 @@ func _leave_market() -> void:
 	quit_pressed = false
 	ScoreAndUpgrades.in_market = false
 	visible = false
+	LevelManager.unpauseGame()
