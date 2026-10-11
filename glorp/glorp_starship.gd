@@ -1,6 +1,7 @@
 extends Node2D
 
 var ship_at_market:bool = false
+@export var market: CanvasLayer
 
 @onready var area_2d: Area2D = $Area2D
 
@@ -16,7 +17,9 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("interact"):
 		if ship_at_market:
+			LevelManager.pauseGame()
 			ScoreAndUpgrades.in_market = true
+			market.visible = true
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
