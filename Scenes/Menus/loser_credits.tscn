@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://1h6r26aeqlpn"]
+
+[ext_resource type="VideoStream" uid="uid://dp6fen8jwwl7h" path="res://Scenes/Video/bad_credits.ogv" id="1_qyguy"]
+[ext_resource type="Script" uid="uid://bnomxs6v8sm6g" path="res://Scenes/Menus/credits_controller.gd" id="2_abkew"]
+[ext_resource type="AudioStream" uid="uid://che74l53r6qgs" path="res://Scenes/Audio/Music/bad_ending.mp3" id="3_qyguy"]
+
+[node name="LoserCredits" type="Node2D" unique_id=943132580]
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1921290011]
+visibility_layer = 2
+offset_right = 1155.0
+offset_bottom = 646.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer" unique_id=678980146]
+visibility_layer = 2
+layout_mode = 2
+offset_transform_scale = Vector2(9.935, 9.935)
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelContainer/PanelContainer2" unique_id=697243403]
+layout_mode = 2
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="PanelContainer/PanelContainer2/AspectRatioContainer" unique_id=1507678408]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.715, 1.715)
+stream = ExtResource("1_qyguy")
+volume_db = -80.0
+autoplay = true
+loop = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1805132901]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_scale = Vector2(2.695, 2.695)
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=29207695]
+layout_mode = 2
+size_flags_horizontal = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 342.88)
+offset_transform_scale = Vector2(0.82, 0.82)
+text = "\" I always knew you were full of bullsquid. 
+
+You are out of fuel. 
+
+You are out of time.
+
+And you are out of luck. 
+
+Goodbye, fisher-boy. \"
+
+
+Glorp swallows you whole.
+
+You slowly descend, 
+inky black blood coursing through your veins,
+and flames baptizing your feet.
+
+You are in hell.
+
+Game over."
+horizontal_alignment = 1
+vertical_alignment = 1
+max_lines_visible = 87
+script = ExtResource("2_abkew")
+metadata/_edit_group_ = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="PanelContainer/VBoxContainer/Label" unique_id=716285420]
+stream = ExtResource("3_qyguy")
+autoplay = true
+parameters/looping = true

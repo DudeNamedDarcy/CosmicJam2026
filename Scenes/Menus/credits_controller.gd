@@ -7,3 +7,5 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	position += velocity * delta
+	if(Input.is_key_pressed(Key.KEY_ESCAPE)):
+		get_tree().quit()
