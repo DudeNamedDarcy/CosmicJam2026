@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c88q4fk7aqnoc"
-path="res://.godot/imported/rightarrow.png-8bb4efa6ef1c65350c4dd8eadcae9043.ctex"
+uid="uid://d2k7hoj7otkrl"
+path="res://.godot/imported/arrowburst.png-f49826ce0f892c2e7314156e058d1c36.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Placeholders/rightarrow.png"
-dest_files=["res://.godot/imported/rightarrow.png-8bb4efa6ef1c65350c4dd8eadcae9043.ctex"]
+source_file="res://Assets/Final/arrowburst.png"
+dest_files=["res://.godot/imported/arrowburst.png-f49826ce0f892c2e7314156e058d1c36.ctex"]
 
 [params]
 

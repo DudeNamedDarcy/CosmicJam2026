@@ -96,7 +96,9 @@ func _on_catch_area_entered(area: Area2D) -> void:
 		register_fish_in_orbit(fish)
 
 		if fish not in caughtFish:
+			print("appending fish")
 			caughtFish.append(fish)
+			print(caughtFish.size())
 
 		if not fish.inCatchRadius:
 			fish.inCatchRadius = true

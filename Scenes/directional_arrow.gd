@@ -2,10 +2,9 @@ extends Control
 class_name DirectionalArrow
 
 enum ArrowType { Up, Right, Down, Left }
-@onready var texture_rect: TextureRect = $TextureRect
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 
-@export var arrows: Array[Texture] = []
 
 var arrowType: ArrowType
 
@@ -14,4 +13,13 @@ func GetArrowType() -> ArrowType:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	arrowType = randi_range(0, 3)
-	texture_rect.texture = arrows[arrowType]
+	sprite.rotation_degrees = arrowType*90
+	sprite.animation = "Idle"
+
+func KillArrow() -> void:
+	sprite.animation = "Die"
+	await sprite.animation_finished
+	queue_free()
+
+	
+	

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b7m36bfujolqs"]
 
 [ext_resource type="Script" uid="uid://px7q08a74a0y" path="res://Scripts/fish.gd" id="1_gjcq6"]
-[ext_resource type="Texture2D" uid="uid://bwtb7v0ltpxhm" path="res://Assets/Placeholders/supermassive_squid.png" id="2_gjcq6"]
+[ext_resource type="Texture2D" uid="uid://bq4om8wo8jvpv" path="res://Assets/Final/supergiantgassquid.png" id="2_5uly7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gem73"]
 size = Vector2(19, 20)
@@ -14,11 +14,12 @@ collision_mask = 2
 script = ExtResource("1_gjcq6")
 typeName = "Supermassive Squid"
 value = 25.0
+fishTexture = ExtResource("2_5uly7")
 IdleBurstTimer = NodePath("IdleBurstTimer")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2019505940]
 scale = Vector2(0.02, 0.02)
-texture = ExtResource("2_gjcq6")
+texture = ExtResource("2_5uly7")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=889486571]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ofiwbm6m0v5h"
-path="res://.godot/imported/downarrow.png-07ed4033d7bb213211bb518f7dac2508.ctex"
+uid="uid://tcjoic168o8r"
+path="res://.godot/imported/reddwarfherring.png-5dd5a8d7545ab5982dd07c70c384dfc1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Placeholders/downarrow.png"
-dest_files=["res://.godot/imported/downarrow.png-07ed4033d7bb213211bb518f7dac2508.ctex"]
+source_file="res://Assets/Final/reddwarfherring.png"
+dest_files=["res://.godot/imported/reddwarfherring.png-5dd5a8d7545ab5982dd07c70c384dfc1.ctex"]
 
 [params]
 
