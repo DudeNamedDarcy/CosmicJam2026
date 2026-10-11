@@ -23,17 +23,20 @@ func throwing():
 		play()
 
 func winning():
+	pitch_scale = 1
 	stream = win
 	if(not playing):
 		play()
 		
 func losing():
+	pitch_scale = 1
 	stream = lose
 	if(not playing):
 		play()
-	
+		
 func comboing():
 	comboCount+=1
 	stream = combo
- 	#set_pitch_scale(2.0)
+	pitch_scale = 1+float(1+comboCount)/10 if comboCount<7 else 1.8
+	print(pitch_scale)
 	play()
