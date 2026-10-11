@@ -3,11 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://caiem5b8o2slt" path="res://Assets/Placeholders/360_F_546468872_b9emNBQeVDLbBqicXaFyoBUwutWcHmbl.jpg" id="1_b6fju"]
 [ext_resource type="PackedScene" uid="uid://cwjnrld5dv08f" path="res://Scenes/player_controller.tscn" id="1_x87qo"]
 [ext_resource type="Script" uid="uid://dd8xfjhdnaicb" path="res://Scenes/fishing_music.gd" id="2_fiftr"]
-[ext_resource type="Script" uid="uid://b4dpoqejtr8d5" path="res://Scenes/boat_noises.gd" id="3_6h5vk"]
 [ext_resource type="Script" uid="uid://xiufvpalhvi1" path="res://singletons/orbit_manager.gd" id="3_fiftr"]
 [ext_resource type="PackedScene" uid="uid://diga0gfwjyvcg" path="res://Scenes/Fish/moon_jelly.tscn" id="3_rgj8m"]
 [ext_resource type="PackedScene" uid="uid://d3oxvy0grl375" path="res://Scenes/Fish/red_dwarf_herring.tscn" id="4_2fmhe"]
-[ext_resource type="Script" uid="uid://dqlo4uebgxkyw" path="res://Scenes/rod_noise.gd" id="5_2fmhe"]
 [ext_resource type="PackedScene" uid="uid://bvboagsrhp2c7" path="res://glorp/glorp_starship.tscn" id="6_2fmhe"]
 [ext_resource type="PackedScene" uid="uid://b7m36bfujolqs" path="res://Scenes/Fish/supermassive_squid.tscn" id="6_4xiap"]
 [ext_resource type="Script" uid="uid://c4evtl6kbwuw2" path="res://Scenes/fish_spawner.gd" id="6_rgj8m"]
@@ -54,23 +52,16 @@ texture = ExtResource("1_b6fju")
 volume_db = 7.94
 script = ExtResource("2_fiftr")
 
-[node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer") instance=ExtResource("1_x87qo")]
-position = Vector2(95, 64)
 [node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer", "moneyVboxContainer", "fishSpawner") instance=ExtResource("1_x87qo")]
+position = Vector2(95, 64)
 collision_layer = 4
 collision_mask = 0
-vboxContainer = NodePath("ComboVboxContainer")
+vboxContainer = NodePath("VBoxContainer")
 moneyVboxContainer = NodePath("TextVboxContainer")
 fishSpawner = NodePath("../Fish Spawner")
 
-[node name="BoatNoise" type="AudioStreamPlayer2D" parent="PlayerController" unique_id=1464942758]
-volume_db = -3.888
-script = ExtResource("3_6h5vk")
-
-[node name="RodNoise" type="AudioStreamPlayer2D" parent="PlayerController" unique_id=2085605005]
-script = ExtResource("5_2fmhe")
-
 [node name="VBoxContainer" type="VBoxContainer" parent="PlayerController" unique_id=220851325]
+
 [node name="TextVboxContainer" type="VBoxContainer" parent="PlayerController" unique_id=1776896156]
 custom_minimum_size = Vector2(100, 100)
 custom_maximum_size = Vector2(100, 100)
@@ -84,7 +75,7 @@ offset_bottom = -20.0
 grow_vertical = 0
 alignment = 2
 
-[node name="ComboVboxContainer" type="VBoxContainer" parent="PlayerController" unique_id=220851325]
+[node name="ComboVboxContainer" type="VBoxContainer" parent="PlayerController" unique_id=2024996591]
 custom_minimum_size = Vector2(50, 50)
 propagate_maximum_size = false
 offset_left = -25.0
