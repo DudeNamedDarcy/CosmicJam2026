@@ -36,7 +36,7 @@ var activeBobbers: Array[Bobber] = []
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("CastReel"):
 		castPower += delta
-	#print(PlayerState.find_key(playerState))
+	print(PlayerState.find_key(playerState))
 	AimMouse()
 		
 
@@ -95,7 +95,7 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("CastReel") && playerState == PlayerState.Casting:
 		print("Total hold duration was: ", min(castPower, maxCastPower)) 
-		if min(castPower, maxCastPower) < 0.5:
+		if min(castPower, maxCastPower) < 0.3:
 			EndFishing()
 			castPower = 0.0
 			return
@@ -149,8 +149,8 @@ func CastBobbers(castPower: float) -> void:
 		var bobberLine: Line2D = Line2D.new()
 		bobberLine.width = 1
 
-		add_child(bobber)
-		add_child(bobberLine)
+		planetParent.add_child(bobber)
+		planetParent.add_child(bobberLine)
 		bobber.global_position = global_position
 		
 		var randomAngle = randf_range(-castRandomSpread, castRandomSpread)
@@ -177,6 +177,7 @@ func StartReelingMinigame() -> void:
 		vboxContainer.add_child(arrow_instance)
 
 func EndFishing() -> void:
+	print("endfishing")
 	playerState = PlayerState.Idle
 	for child in vboxContainer.get_children():
 		arrows.pop_front()
