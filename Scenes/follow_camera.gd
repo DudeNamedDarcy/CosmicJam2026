@@ -15,7 +15,7 @@ func ApplyShake(str: float,  time: float = 0.2):
 
 func FishComboShake():
 	comboCount += 1
-	ApplyShake(min(2.0*(comboCount), 5.0), .1)
+	ApplyShake(min(2.0*(comboCount*2), 5.0), .1)
 
 func ResetFishComboShake():
 	comboCount = 0

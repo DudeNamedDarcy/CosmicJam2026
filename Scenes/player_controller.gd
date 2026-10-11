@@ -66,7 +66,7 @@ func _ready() -> void:
 	area_2d.name = "starship"
 	uiController.UpdateMoneyText()
 	uiController.UpdateFuelText()
-	#castingPoint = castingPointLeft
+	castingPoint = castingPointLeft
 
 func _process(delta: float) -> void:
 	if playerState == PlayerState.Reeling:
