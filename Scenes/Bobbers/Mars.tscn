@@ -13,6 +13,7 @@ radius = 30.0
 radius = 16.0
 
 [node name="Mars" type="CharacterBody2D" unique_id=2079869234 node_paths=PackedStringArray("bobberSprite", "orbitArea", "catchArea")]
+z_index = 11
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_v8cwh")
