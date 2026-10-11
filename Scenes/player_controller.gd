@@ -26,7 +26,9 @@ var castPower: float = 0.0
 var arrows: Array[DirectionalArrow] = []
 var fishList: Array[Fish] = []
 var activeBobbers: Array[Bobber] = []
-	
+
+@onready var boat_audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("CastReel"):
 		castPower += delta
@@ -71,9 +73,11 @@ func _physics_process(delta: float) -> void:
 
 	# Smooth acceleration and deceleration
 	if characterDirection != Vector2.ZERO:
+		boat_audio.accelerating()
 		var target_velocity = characterDirection * maxMovementSpeed
 		velocity = velocity.move_toward(target_velocity, acceleration * delta)
 	else:
+		boat_audio.decelerating()
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 
 	move_and_slide()
