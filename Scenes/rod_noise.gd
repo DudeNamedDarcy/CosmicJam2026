@@ -35,7 +35,7 @@ func winning():
 		play()
 		
 func losing():
-	pitch_scale = 1
+	pitch_scale = randf_range(1,1.3)
 	stream = lose
 	if(not playing):
 		play()
