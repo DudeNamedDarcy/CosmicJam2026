@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://px7q08a74a0y" path="res://Scripts/fish.gd" id="1_o1kyx"]
 [ext_resource type="Texture2D" uid="uid://ba1xwshqevdfa" path="res://Assets/Final/goldfish.png" id="2_o1kyx"]
+[ext_resource type="Texture2D" uid="uid://j76d3g8ogfg0" path="res://Assets/Placeholders/star_1.png" id="3_o1kyx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gem73"]
 size = Vector2(15, 13)
@@ -19,7 +20,8 @@ probabilityWeight = 10
 IdleBurstTimer = NodePath("IdleBurstTimer")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2019505940]
-texture = ExtResource("2_o1kyx")
+scale = Vector2(0.008, 0.008)
+texture = ExtResource("3_o1kyx")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=889486571]
 
