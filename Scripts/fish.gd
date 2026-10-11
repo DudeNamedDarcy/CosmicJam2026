@@ -25,13 +25,13 @@ var state: State
 var center: Node2D
 var inCatchRadius: bool
 
-var starTextures: Array[Texture2D] = [load("res://Assets/Placeholders/star_1.png"), load("res://Assets/Placeholders/star_2.png"), load("res://Assets/Placeholders/star_3.png")]
-
 func _ready() -> void:
-	$Sprite2D.texture = starTextures[randi_range(0,starTextures.size() - 1)]
 	state = State.IDLE
 	center = null
 	inCatchRadius = false
+	$"Fish Star Animation".scale = Vector2(0,0)
+	var tween = get_tree().create_tween()
+	tween.tween_property($"Fish Star Animation", "scale", Vector2(1,1), 1.0)
 
 func _process(delta: float) -> void:
 	match state:
