@@ -17,6 +17,7 @@ border_width_bottom = 5
 border_color = Color(0.81960785, 0, 0, 1)
 
 [node name="BlackHoleMarket" type="CanvasLayer" unique_id=1787878085]
+process_mode = 3
 script = ExtResource("1_1x0ya")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=639196272]

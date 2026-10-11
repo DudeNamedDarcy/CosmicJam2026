@@ -107,7 +107,6 @@ func _on_catch_area_entered(area: Area2D) -> void:
 
 		if not fish.inCatchRadius && fish in fishInOrbit:
 			fish.inCatchRadius = true
-			fish.modulate = Color.RED
 			
 func register_fish_in_orbit(fish: Fish) -> void:
 	if fish.center == null or fish.center == self:
