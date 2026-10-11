@@ -17,6 +17,6 @@ func KillFish(success: bool = true) -> void:
 	tween.set_trans(Tween.TRANS_BACK)
 	tween.set_ease(Tween.EASE_IN)
 	tween.tween_property(self, "scale", Vector2(0.1, 0.1), 0.3)
-	LevelManager.shakeCamera(2.0)
+	LevelManager.shakeCameraCombo()
 	tween.tween_callback(queue_free)
 	

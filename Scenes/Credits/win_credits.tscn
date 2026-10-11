@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://chbnvl3ke5ij"]
+
+[ext_resource type="VideoStream" uid="uid://d2666aeqc4t6k" path="res://Scenes/Video/dpu47-ydq5k.ogv" id="1_gnt72"]
+[ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="2_2alx2"]
+[ext_resource type="Script" uid="uid://bnomxs6v8sm6g" path="res://Scenes/Credits/credits_controller.gd" id="3_4v6pm"]
+[ext_resource type="AudioStream" uid="uid://dn27r08fperji" path="res://Scenes/Audio/Music/endcredits_normal.mp3" id="4_p78hr"]
+
+[sub_resource type="FontVariation" id="FontVariation_h001g"]
+base_font = ExtResource("2_2alx2")
+
+[node name="WinCredits" type="Node2D" unique_id=1059538705]
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=728846895]
+visibility_layer = 2
+offset_right = 1155.0
+offset_bottom = 646.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer" unique_id=591619601]
+visibility_layer = 2
+layout_mode = 2
+offset_transform_scale = Vector2(9.935, 9.935)
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelContainer/PanelContainer2" unique_id=1436842999]
+layout_mode = 2
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="PanelContainer/PanelContainer2/AspectRatioContainer" unique_id=1914601642]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.715, 1.715)
+stream = ExtResource("1_gnt72")
+volume_db = -11.1
+autoplay = true
+loop = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=140269366]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_scale = Vector2(2.695, 2.695)
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=623299576]
+layout_mode = 2
+size_flags_horizontal = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(5.975, 482.25)
+offset_transform_scale = Vector2(0.82, 0.82)
+theme_override_fonts/font = SubResource("FontVariation_h001g")
+theme_override_font_sizes/font_size = 14
+text = "\" Holy mackerel, you sick son of a squid. 
+
+You actually did it. I am not hungry anymore. 
+I never thought this day would come. 
+
+Not only are you no longer in my debt, 
+but you have gained my eternal respect.
+
+Goodbye human. 
+
+I love you. \"
+
+
+Glorp combusts into a million pieces.
+
+He died a happy boy.
+
+You have won Starfisher.
+
+Glorp is Dead.
+
+Congratulations.
+
+
+Game design and coding:
+
+Dylan Patrascu
+
+Katrina Frain
+
+Darcy Loane-Billings
+
+
+Visuals:
+
+Norah Wilcox
+
+
+Sound design and Music:
+
+Tess Leblanc
+
+Simon Menad
+
+
+Thank you to CGD for organizing.
+
+
+Press start/escape to leave."
+horizontal_alignment = 1
+vertical_alignment = 1
+max_lines_visible = 87
+script = ExtResource("3_4v6pm")
+metadata/_edit_group_ = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="PanelContainer/VBoxContainer/Label" unique_id=35715337]
+stream = ExtResource("4_p78hr")
+autoplay = true
+parameters/looping = true

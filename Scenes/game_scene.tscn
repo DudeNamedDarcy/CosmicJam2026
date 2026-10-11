@@ -2,8 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://caiem5b8o2slt" path="res://Assets/Placeholders/360_F_546468872_b9emNBQeVDLbBqicXaFyoBUwutWcHmbl.jpg" id="1_b6fju"]
 [ext_resource type="PackedScene" uid="uid://cwjnrld5dv08f" path="res://Scenes/player_controller.tscn" id="1_x87qo"]
+[ext_resource type="Script" uid="uid://dd8xfjhdnaicb" path="res://Scenes/fishing_music.gd" id="2_fiftr"]
+[ext_resource type="Script" uid="uid://b4dpoqejtr8d5" path="res://Scenes/boat_noises.gd" id="3_6h5vk"]
+[ext_resource type="Script" uid="uid://xiufvpalhvi1" path="res://singletons/orbit_manager.gd" id="3_fiftr"]
 [ext_resource type="PackedScene" uid="uid://diga0gfwjyvcg" path="res://Scenes/Fish/moon_jelly.tscn" id="3_rgj8m"]
 [ext_resource type="PackedScene" uid="uid://d3oxvy0grl375" path="res://Scenes/Fish/red_dwarf_herring.tscn" id="4_2fmhe"]
+[ext_resource type="Script" uid="uid://dqlo4uebgxkyw" path="res://Scenes/rod_noise.gd" id="5_2fmhe"]
 [ext_resource type="PackedScene" uid="uid://bvboagsrhp2c7" path="res://glorp/glorp_starship.tscn" id="6_2fmhe"]
 [ext_resource type="PackedScene" uid="uid://b7m36bfujolqs" path="res://Scenes/Fish/supermassive_squid.tscn" id="6_4xiap"]
 [ext_resource type="Script" uid="uid://c4evtl6kbwuw2" path="res://Scenes/fish_spawner.gd" id="6_rgj8m"]
@@ -16,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://cll5bs5f8a81p" path="res://Assets/Final/medium-asteroid.png" id="14_a7fet"]
 [ext_resource type="Texture2D" uid="uid://wb6i18c7r4pi" path="res://Assets/Final/small-asteroid.png" id="15_8m72m"]
 [ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="13_wywco"]
+[ext_resource type="PackedScene" uid="uid://buf18n2jp25y4" path="res://Scenes/money_fuel_ui.tscn" id="13_wywco"]
 [ext_resource type="Texture2D" uid="uid://co5l18et1fp0f" path="res://Assets/Final/nebulae/barfcoloured-nebula.png" id="16_vtwju"]
 [ext_resource type="Texture2D" uid="uid://67jw5hhk1xk6" path="res://Assets/Final/nebulae/blue-nebula.png" id="17_fnr0w"]
 [ext_resource type="Texture2D" uid="uid://b5qgb54g2bdhj" path="res://Assets/Final/nebulae/eye-nebula.png" id="18_gqlrj"]
@@ -86,13 +91,20 @@ position = Vector2(596, 361)
 scale = Vector2(1.7024027, 2.1599998)
 texture = ExtResource("1_b6fju")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Background" unique_id=684806575]
+volume_db = 7.94
+script = ExtResource("2_fiftr")
+
 [node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer", "moneyVboxContainer", "fishSpawner") instance=ExtResource("1_x87qo")]
 z_index = 1
+position = Vector2(95, 64)
 collision_layer = 4
 collision_mask = 2
 vboxContainer = NodePath("ComboVboxContainer")
 moneyVboxContainer = NodePath("TextVboxContainer")
 fishSpawner = NodePath("../Fish Spawner")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerController" unique_id=220851325]
 
 [node name="TextVboxContainer" type="VBoxContainer" parent="PlayerController" unique_id=1776896156]
 custom_minimum_size = Vector2(100, 100)
@@ -107,7 +119,7 @@ offset_bottom = -20.0
 grow_vertical = 0
 alignment = 2
 
-[node name="ComboVboxContainer" type="VBoxContainer" parent="PlayerController" unique_id=220851325]
+[node name="ComboVboxContainer" type="VBoxContainer" parent="PlayerController" unique_id=2024996591]
 custom_minimum_size = Vector2(50, 50)
 propagate_maximum_size = false
 offset_left = -25.0
@@ -115,6 +127,13 @@ offset_top = 16.0
 offset_right = 25.0
 offset_bottom = 716.0
 metadata/_edit_use_anchors_ = true
+
+[node name="BoatNoise" type="AudioStreamPlayer2D" parent="PlayerController" unique_id=1464942758]
+volume_db = -3.888
+script = ExtResource("3_6h5vk")
+
+[node name="RodNoise" type="AudioStreamPlayer2D" parent="PlayerController" unique_id=2085605005]
+script = ExtResource("5_2fmhe")
 
 [node name="PlayerBounds" type="StaticBody2D" parent="." unique_id=955427512]
 
@@ -137,6 +156,10 @@ shape = SubResource("WorldBoundaryShape2D_6h5vk")
 [node name="Planet" type="Node2D" parent="." unique_id=797403716]
 position = Vector2(576, 93)
 
+[node name="OrbitManager" type="Node2D" parent="Planet" unique_id=1894180204]
+script = ExtResource("3_fiftr")
+metadata/_custom_type_script = "uid://xiufvpalhvi1"
+
 [node name="Fish Spawner" type="Node2D" parent="." unique_id=1574152278 node_paths=PackedStringArray("spawnableArea")]
 script = ExtResource("6_rgj8m")
 fishDict = Dictionary[PackedScene, int]({
@@ -152,7 +175,7 @@ spawnableArea = NodePath("../SpawnableArea")
 maxFishInLevel = 1000
 
 [node name="Spawn Timer" type="Timer" parent="Fish Spawner" unique_id=1446234030]
-wait_time = 0.2
+wait_time = 0.00999999999999999
 
 [node name="SpawnableArea" type="Polygon2D" parent="." unique_id=1898762879]
 visible = false
@@ -232,6 +255,8 @@ scale = Vector2(27.631252, 16.451735)
 color = Color(0.09112144, 0.09112146, 0.09112144, 1)
 metadata/_edit_use_anchors_ = true
 
+[node name="Parallax2D3" type="Parallax2D" parent="ParallaxBackground" unique_id=1985957334]
+
 [node name="Nebulae" type="Node2D" parent="." unique_id=770759183]
 z_index = -101
 
@@ -277,40 +302,6 @@ position = Vector2(625, 237)
 scale = Vector2(4, 4)
 texture = ExtResource("22_e624q")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1888502825]
-
-[node name="MoneyUI" type="Control" parent="CanvasLayer" unique_id=969162968]
-z_index = 10
-layout_mode = 3
-anchors_preset = 0
-offset_right = 400.0
-offset_bottom = 33.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MoneyUI" unique_id=1241626468]
-layout_mode = 0
-offset_right = 400.0
-offset_bottom = 33.0
-theme_override_fonts/normal_font = ExtResource("13_wywco")
-theme_override_font_sizes/normal_font_size = 25
-text = "$100000000000000"
-fit_content = true
-
-[node name="FuelUI" type="Control" parent="CanvasLayer" unique_id=2131385606]
-z_index = 10
-propagate_maximum_size = true
-layout_mode = 3
-anchors_preset = 0
-offset_top = 33.0
-offset_right = 400.0
-offset_bottom = 66.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/FuelUI" unique_id=623553988]
-layout_mode = 0
-offset_right = 400.0
-offset_bottom = 33.0
-theme_override_fonts/normal_font = ExtResource("13_wywco")
-theme_override_font_sizes/normal_font_size = 25
-text = "Fuel: 100%"
-fit_content = true
+[node name="MoneyFuelUI" parent="." unique_id=1013169491 instance=ExtResource("13_wywco")]
 
 [connection signal="timeout" from="Fish Spawner/Spawn Timer" to="Fish Spawner" method="_on_spawn_timer_timeout"]
