@@ -19,19 +19,27 @@ var mercury_dialogue: Array[String] = ["Huh. You're doing better than I thought.
 "Ok, here's a larger bobber for you. Name's Mercury.",
 "There's even larger ones from where that iron ball came from if you keep this up!"]
 
-var mars_dialogue: Array[String] = ["Mars1", "Mars2"]
+var mars_dialogue: Array[String] = ["COD DAMN!! For a pathetic little starfisher, you’ve got guts! Those Red Dwarf Herring are a real pita bread.
+", "You’re far from done, son. Now, I want a big tasty Angler Fish. 
+Oh, and you’ll need this."]
 
-var venus_dialogue: Array[String] = ["Venus1", "Venus2"]
+var venus_dialogue: Array[String] = ["Whoa! That was quick! My kitty stomach barely started growling.
+", "Bring me r.dia. You’re gonna need this here Venus."]
 
-var earth_dialogue: Array[String] = ["Earth1", "Earth2"]
+var earth_dialogue: Array[String] = ["YAAYYYY!! r.dia !! My fifth favourite…:
+", "Close behind Gas Giant Squid!"]
 
-var neptune_dialogue: Array[String] = ["Neptune1", "Neptune2"]
+var neptune_dialogue: Array[String] = ["You’re not getting tired of this, are you? STILL DON’T CARE!!
+", "Cold temp surface for a nice cold Patrick Starfish (licks upper lip with both tongues)."]
 
-var uranus_dialogue: Array[String] = ["Uranus1", "Uranus2"]
+var uranus_dialogue: Array[String] = ["DINNER TIIIIME!! Hehehe.
+", "Alright, big leagues now, m’boy. Gold Fish."]
 
-var saturn_dialogue: Array[String] = ["Saturn1", "Saturn2"]
+var saturn_dialogue: Array[String] = ["That caviar gave me dire dire diarrhea!!
+", "I need another Gold Fish to rehydrate."]
 
-var jupiter_dialogue: Array[String] = ["Jupiter1", "Jupiter2"]
+var jupiter_dialogue: Array[String] = ["You’ve got sole, squiddo. Few are brave enough to starfish like you do.
+", "Thanks for your help!!!"]
 
 var active_tween:Tween
 
