@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="CosmicJam2026"
+config/name="StarFisher"
 run/main_scene="uid://gi43qa15fksh"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://t1dc2pbkxolm"
 
 [autoload]
 

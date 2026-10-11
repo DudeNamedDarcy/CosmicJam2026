@@ -7,6 +7,14 @@
 [ext_resource type="AudioStream" uid="uid://l4ihbu6r3bhk" path="res://sounds_market/broke_boy_alam_fix.wav" id="4_bq372"]
 [ext_resource type="PackedScene" uid="uid://t3fxorjxcvtt" path="res://dialogue/dialogue_box.tscn" id="5_w6kuu"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_himt0"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.81960785, 0, 0, 1)
+
 [node name="BlackHoleMarket" type="CanvasLayer" unique_id=1787878085]
 script = ExtResource("1_1x0ya")
 
@@ -100,28 +108,41 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -480.0
-offset_top = -295.0
-offset_right = -35.0
-offset_bottom = -217.5
+offset_left = -498.0
+offset_top = 115.63513
+offset_right = -15.0
+offset_bottom = 295.63513
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="MoneyLabel" type="Label" parent="VBoxContainer2" unique_id=1153007020]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("2_nn7dx")
 text = "Money: XXXX"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WarningLabel" type="Label" parent="VBoxContainer2" unique_id=1007154275]
+[node name="FuelLabel" type="Label" parent="VBoxContainer2" unique_id=1728252289]
 unique_name_in_owner = true
 layout_mode = 2
-text = "WARNING HERE"
+theme = ExtResource("2_nn7dx")
+text = "FUEL QUANTITY: XXXX"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="FuelButton" type="Button" parent="VBoxContainer2" unique_id=382424202]
+layout_mode = 2
+theme = ExtResource("2_nn7dx")
+text = "BUY FUEL - $200"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer2" unique_id=824002812]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_nn7dx")
+text = "LEAVE THE MARKET"
 
 [node name="ChaChingAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=348422799]
 stream = ExtResource("2_a7kth")
@@ -129,8 +150,9 @@ max_polyphony = 4
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1007233450]
 offset_left = 640.0
+offset_top = -107.0
 offset_right = 1152.0
-offset_bottom = 512.0
+offset_bottom = 405.0
 stretch_shrink = 4
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=46393094]
@@ -145,9 +167,30 @@ stream = ExtResource("4_bq372")
 
 [node name="DialogueBox" parent="." unique_id=1166612431 instance=ExtResource("5_w6kuu")]
 offset_left = 654.0
-offset_top = 451.0
+offset_top = 313.0
 offset_right = -15.0
-offset_bottom = -20.0
+offset_bottom = -222.0
+
+[node name="BrokeAlertLabel" type="RichTextLabel" parent="." unique_id=812407179]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -195.0
+offset_top = -54.0
+offset_right = 195.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_nn7dx")
+theme_override_colors/default_color = Color(0.81960785, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_himt0")
+text = "BROKE ALERT"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="VBoxContainer/OrbitRadiusButton" to="." method="_on_orbit_radius_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/CatchRadiusButton" to="." method="_on_catch_radius_button_pressed"]
@@ -155,3 +198,5 @@ offset_bottom = -20.0
 [connection signal="pressed" from="VBoxContainer/LargerCombosButton" to="." method="_on_larger_combos_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/LongerComboButton" to="." method="_on_longer_combo_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/LargerFuelButton" to="." method="_on_larger_fuel_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/FuelButton" to="." method="_on_fuel_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/QuitButton" to="." method="_on_quit_button_pressed"]
