@@ -7,14 +7,13 @@
 radius = 45.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6vkj"]
-radius = 29.0
+radius = 25.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yysiv"]
 radius = 13.0
 
 [node name="Mercury" type="CharacterBody2D" unique_id=2079869234 node_paths=PackedStringArray("bobberSprite", "orbitArea", "catchArea")]
-collision_layer = 8
-collision_mask = 2
+collision_mask = 0
 script = ExtResource("1_8rts1")
 bobberType = "Mercury"
 bobberTexture = ExtResource("3_b8nd0")
@@ -28,7 +27,6 @@ catchArea = NodePath("Catch Area")
 shape = SubResource("CircleShape2D_gem73")
 
 [node name="Planet" type="Sprite2D" parent="." unique_id=1052726689]
-z_index = 10
 scale = Vector2(2.8, 2.8)
 texture = ExtResource("3_b8nd0")
 
