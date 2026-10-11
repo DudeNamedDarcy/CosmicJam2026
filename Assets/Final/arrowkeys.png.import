@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chnjcnw68avqp"
-path="res://.godot/imported/moon_jelly.png-c41db366550968dee9a63922c3505a4f.ctex"
+uid="uid://b4kbwh0if5jat"
+path="res://.godot/imported/arrowkeys.png-8f6870d37977d1be40f3f68630c29da9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Placeholders/moon_jelly.png"
-dest_files=["res://.godot/imported/moon_jelly.png-c41db366550968dee9a63922c3505a4f.ctex"]
+source_file="res://Assets/Final/arrowkeys.png"
+dest_files=["res://.godot/imported/arrowkeys.png-8f6870d37977d1be40f3f68630c29da9.ctex"]
 
 [params]
 

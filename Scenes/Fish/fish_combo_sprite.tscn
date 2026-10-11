@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://fyy47o33owpb"]
+
+[ext_resource type="Script" uid="uid://dkgeimfifgoju" path="res://Scenes/Fish/fish_combo_sprite.gd" id="1_7m2ih"]
+[ext_resource type="Texture2D" uid="uid://ccs888axr0547" path="res://Assets/Final/moonjelly.png" id="2_lui15"]
+
+[node name="FishComboSprite" type="Control" unique_id=1442407300 node_paths=PackedStringArray("sprite")]
+custom_minimum_size = Vector2(64, 64)
+custom_maximum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1088.0
+offset_bottom = -584.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+script = ExtResource("1_7m2ih")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1493622768]
+scale = Vector2(4, 4)
+texture = ExtResource("2_lui15")
+centered = false

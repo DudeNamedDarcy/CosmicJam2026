@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name PlayerController
 enum PlayerState { Idle, Moving, Casting, Fishing, Reeling }
 const DIRECTIONAL_ARROW = preload("res://Scenes/directional_arrow.tscn")
+const COMBO_FISH = preload("res://Scenes/Fish/fish_combo_sprite.tscn")
 
 @onready var cameraController = $FollowCamera
 
@@ -36,7 +37,7 @@ var activeBobbers: Array[Bobber] = []
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("CastReel"):
 		castPower += delta
-	print(PlayerState.find_key(playerState))
+	#print(PlayerState.find_key(playerState))
 	AimMouse()
 		
 
@@ -131,7 +132,7 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 	if arrow.GetArrowType() == input_arrow:
 		cameraController.ApplyShake(2.0)
 		arrows.pop_front()
-		arrow.queue_free()
+		arrow.KillArrow()
 
 		if arrows.is_empty():
 			cameraController.ApplyShake(2.0)
@@ -159,7 +160,7 @@ func CastBobbers(castPower: float) -> void:
 		# Cast the bobber in the aiming direction
 		bobber.cast(randomizedDirection, randomizedPower, castDeceleration, bobberLine)
 
-		#activeBobbers.append(bobber)
+		activeBobbers.append(bobber)
 		print(bobber.bobberType)
 	
 func StartReelingMinigame() -> void:
@@ -170,19 +171,26 @@ func StartReelingMinigame() -> void:
 		EndFishing()
 		return
 	var comboLength = 4 + fishList.size() - 1
-	
+
 	for i in comboLength:
 		var arrow_instance = DIRECTIONAL_ARROW.instantiate()
 		arrows.append(arrow_instance)
 		vboxContainer.add_child(arrow_instance)
+	for fish in fishList:
+		var fish_instance = COMBO_FISH.instantiate()
+		fish_instance.PopulateData(fish)
+		vboxContainer.add_child(fish_instance)
+	for child in planetParent.get_children():
+		child.queue_free()
+	activeBobbers.clear()
 
 func EndFishing() -> void:
-	print("endfishing")
 	playerState = PlayerState.Idle
-	for child in vboxContainer.get_children():
-		arrows.pop_front()
-		child.queue_free()	
-	for child in planetParent.get_children():
-		activeBobbers.pop_front()
-		child.queue_free()
+
+	for arrow in arrows.duplicate():
+		if is_instance_valid(arrow):
+			arrow.KillArrow()
+
+	arrows.clear()
+
 	aimArrow.show()

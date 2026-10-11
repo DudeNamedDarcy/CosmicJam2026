@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://caiem5b8o2slt" path="res://Assets/Placeholders/360_F_546468872_b9emNBQeVDLbBqicXaFyoBUwutWcHmbl.jpg" id="1_b6fju"]
 [ext_resource type="PackedScene" uid="uid://cwjnrld5dv08f" path="res://Scenes/player_controller.tscn" id="1_x87qo"]
+[ext_resource type="Script" uid="uid://xiufvpalhvi1" path="res://Scripts/orbit_manager.gd" id="3_fiftr"]
+[ext_resource type="PackedScene" uid="uid://diga0gfwjyvcg" path="res://Scenes/Fish/moon_jelly.tscn" id="4_1ixah"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
 normal = Vector2(0, 1)
@@ -35,7 +37,6 @@ offset_left = -25.0
 offset_top = -3.0
 offset_right = 25.0
 offset_bottom = 697.0
-theme_override_constants/separation = 4
 
 [node name="PlayerBounds" type="StaticBody2D" parent="." unique_id=955427512]
 
@@ -57,3 +58,31 @@ shape = SubResource("WorldBoundaryShape2D_6h5vk")
 
 [node name="Planet" type="Node2D" parent="." unique_id=797403716]
 position = Vector2(576, 93)
+
+[node name="OrbitManager" type="Node2D" parent="Planet" unique_id=1894180204]
+script = ExtResource("3_fiftr")
+metadata/_custom_type_script = "uid://xiufvpalhvi1"
+
+[node name="Moon Jelly" parent="." unique_id=1404079117 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_1ixah")]
+position = Vector2(576, 363)
+orbitManager = NodePath("../Planet/OrbitManager")
+
+[node name="Moon Jelly2" parent="." unique_id=138465252 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_1ixah")]
+position = Vector2(576, 363)
+orbitManager = NodePath("../Planet/OrbitManager")
+
+[node name="Moon Jelly3" parent="." unique_id=444781375 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_1ixah")]
+position = Vector2(576, 363)
+orbitManager = NodePath("../Planet/OrbitManager")
+
+[node name="Moon Jelly4" parent="." unique_id=1271048047 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_1ixah")]
+position = Vector2(576, 363)
+orbitManager = NodePath("../Planet/OrbitManager")
+
+[node name="Moon Jelly5" parent="." unique_id=1878490318 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_1ixah")]
+position = Vector2(576, 363)
+orbitManager = NodePath("../Planet/OrbitManager")
+
+[node name="Moon Jelly6" parent="." unique_id=1435106380 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_1ixah")]
+position = Vector2(576, 363)
+orbitManager = NodePath("../Planet/OrbitManager")

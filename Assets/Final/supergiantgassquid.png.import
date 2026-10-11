@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfnvaco2wtvgg"
-path="res://.godot/imported/red_dwarf_herring.png-fee7a8f3f3c263a687c2b742224a631d.ctex"
+uid="uid://bq4om8wo8jvpv"
+path="res://.godot/imported/supergiantgassquid.png-df992e6bc98129e70066494e1684f973.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Placeholders/red_dwarf_herring.png"
-dest_files=["res://.godot/imported/red_dwarf_herring.png-fee7a8f3f3c263a687c2b742224a631d.ctex"]
+source_file="res://Assets/Final/supergiantgassquid.png"
+dest_files=["res://.godot/imported/supergiantgassquid.png-df992e6bc98129e70066494e1684f973.ctex"]
 
 [params]
 
