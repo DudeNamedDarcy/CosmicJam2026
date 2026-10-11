@@ -4,6 +4,9 @@ extends CanvasLayer
 @export var fuelTextControl: Control
 @export var moneyText: RichTextLabel
 @export var fuelText: RichTextLabel
+@export var QuestText: RichTextLabel
+
+@onready var intro_dialogue_box: Control = $IntroDialogueBox
 
 var shake_tween: Tween
 var previous_fuel: float = 100.0
@@ -20,6 +23,10 @@ func UpdateMoneyText() -> void:
 
 func UpdateFuelText() -> void:
 	fuelText.text = "Fuel: %.2f%%" % ScoreAndUpgrades.fuel_quantity
+
+func UpdateQuestText(string) -> void:
+	QuestText.text = "To Catch: " + str(string)
+
 
 	var current_fuel = ScoreAndUpgrades.fuel_quantity
 
@@ -53,3 +60,8 @@ func ShakeBox(isMoney: bool) -> void:
 	shake_tween.tween_property(targetControl, "position:x", original_x - 6.0, 0.05)
 	shake_tween.tween_property(targetControl, "position:x", original_x + 4.0, 0.05)
 	shake_tween.tween_property(targetControl, "position:x", original_x, 0.05)
+
+func updateDialogue() -> void:
+	#updateDialogue() in Player UI called!
+	intro_dialogue_box.visible = true
+	intro_dialogue_box.calling_dialogues()

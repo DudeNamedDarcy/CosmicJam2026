@@ -2,13 +2,15 @@
 
 [ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="1_ebmla"]
 [ext_resource type="Script" uid="uid://borjumllejliy" path="res://Scenes/money_fuel_ui.gd" id="1_vhiju"]
+[ext_resource type="PackedScene" uid="uid://dr4254dbjslde" path="res://dialogue/intro_dialogue_box.tscn" id="3_r8n0i"]
 
-[node name="MoneyFuelUI" type="CanvasLayer" unique_id=1013169491 node_paths=PackedStringArray("moneyTextControl", "fuelTextControl", "moneyText", "fuelText")]
+[node name="MoneyFuelUI" type="CanvasLayer" unique_id=1013169491 node_paths=PackedStringArray("moneyTextControl", "fuelTextControl", "moneyText", "fuelText", "QuestText")]
 script = ExtResource("1_vhiju")
 moneyTextControl = NodePath("MoneyUI")
 fuelTextControl = NodePath("FuelUI")
 moneyText = NodePath("MoneyUI/RichTextLabel")
 fuelText = NodePath("FuelUI/RichTextLabel")
+QuestText = NodePath("QuestUI/RichTextLabel")
 
 [node name="MoneyUI" type="Control" parent="." unique_id=364832241]
 z_index = 10
@@ -43,3 +45,27 @@ theme_override_fonts/normal_font = ExtResource("1_ebmla")
 theme_override_font_sizes/normal_font_size = 25
 text = "Fuel: 100%"
 fit_content = true
+
+[node name="QuestUI" type="Control" parent="." unique_id=1988359149]
+z_index = 10
+propagate_maximum_size = true
+layout_mode = 3
+anchors_preset = 0
+offset_top = 66.0
+offset_right = 400.0
+offset_bottom = 99.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="QuestUI" unique_id=969859362]
+layout_mode = 0
+offset_right = 654.0
+offset_bottom = 33.0
+theme_override_fonts/normal_font = ExtResource("1_ebmla")
+theme_override_font_sizes/normal_font_size = 25
+text = "To Catch: <FISH HERE>"
+fit_content = true
+
+[node name="IntroDialogueBox" parent="." unique_id=1166612431 instance=ExtResource("3_r8n0i")]
+offset_left = 126.0
+offset_top = 475.0
+offset_right = -126.0
+offset_bottom = -23.0

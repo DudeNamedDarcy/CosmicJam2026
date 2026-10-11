@@ -162,13 +162,13 @@ metadata/_custom_type_script = "uid://xiufvpalhvi1"
 [node name="Fish Spawner" type="Node2D" parent="." unique_id=1574152278 node_paths=PackedStringArray("spawnableArea")]
 script = ExtResource("6_rgj8m")
 fishDict = Dictionary[PackedScene, int]({
-ExtResource("8_5q52j"): 1,
-ExtResource("10_a7fet"): 1,
-ExtResource("10_e624q"): 1,
-ExtResource("9_w8jfd"): 1,
-ExtResource("3_rgj8m"): 1,
-ExtResource("8_ldntv"): 1,
-ExtResource("4_2fmhe"): 1,
+ExtResource("8_5q52j"): 2,
+ExtResource("10_a7fet"): 2,
+ExtResource("10_e624q"): 2,
+ExtResource("9_w8jfd"): 2,
+ExtResource("3_rgj8m"): 2,
+ExtResource("8_ldntv"): 2,
+ExtResource("4_2fmhe"): 2,
 ExtResource("7_wywco"): 1
 })
 spawnableArea = NodePath("../SpawnableArea")
@@ -182,10 +182,11 @@ visible = false
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(2192, -485, 2216, 1297, -823, 1295, 622, 468, 770, 470, 767, 276, 619, 281, 619, 443, -839, 1277, -827, -479)
 
-[node name="GlorpStarship" parent="." unique_id=1172553172 node_paths=PackedStringArray("market") instance=ExtResource("6_2fmhe")]
+[node name="GlorpStarship" parent="." unique_id=1172553172 node_paths=PackedStringArray("market", "playerController") instance=ExtResource("6_2fmhe")]
 process_mode = 3
 position = Vector2(689, 369)
 market = NodePath("../BlackHoleMarket")
+playerController = NodePath("../PlayerController")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937637144]
 environment = SubResource("Environment_gem73")
