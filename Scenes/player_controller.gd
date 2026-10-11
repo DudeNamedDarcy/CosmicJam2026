@@ -33,6 +33,7 @@ var castPower: float = 0.0
 @export var sprite: AnimatedSprite2D
 @export var vboxContainer: VBoxContainer
 @export var planetParent: Node2D
+@export var fishSpawner: FishSpawner
 
 var playerState: PlayerState = PlayerState.Idle
 var characterDirection: Vector2
@@ -41,6 +42,10 @@ var fishList: Array[Fish] = []
 var activeBobbers: Array[Bobber] = []
 var comboFishList: Array[FishComboSprite] = []
 var aim_arrow_base_scale: float
+
+# Quest
+var fishNeededForQuest: String = ""
+var caughtFishForQuest = false
 
 func _ready() -> void:
 	aim_arrow_base_scale = aimArrow.scale.x
@@ -190,6 +195,9 @@ func StartReelingMinigame() -> void:
 		EndFishing(false)
 		DeletePlanets()
 		return
+		
+	if fishSpawner:
+		fishSpawner.remove_fish_from_pool(fishList.size())
 	var comboLength = 4 + fishList.size() - 1
 
 	for i in comboLength:
@@ -197,6 +205,9 @@ func StartReelingMinigame() -> void:
 		arrows.append(arrow_instance)
 		vboxContainer.add_child(arrow_instance)
 	for fish in fishList:
+		if fish.name == fishNeededForQuest:
+			caughtFishForQuest = true
+		
 		var fish_instance = COMBO_FISH.instantiate()
 		fish_instance.PopulateData(fish)
 		comboFishList.append(fish_instance)
@@ -216,7 +227,7 @@ func EndFishing(success: bool) -> void:
 	for arrow in arrows.duplicate():
 		if is_instance_valid(arrow):
 			arrow.KillArrow()
-
+	
 	arrows.clear()
 	await get_tree().create_timer(0.2).timeout 
 	for fish in comboFishList.duplicate():
@@ -228,3 +239,14 @@ func EndFishing(success: bool) -> void:
 		
 			
 	aimArrow.show()
+	CompleteQuest()
+	
+func CompleteQuest():
+	print("quest complete")
+	caughtFishForQuest = false
+	fishNeededForQuest = ""
+	# start popup for next quest
+	
+# call this to add a new quest fish
+func AddNewQuestFish(fishName: String):
+	fishNeededForQuest = fishName

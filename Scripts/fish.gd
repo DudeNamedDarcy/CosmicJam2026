@@ -7,6 +7,7 @@ enum State { IDLE, ORBITING }
 @export var typeName: String = "default"
 @export var value: float = 0.0
 @export var fishTexture: Texture2D
+@export_range(0.0, 100.0, 1.0) var probabilityWeight:int = 50.0
 
 @export_category("Idle Movement")
 @export var IdleBurstTimer: Timer
