@@ -390,7 +390,7 @@ z_index = 10
 sprite_frames = SubResource("SpriteFrames_5ur5x")
 animation = &"MoveUpgraded"
 autoplay = "Idle"
-frame_progress = 0.19579212
+frame_progress = 0.921025
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1640096837]
 shape = SubResource("RectangleShape2D_g4v7s")

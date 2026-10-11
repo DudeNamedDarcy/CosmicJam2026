@@ -301,7 +301,6 @@ func DeletePlanets() -> void:
 	activeBobbers.clear()
 	
 func EndFishing(success: bool) -> void:
-	var fishTotal = 0
 	rod_audio.stop_reeling()
 	playerState = PlayerState.Idle
 
@@ -313,7 +312,8 @@ func EndFishing(success: bool) -> void:
 	arrows.clear()
 	if success:
 		rod_audio.combo_win()
-		await get_tree().create_timer(0.2).timeout 
+		await get_tree().create_timer(0.2).timeout
+	var totalMoney: float = 0 
 	for fish in comboFishList.duplicate():
 		print(fish)
 		if is_instance_valid(fish):
@@ -323,13 +323,21 @@ func EndFishing(success: bool) -> void:
 				rod_audio.winning()
 				moneyVboxContainer.add_child(moneyText)
 				var fishValueWithUpgrade = (fish.value) + ((ScoreAndUpgrades.larger_combo_progress) * ((fish.value)/5))
+				totalMoney += fishValueWithUpgrade
 				moneyText.DisplayText(fishValueWithUpgrade)
 				ScoreAndUpgrades.money += fishValueWithUpgrade
-				fishTotal += fishValueWithUpgrade
 			fish.KillFish(success)
-				#fishvalue *comboSize * 1.1
 			uiController.UpdateMoneyText()
 			fish.KillFish(success)
+	if success:
+		await get_tree().create_timer(0.2).timeout	
+		var moneyText = MONEY_GAIN_TEXT.instantiate()
+		moneyVboxContainer.add_child(moneyText)
+		moneyText.DisplayTotalEarnings(totalMoney)
+
+		
+
+	
 	if (!success):
 		LevelManager.shakeCamera(20.0, 0.5)
 	LevelManager.shakeCameraComboClear()
