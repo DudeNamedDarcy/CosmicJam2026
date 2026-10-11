@@ -4,7 +4,7 @@ var money: float = 1400
 
 var orbit_radius_progress: int = 0
 var catch_radius_progress: int = 0
-var faster_ship_progress: int = 0
+var faster_ship_progress: int = 3
 var larger_combo_progress: int = 0
 var longer_combo_progress: int = 0
 var larger_fuel_progress: int = 0
