@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://be4dqvwhs32rr"]
+
+[ext_resource type="Script" uid="uid://f5wiuad0pepu" path="res://Scenes/follow_camera.gd" id="1_qm2hi"]
+
+[node name="FollowCamera" type="Camera2D" unique_id=790845644]
+zoom = Vector2(1.5, 1.5)
+limit_left = 0
+limit_top = 0
+limit_right = 1100
+limit_bottom = 700
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+script = ExtResource("1_qm2hi")

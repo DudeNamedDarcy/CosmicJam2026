@@ -84,6 +84,10 @@ func reelIn() -> Array[Fish]:
 	for fish in caughtFish:
 		print("Fish Name: ", fish.typeName, ", Value: ", fish.value)
 	return caughtFish
+
+func killAllFish() -> void:
+	for fish in caughtFish.duplicate():
+		fish.KillFish()
 	
 func cast(direction: Vector2, power: float, deceleration: float, line: Line2D):
 	castDirection = direction
