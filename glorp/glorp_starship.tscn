@@ -54,13 +54,13 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_768q2"]
-radius = 130.0
+radius = 105.0
 
 [node name="GlorpStarship" type="Node2D" unique_id=1172553172]
 script = ExtResource("1_i1ns5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1943480814]
-scale = Vector2(3, 3)
+scale = Vector2(2.33, 2.33)
 sprite_frames = SubResource("SpriteFrames_3b8x7")
 animation = &"hover"
 autoplay = "hover"
@@ -72,3 +72,4 @@ frame_progress = 0.81959695
 shape = SubResource("CircleShape2D_768q2")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

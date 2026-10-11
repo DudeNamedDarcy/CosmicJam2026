@@ -45,6 +45,10 @@ var activeBobbers: Array[Bobber] = []
 var comboFishList: Array[FishComboSprite] = []
 var aim_arrow_base_scale: float
 
+#Market
+@onready var black_hole_market: CanvasLayer = $BlackHoleMarket
+
+
 # Quest
 var fishNeededForQuest: String = ""
 var caughtFishForQuest = false
@@ -80,7 +84,7 @@ func AimMouse() -> void:
 	#print(aimArrow.rotation)
 	
 func _physics_process(delta: float) -> void:
-	print("Fuel: %.2f" % (ScoreAndUpgrades.fuel_quantity))
+	#print("Fuel: %.2f" % (ScoreAndUpgrades.fuel_quantity))
 	#thanks to this article: https://forum.godotengine.org/t/how-to-display-a-float-with-two-decimal-points/133086/3
 	characterDirection.x = Input.get_axis("MoveLeft", "MoveRight")
 	characterDirection.y = Input.get_axis("MoveUp", "MoveDown")
