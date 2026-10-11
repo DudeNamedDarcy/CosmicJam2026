@@ -105,6 +105,7 @@ func AimMouse() -> void:
 		aimArrow.rotation = mouse_direction.angle()
 	
 func _physics_process(delta: float) -> void:
+	maxComboTime = (ScoreAndUpgrades.longer_combo_progress + 1)
 	uiController.UpdateFuelText()
 	#thanks to this article: https://forum.godotengine.org/t/how-to-display-a-float-with-two-decimal-points/133086/3
 	characterDirection.x = Input.get_axis("MoveLeft", "MoveRight")
@@ -207,7 +208,7 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 			print("Combo complete! Combo size", comboSize)
 			EndFishing(true)
 		else:
-			arrows[0].TurnRed()
+			arrows[0].TurnRed((ScoreAndUpgrades.longer_combo_progress) + 1)
 		elapsedComboTime = 0.0
 
 	else:
@@ -258,7 +259,7 @@ func StartReelingMinigame() -> void:
 		arrows.append(arrow_instance)
 		vboxContainer.add_child(arrow_instance)
 		if i == 0:
-			arrows[0].TurnRed()
+			arrows[0].TurnRed((ScoreAndUpgrades.longer_combo_progress) + 1)
 	for fish in fishList:
 		if fish.name == fishNeededForQuest:
 			caughtFishForQuest = true
@@ -277,6 +278,7 @@ func DeletePlanets() -> void:
 	activeBobbers.clear()
 	
 func EndFishing(success: bool) -> void:
+	var fishTotal = 0
 	rod_audio.stop_reeling()
 	playerState = PlayerState.Idle
 
@@ -297,9 +299,13 @@ func EndFishing(success: bool) -> void:
 				var moneyText = MONEY_GAIN_TEXT.instantiate()
 				rod_audio.winning()
 				moneyVboxContainer.add_child(moneyText)
-				moneyText.DisplayText(fish.value)
+				var fishValueWithUpgrade = (fish.value) + ((ScoreAndUpgrades.larger_combo_progress) * ((fish.value)/5))
+				moneyText.DisplayText(fishValueWithUpgrade)
+				ScoreAndUpgrades.money += fishValueWithUpgrade
+				fishTotal += fishValueWithUpgrade
+			fish.KillFish(success)
 				#fishvalue *comboSize * 1.1
-				uiController.UpdateMoneyText()
+			uiController.UpdateMoneyText()
 			fish.KillFish(success)
 	
 	LevelManager.shakeCameraComboClear()
