@@ -4,6 +4,7 @@ var ship_at_market:bool = false
 @export var market: CanvasLayer
 
 @onready var area_2d: Area2D = $Area2D
+@export var playerController: PlayerController
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,7 +16,7 @@ func _process(delta: float) -> void:
 	print("ScoreAndUpgrades.in_market is: " + str(ScoreAndUpgrades.in_market))
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("interact"):
+	if Input.is_action_just_pressed("interact") && (playerController.playerState == playerController.PlayerState.Idle || playerController.playerState == playerController.PlayerState.Moving):
 		if ship_at_market:
 			LevelManager.pauseGame()
 			ScoreAndUpgrades.in_market = true

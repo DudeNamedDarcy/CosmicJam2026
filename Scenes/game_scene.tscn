@@ -185,10 +185,11 @@ wait_time = 0.004
 visible = false
 polygon = PackedVector2Array(2192, -485, 2216, 1297, -823, 1295, 622, 468, 770, 470, 767, 276, 619, 281, 619, 443, -839, 1277, -827, -479)
 
-[node name="GlorpStarship" parent="." unique_id=1172553172 node_paths=PackedStringArray("market") instance=ExtResource("6_2fmhe")]
+[node name="GlorpStarship" parent="." unique_id=1172553172 node_paths=PackedStringArray("market", "playerController") instance=ExtResource("6_2fmhe")]
 process_mode = 3
 position = Vector2(689, 369)
 market = NodePath("../BlackHoleMarket")
+playerController = NodePath("../PlayerController")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937637144]
 environment = SubResource("Environment_gem73")

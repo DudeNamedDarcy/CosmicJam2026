@@ -16,7 +16,7 @@ script = ExtResource("1_u4d8y")
 typeName = "r.dia"
 value = 50.0
 fishTexture = ExtResource("2_u4d8y")
-probabilityWeight = 5
+probabilityWeight = 25
 IdleBurstTimer = NodePath("IdleBurstTimer")
 
 [node name="Fish Star Animation" parent="." unique_id=196298808 instance=ExtResource("3_2kuvg")]
