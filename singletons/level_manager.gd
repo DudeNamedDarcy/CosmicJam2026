@@ -2,6 +2,7 @@ extends Node
 
 signal level_up
 signal shake_camera(str: float)
+
 var level: int = 0
 
 func next_level():
@@ -11,3 +12,4 @@ func next_level():
 
 func shakeCamera(str: float):
 	shake_camera.emit(str)
+

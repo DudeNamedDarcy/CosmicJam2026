@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d3oxvy0grl375" path="res://Scenes/Fish/red_dwarf_herring.tscn" id="4_2fmhe"]
 [ext_resource type="PackedScene" uid="uid://bvboagsrhp2c7" path="res://glorp/glorp_starship.tscn" id="6_2fmhe"]
 [ext_resource type="Script" uid="uid://c4evtl6kbwuw2" path="res://Scenes/fish_spawner.gd" id="6_rgj8m"]
+[ext_resource type="Texture2D" uid="uid://ck5uv4d76r727" path="res://Assets/Final/Parallax/stars.png" id="7_2fmhe"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
 normal = Vector2(0, 1)
@@ -17,9 +18,23 @@ normal = Vector2(0, 1)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6h5vk"]
 
+[sub_resource type="Environment" id="Environment_gem73"]
+background_mode = 3
+glow_enabled = true
+glow_hdr_threshold = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fmhe"]
+atlas = ExtResource("7_2fmhe")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gem73"]
+atlas = ExtResource("7_2fmhe")
+region = Rect2(128, 0, 128, 128)
+
 [node name="GameScene" type="Node2D" unique_id=459147446]
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1596285265]
+visible = false
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(596, 361)
@@ -40,6 +55,7 @@ offset_left = -25.0
 offset_top = -3.0
 offset_right = 25.0
 offset_bottom = 697.0
+metadata/_edit_use_anchors_ = true
 
 [node name="PlayerBounds" type="StaticBody2D" parent="." unique_id=955427512]
 
@@ -79,5 +95,41 @@ polygon = PackedVector2Array(1146, 2, 1146, 694, 9, 699, 622, 468, 747, 468, 750
 
 [node name="GlorpStarship" parent="." unique_id=1172553172 instance=ExtResource("6_2fmhe")]
 position = Vector2(689, 369)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937637144]
+environment = SubResource("Environment_gem73")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=50502159]
+scroll_base_offset = Vector2(20, 20)
+scroll_ignore_camera_zoom = true
+
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxBackground" unique_id=1608117694]
+scroll_scale = Vector2(2, 2)
+repeat_size = Vector2(256, 256)
+repeat_times = 20
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Parallax2D" unique_id=1468262979]
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_2fmhe")
+
+[node name="Parallax2D2" type="Parallax2D" parent="ParallaxBackground" unique_id=398456648]
+scroll_scale = Vector2(2.5, 2.5)
+repeat_size = Vector2(256, 256)
+repeat_times = 20
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Parallax2D2" unique_id=865953587]
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_gem73")
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground" unique_id=47073576]
+z_index = -500
+z_as_relative = false
+offset_left = -133.0
+offset_top = -90.99997
+offset_right = -80.0889
+offset_bottom = -36.71998
+scale = Vector2(27.631252, 16.451735)
+color = Color(0.09112144, 0.09112146, 0.09112144, 1)
+metadata/_edit_use_anchors_ = true
 
 [connection signal="timeout" from="Fish Spawner/Spawn Timer" to="Fish Spawner" method="_on_spawn_timer_timeout"]
