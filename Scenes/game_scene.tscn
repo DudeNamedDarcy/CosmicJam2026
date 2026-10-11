@@ -17,9 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://w7gafq2uiia1" path="res://Scenes/Fish/gold_fish.tscn" id="9_w8jfd"]
 [ext_resource type="PackedScene" uid="uid://wgsgx4i8wbue" path="res://Scenes/Fish/big_fish.tscn" id="10_a7fet"]
 [ext_resource type="Texture2D" uid="uid://dgqiixt65f3lo" path="res://Assets/Final/big-asteroid.png" id="13_w8jfd"]
+[ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="13_wywco"]
 [ext_resource type="Texture2D" uid="uid://cll5bs5f8a81p" path="res://Assets/Final/medium-asteroid.png" id="14_a7fet"]
 [ext_resource type="Texture2D" uid="uid://wb6i18c7r4pi" path="res://Assets/Final/small-asteroid.png" id="15_8m72m"]
-[ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="13_wywco"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
 normal = Vector2(0, 1)
@@ -166,7 +166,7 @@ spawnableArea = NodePath("../SpawnableArea")
 maxFishInLevel = 1000
 
 [node name="Spawn Timer" type="Timer" parent="Fish Spawner" unique_id=1446234030]
-wait_time = 0.2
+wait_time = 0.015
 
 [node name="SpawnableArea" type="Polygon2D" parent="." unique_id=1898762879]
 visible = false
@@ -247,6 +247,7 @@ color = Color(0.09112144, 0.09112146, 0.09112144, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Parallax2D3" type="Parallax2D" parent="ParallaxBackground" unique_id=1985957334]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1888502825]
 
 [node name="MoneyUI" type="Control" parent="CanvasLayer" unique_id=969162968]

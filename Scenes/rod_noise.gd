@@ -7,10 +7,11 @@ extends AudioStreamPlayer2D
 @export var reel: AudioStream = preload("res://Scenes/Audio/SFX/v2/reeling.mp3")
 @export var start: AudioStream = preload("res://Scenes/Audio/SFX/v2/start.mp3")
 @export var success: AudioStream = preload("res://Scenes/Audio/SFX/v2/success_combo.mp3")
+@export var win_plateau: AudioStream = preload("res://Scenes/Audio/SFX/v2/win_plateau.mp3")
 
 var comboCount
 var winCount = 0
-var reelMax
+var reelMax = 0
 var reelPossible = true
 
 # Called when the node enters the scene tree for the first time.
@@ -33,9 +34,14 @@ func throwing():
 		play()
 
 func winning():
-	pitch_scale = 1+float(1+winCount)/10 if winCount<20 else 3
-	winCount+=1
-	stream = win
+	if winCount<6:
+		pitch_scale = 1+float(1+winCount)/10
+		winCount+=1
+		stream = win
+	else:
+		pitch_scale = 1
+		stream = win_plateau
+		# stream = winPlateau
 	if(not playing):
 		play()
 		
@@ -48,7 +54,7 @@ func losing():
 func comboing():
 	comboCount+=1
 	stream = combo
-	pitch_scale = 1+float(1+comboCount)/10 if comboCount<9 else 2
+	pitch_scale = 1+float(1+comboCount)/10 if comboCount<6 else 1.7
 	play()
 	
 func reeling(reelTime):
