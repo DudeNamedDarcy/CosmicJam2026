@@ -66,6 +66,8 @@ var caughtFishForQuest = false
 var elapsedComboTime: float
 @export var maxComboTime: float = 1.0
 var comboSize: float
+var closeToShop: bool = false
+
 func _ready() -> void:
 	aim_arrow_base_scale = aimArrow.scale.x
 	input_button.visible = false
@@ -172,6 +174,7 @@ func _input(event: InputEvent) -> void:
 		rod_audio.reeling(maxCastPower)			
 		if playerState == PlayerState.Idle || playerState == PlayerState.Moving:
 				playerState = PlayerState.Casting
+				input_button.visible = false
 		elif playerState == PlayerState.Fishing:
 			playerState = PlayerState.Reeling
 			StartReelingMinigame()
@@ -314,6 +317,8 @@ func EndFishing(success: bool) -> void:
 	comboSize = 0
 	aimArrow.show()
 	CompleteQuest()
+	await get_tree().create_timer(0.4).timeout
+	input_button.visible = closeToShop
 	
 func CompleteQuest():
 	print("quest complete")
@@ -329,8 +334,10 @@ func AddNewQuestFish(fishName: String):
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.name == "market":
 		input_button.visible = true
+		closeToShop = true
 
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if area.name == "market":
 		input_button.visible = false
+		closeToShop = false
