@@ -13,9 +13,16 @@
 [ext_resource type="PackedScene" uid="uid://w7gafq2uiia1" path="res://Scenes/Fish/gold_fish.tscn" id="9_w8jfd"]
 [ext_resource type="PackedScene" uid="uid://wgsgx4i8wbue" path="res://Scenes/Fish/big_fish.tscn" id="10_a7fet"]
 [ext_resource type="Texture2D" uid="uid://dgqiixt65f3lo" path="res://Assets/Final/big-asteroid.png" id="13_w8jfd"]
+[ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="13_wywco"]
 [ext_resource type="Texture2D" uid="uid://cll5bs5f8a81p" path="res://Assets/Final/medium-asteroid.png" id="14_a7fet"]
 [ext_resource type="Texture2D" uid="uid://wb6i18c7r4pi" path="res://Assets/Final/small-asteroid.png" id="15_8m72m"]
-[ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="13_wywco"]
+[ext_resource type="Texture2D" uid="uid://co5l18et1fp0f" path="res://Assets/Final/nebulae/barfcoloured-nebula.png" id="16_vtwju"]
+[ext_resource type="Texture2D" uid="uid://67jw5hhk1xk6" path="res://Assets/Final/nebulae/blue-nebula.png" id="17_fnr0w"]
+[ext_resource type="Texture2D" uid="uid://b5qgb54g2bdhj" path="res://Assets/Final/nebulae/eye-nebula.png" id="18_gqlrj"]
+[ext_resource type="Texture2D" uid="uid://dicgcvh5yrqjj" path="res://Assets/Final/nebulae/fire-nebula.png" id="19_kiiqx"]
+[ext_resource type="Texture2D" uid="uid://ocvuuc3kyadf" path="res://Assets/Final/nebulae/puple-nebula.png" id="20_m8c54"]
+[ext_resource type="Texture2D" uid="uid://y1d3540brc2h" path="res://Assets/Final/nebulae/purple-yellow-nebula.png" id="21_5q52j"]
+[ext_resource type="Texture2D" uid="uid://3b8yixiru3hp" path="res://Assets/Final/nebulae/rainbow-nebula.png" id="22_e624q"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
 normal = Vector2(0, 1)
@@ -224,7 +231,51 @@ scale = Vector2(27.631252, 16.451735)
 color = Color(0.09112144, 0.09112146, 0.09112144, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Parallax2D3" type="Parallax2D" parent="ParallaxBackground" unique_id=1985957334]
+[node name="Nebulae" type="Node2D" parent="." unique_id=770759183]
+z_index = -101
+
+[node name="Sprite2D" type="Sprite2D" parent="Nebulae" unique_id=491595982]
+modulate = Color(1, 1, 1, 0.30588236)
+position = Vector2(-744, -401)
+scale = Vector2(3, 3)
+texture = ExtResource("16_vtwju")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Nebulae" unique_id=1421894617]
+modulate = Color(1, 1, 1, 0.30588236)
+position = Vector2(1537, -235)
+scale = Vector2(4, 4)
+texture = ExtResource("17_fnr0w")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Nebulae" unique_id=1285643991]
+modulate = Color(1, 1, 1, 0.30588236)
+position = Vector2(1882, 529)
+scale = Vector2(3, 3)
+texture = ExtResource("18_gqlrj")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Nebulae" unique_id=707680487]
+modulate = Color(1, 1, 1, 0.30588236)
+position = Vector2(1399, 1015)
+scale = Vector2(4, 4)
+texture = ExtResource("19_kiiqx")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Nebulae" unique_id=1948578463]
+modulate = Color(1, 1, 1, 0.30588236)
+position = Vector2(-389, 10)
+scale = Vector2(4, 4)
+texture = ExtResource("20_m8c54")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Nebulae" unique_id=1815291621]
+modulate = Color(1, 1, 1, 0.30588236)
+position = Vector2(-138, 778)
+scale = Vector2(3, 3)
+texture = ExtResource("21_5q52j")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Nebulae" unique_id=364559459]
+modulate = Color(1, 1, 1, 0.30588236)
+position = Vector2(625, 237)
+scale = Vector2(4, 4)
+texture = ExtResource("22_e624q")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1888502825]
 
 [node name="MoneyUI" type="Control" parent="CanvasLayer" unique_id=969162968]
