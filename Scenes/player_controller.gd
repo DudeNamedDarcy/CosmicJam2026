@@ -83,6 +83,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if questStep == 9:
+		get_tree().change_scene_to_file("res://Scenes/Credits/win_credits.tscn")
+
 	if playerState == PlayerState.Reeling:
 		elapsedComboTime += delta
 		if elapsedComboTime >= maxComboTime:
