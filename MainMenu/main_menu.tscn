@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://b4obqg1s8xc7s"]
+
+[ext_resource type="Script" uid="uid://cgk5p01hihcku" path="res://MainMenu/main_menu.gd" id="1_3w4mj"]
+[ext_resource type="AudioStream" uid="uid://k05nkoq65th6" path="res://MainMenu/menu_105bpm.wav" id="1_nhkf3"]
+[ext_resource type="Script" uid="uid://clyovkxg4cj4f" path="res://MainMenu/addons/perspective_quads/scripts/nodes/perspective_viewport_container_2d.gd" id="3_5de1l"]
+[ext_resource type="PackedScene" uid="uid://dsiq0ku6hhr" path="res://MainMenu/second_menu_part.tscn" id="4_ajn5b"]
+
+[node name="MainMenu" type="Control" unique_id=402787751]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3w4mj")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2130187908]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1892696596]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 728.0
+offset_top = 147.0
+offset_right = -120.0
+offset_bottom = -168.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=327940219]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -50.5
+offset_right = 576.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=2101989938]
+layout_mode = 2
+
+[node name="StartGameButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=2089890686]
+layout_mode = 2
+text = "Start Game"
+
+[node name="CreditsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=610206053]
+layout_mode = 2
+text = "Credits"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=185556139]
+layout_mode = 2
+text = "Quit Game"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1039320173]
+stream = ExtResource("1_nhkf3")
+autoplay = true
+
+[node name="PerspectiveViewportContainer2D" type="Node2D" parent="." unique_id=1891585155]
+position = Vector2(251, 324)
+script = ExtResource("3_5de1l")
+corner_top_left = Vector2(0, -0.135)
+corner_top_right = Vector2(1, 0.15)
+corner_bottom_right = Vector2(1, 0.85)
+corner_bottom_left = Vector2(0, 1.135)
+metadata/_custom_type_script = "uid://clyovkxg4cj4f"
+
+[node name="SubViewport" type="SubViewport" parent="PerspectiveViewportContainer2D" unique_id=1565281900]
+
+[node name="SecondPart" parent="PerspectiveViewportContainer2D/SubViewport" unique_id=1191171838 instance=ExtResource("4_ajn5b")]
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

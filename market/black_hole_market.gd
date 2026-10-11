@@ -41,6 +41,9 @@ var purchase_dialogue: Array[String] = ["Finally!",
 "Just big and greedy, you are"
 ]
 
+var broke_dialogue: Array[String] = ["Imagine being broke LOL",
+"Come back when you're a little... richer!"]
+
 var totalMoney = (ScoreAndUpgrades.money)
 
 var out_of_money_bool = true
