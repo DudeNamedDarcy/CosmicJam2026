@@ -39,7 +39,7 @@ var intro_dialogue: Array[String] = ["You again. Ugh. If you want to quell my fo
 "You are truly an insatiable fellow."
 ]
 
-var purchase_dialogue: Array[String] = ["Finally!",
+var purchase_dialogue: Array[String] = ["Eh, that upgrade's okay, I guess!",
 "Good boy",
 "Holy mackerel! Took you long enough!",
 "A worthless purchase",
@@ -56,8 +56,8 @@ var out_of_money_bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	broke_alert_label.hide()
-	var chosen_index: int = randi_range(0, len(intro_dialogue) -1)
-	dialogue_box.dialogue = intro_dialogue.slice(chosen_index, (chosen_index+1))
+	dialogue_box.dialogue = intro_dialogue
+	dialogue_box.current_dialogue_index = randi_range(0, len(intro_dialogue) -1)
 	dialogue_box.show_text(dialogue_box.dialogue)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -130,8 +130,8 @@ func _handle_money(given_progress_bar: ProgressBar, moneyAmount:int, given_butto
 		return
 
 func activate_buy_dialogue() -> void:
-	var chosen_index: int = randi_range(0, len(purchase_dialogue) -1)
-	dialogue_box.dialogue = purchase_dialogue.slice(chosen_index, (chosen_index+1))
+	dialogue_box.dialogue = purchase_dialogue
+	dialogue_box.current_dialogue_index = randi_range(0, len(purchase_dialogue) -1)
 	dialogue_box.show_text(dialogue_box.dialogue)
 
 
