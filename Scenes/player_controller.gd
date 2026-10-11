@@ -36,6 +36,8 @@ var castPower: float = 0.0
 @export var moneyVboxContainer: VBoxContainer
 @export var planetParent: Node2D
 @export var fishSpawner: FishSpawner
+@export var castingPointLeft: Marker2D
+@export var castingPointRight: Marker2D
 
 @onready var area_2d: Area2D = $Area2D
 @onready var uiController = get_node("/root/GameScene/MoneyFuelUI")
@@ -50,6 +52,7 @@ var activeBobbers: Array[Bobber] = []
 @onready var rod_audio: AudioStreamPlayer2D = $RodNoise
 var comboFishList: Array[FishComboSprite] = []
 var aim_arrow_base_scale: float
+var castingPoint: Marker2D
 
 #Market
 @onready var black_hole_market: CanvasLayer = $BlackHoleMarket
@@ -68,9 +71,10 @@ func _ready() -> void:
 	aim_arrow_base_scale = aimArrow.scale.x
 	input_button.visible = false
 	area_2d.name = "starship"
+	castingPoint = castingPointLeft
 	uiController.UpdateMoneyText()
 	uiController.UpdateFuelText()
-	#castingPoint = castingPointLeft
+
 
 func _process(delta: float) -> void:
 	if ScoreAndUpgrades.in_market == true:
@@ -124,8 +128,10 @@ func _physics_process(delta: float) -> void:
 	# Flip sprite TODO: Add squash and stretch
 	if characterDirection.x > 0:
 		sprite.flip_h = true
+		castingPoint = castingPointRight
 	elif characterDirection.x < 0:
 		sprite.flip_h = false
+		castingPoint = castingPointLeft
 
 	# Smooth acceleration and deceleration
 	if characterDirection != Vector2.ZERO:
@@ -225,7 +231,7 @@ func CastBobbers(castPower: float) -> void:
 
 		planetParent.add_child(bobber)
 		planetParent.add_child(bobberLine)
-		bobber.global_position = global_position
+		bobber.global_position = castingPoint.global_position
 		
 		var randomAngle = randf_range(-castRandomSpread, castRandomSpread)
 		var randomizedDirection = cast_direction.rotated(randomAngle)

@@ -275,7 +275,7 @@ animations = [{
 "speed": 4.0
 }]
 
-[node name="PlayerController" type="CharacterBody2D" unique_id=743970108 node_paths=PackedStringArray("aimArrow", "sprite", "planetParent")]
+[node name="PlayerController" type="CharacterBody2D" unique_id=743970108 node_paths=PackedStringArray("aimArrow", "sprite", "planetParent", "castingPointLeft", "castingPointRight")]
 position = Vector2(0, -0.19)
 motion_mode = 1
 script = ExtResource("1_5ur5x")
@@ -288,8 +288,11 @@ castRandomPower = 1.0
 aimArrow = NodePath("AimRingPivot/Sprite2D")
 sprite = NodePath("AnimatedSprite2D")
 planetParent = NodePath("PlanetParent")
+castingPointLeft = NodePath("Casting Point")
+castingPointRight = NodePath("Flip H Casting Point")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1706531453]
+z_index = 10
 sprite_frames = SubResource("SpriteFrames_5ur5x")
 animation = &"Move"
 autoplay = "Idle"
@@ -335,3 +338,8 @@ frame_progress = 0.51284575
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[node name="Casting Point" type="Marker2D" parent="." unique_id=358627330]
+position = Vector2(-29, -19)
+
+[node name="Flip H Casting Point" type="Marker2D" parent="." unique_id=445897015]
+position = Vector2(30, -19)
