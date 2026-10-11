@@ -43,13 +43,28 @@ offset_transform_scale = Vector2(2.695, 2.695)
 layout_mode = 2
 size_flags_horizontal = 4
 offset_transform_enabled = true
-offset_transform_position = Vector2(0, 500)
+offset_transform_position = Vector2(0, 520.075)
 offset_transform_scale = Vector2(0.82, 0.82)
-text = "You have won Starfishing.
+text = "\" Holy mackerel, you sick son of a squid. 
 
+You actually did it. I am not hungry anymore. 
+I never thought this day would come. 
+
+Not only are you no longer in my debt, 
+but you have gained my eternal respect.
+
+Goodbye human. 
+
+I love you. \"
+
+
+Glorp combusts into a million pieces.
+
+He died a happy boy.
+
+You have won Starfishing.
 
 Glorp is Dead.
-
 
 Congratulations.
 
