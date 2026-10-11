@@ -1,14 +1,18 @@
 [gd_scene format=3 uid="uid://h3jtggkahx5r"]
 
 [ext_resource type="VideoStream" uid="uid://cj3fytwqvu68y" path="res://Scenes/Video/normal_credits.ogv" id="1_6o0r7"]
+[ext_resource type="Script" uid="uid://d12qs734lee0a" path="res://Scenes/Credits/normal_credits.gd" id="1_qm2ky"]
 [ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="2_g3hg3"]
 [ext_resource type="Script" uid="uid://bnomxs6v8sm6g" path="res://Scenes/Credits/credits_controller.gd" id="3_qm2ky"]
 [ext_resource type="AudioStream" uid="uid://c2e8tagxwoyfo" path="res://Scenes/Audio/Music/endcredits_awesome.mp3" id="4_5mi57"]
+[ext_resource type="FontFile" uid="uid://f4k0ijoumsg7" path="res://fonts/Geist_Pixel/GeistPixel-Regular-VariableFont_ELSH.ttf" id="6_5mi57"]
 
 [sub_resource type="FontVariation" id="FontVariation_04ky2"]
 base_font = ExtResource("2_g3hg3")
 
-[node name="NormalCredits" type="Node2D" unique_id=1802824940]
+[node name="NormalCredits" type="Node2D" unique_id=1802824940 node_paths=PackedStringArray("screenFade")]
+script = ExtResource("1_qm2ky")
+screenFade = NodePath("Screen Fade")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1735142745]
 visibility_layer = 2
@@ -86,3 +90,19 @@ metadata/_edit_group_ = true
 stream = ExtResource("4_5mi57")
 autoplay = true
 parameters/looping = true
+
+[node name="Button" type="Button" parent="." unique_id=2123745616]
+offset_left = 18.0
+offset_top = 17.0
+offset_right = 190.33333
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("6_5mi57")
+text = "Back to Menu"
+
+[node name="Screen Fade" type="ColorRect" parent="." unique_id=1097401386]
+offset_right = 1480.4026
+offset_bottom = 828.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

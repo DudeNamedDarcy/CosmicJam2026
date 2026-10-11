@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="StarFisher"
-run/main_scene="uid://gi43qa15fksh"
+run/main_scene="uid://b4obqg1s8xc7s"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="uid://cgs3khd1ggvxf"
 
@@ -152,3 +152,4 @@ rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 viewport/hdr_2d=true
+viewport/transparent_background=true

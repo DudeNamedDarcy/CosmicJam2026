@@ -100,36 +100,37 @@ func _out_of_money() -> void:
 func _on_orbit_radius_button_pressed() -> void:
 	if ScoreAndUpgrades.orbit_radius_progress < 2 and (ScoreAndUpgrades.money) > 0:
 		ScoreAndUpgrades.orbit_radius_progress += 1
-	print(ScoreAndUpgrades.orbit_radius_progress)
+	#print(ScoreAndUpgrades.orbit_radius_progress)
 	_handle_money(orbit_radius_progress, 200, orbit_radius_button)
 
 func _on_catch_radius_button_pressed() -> void:
 	if ScoreAndUpgrades.catch_radius_progress < 2 and (ScoreAndUpgrades.money) > 0:
 		ScoreAndUpgrades.catch_radius_progress += 1
-	print(ScoreAndUpgrades.catch_radius_progress)
+	#print(ScoreAndUpgrades.catch_radius_progress)
 	_handle_money(catch_radius_progress, 200, catch_radius_button)
 
 func _on_faster_ship_button_pressed() -> void:
 	if ScoreAndUpgrades.faster_ship_progress < 2 and (ScoreAndUpgrades.money) > 0:
 		ScoreAndUpgrades.faster_ship_progress += 1
-	print(ScoreAndUpgrades.faster_ship_progress)
+	#print(ScoreAndUpgrades.faster_ship_progress)
 	_handle_money(faster_ship_progress, 200, faster_ship_button)
 
 func _on_larger_combos_button_pressed() -> void:
 	if ScoreAndUpgrades.larger_combo_progress < 2 and (ScoreAndUpgrades.money) > 0:
 		ScoreAndUpgrades.larger_combo_progress += 1
-	print(ScoreAndUpgrades.larger_combo_progress)
+	#print(ScoreAndUpgrades.larger_combo_progress)
 	_handle_money(larger_combos_progress, 200, larger_combos_button)
 
 func _on_longer_combo_button_pressed() -> void:
 	if ScoreAndUpgrades.longer_combo_progress < 2 and (ScoreAndUpgrades.money) > 0:
 		ScoreAndUpgrades.longer_combo_progress += 1
-	print(ScoreAndUpgrades.longer_combo_progress)
+	#print(ScoreAndUpgrades.longer_combo_progress)
 	_handle_money(longer_combo_progress, 200, longer_combo_button)
 
 
 func _on_larger_fuel_button_pressed() -> void:
 	pass
+
 
 
 

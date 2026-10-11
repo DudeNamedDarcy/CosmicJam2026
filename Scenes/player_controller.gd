@@ -194,7 +194,7 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("CastReel") && playerState == PlayerState.Casting:
 		rod_audio.stop_reeling()
 		rod_audio.throwing()
-		print("Total hold duration was: ", min(castPower, maxCastPower)) 
+		#print("Total hold duration was: ", min(castPower, maxCastPower)) 
 		if min(castPower, maxCastPower) < 0.3:
 			EndFishing(false)
 			castPower = 0.0
@@ -241,7 +241,7 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 
 		if arrows.is_empty():
 			LevelManager.shakeCamera(2.0)
-			print("Combo complete! Combo size", comboSize)
+			#print("Combo complete! Combo size", comboSize)
 			EndFishing(true)
 		else:
 			arrows[0].TurnRed((ScoreAndUpgrades.longer_combo_progress) + 1)
@@ -273,7 +273,7 @@ func CastBobbers(castPower: float) -> void:
 		bobber.cast(randomizedDirection, randomizedPower, castDeceleration, bobberLine)
 
 		activeBobbers.append(bobber)
-		print(bobber.bobberType)
+		#print(bobber.bobberType)
 	
 func StartReelingMinigame() -> void:
 	rod_audio.stop_reeling()
@@ -329,7 +329,7 @@ func EndFishing(success: bool) -> void:
 		rod_audio.combo_win()
 		await get_tree().create_timer(0.2).timeout 
 	for fish in comboFishList.duplicate():
-		print(fish)
+		#print(fish)
 		if is_instance_valid(fish):
 			if success:
 				await get_tree().create_timer(0.2).timeout	
