@@ -43,7 +43,7 @@ offset_transform_scale = Vector2(2.695, 2.695)
 layout_mode = 2
 size_flags_horizontal = 4
 offset_transform_enabled = true
-offset_transform_position = Vector2(0, 342.88)
+offset_transform_position = Vector2(0, 379.59)
 offset_transform_scale = Vector2(0.82, 0.82)
 text = "\" I always knew you were full of bullsquid. 
 
@@ -58,11 +58,14 @@ Goodbye, fisher-boy. \"
 
 Glorp swallows you whole.
 
+
 You slowly descend, 
 inky black blood coursing through your veins,
 and flames baptizing your feet.
 
+
 You are in hell.
+
 
 Game over."
 horizontal_alignment = 1
