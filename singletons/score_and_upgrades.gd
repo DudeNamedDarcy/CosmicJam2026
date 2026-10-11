@@ -1,6 +1,7 @@
 extends Node
-
 var money: float = 1400
+
+var in_market: bool = false
 
 var orbit_radius_progress: int = 0
 var catch_radius_progress: int = 0

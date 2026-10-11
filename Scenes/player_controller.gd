@@ -40,6 +40,7 @@ var castPower: float = 0.0
 @export var castingPointRight: Marker2D
 
 @onready var area_2d: Area2D = $Area2D
+@onready var uiController = get_node("/root/GameScene/MoneyFuelUI")
 
 var playerState: PlayerState = PlayerState.Idle
 var characterDirection: Vector2
@@ -53,6 +54,11 @@ var comboFishList: Array[FishComboSprite] = []
 var aim_arrow_base_scale: float
 var castingPoint: Marker2D
 
+#Market
+@onready var black_hole_market: CanvasLayer = $BlackHoleMarket
+
+@onready var input_button: AnimatedSprite2D = $InputButton
+
 # Quest
 var fishNeededForQuest: String = ""
 var caughtFishForQuest = false
@@ -61,11 +67,19 @@ var elapsedComboTime: float
 @export var maxComboTime: float = 1.0
 var comboSize: float
 func _ready() -> void:
+	black_hole_market.visible = false
 	aim_arrow_base_scale = aimArrow.scale.x
+	input_button.visible = false
 	area_2d.name = "starship"
 	castingPoint = castingPointLeft
+	uiController.UpdateMoneyText()
+	uiController.UpdateFuelText()
+
 
 func _process(delta: float) -> void:
+	if ScoreAndUpgrades.in_market == true:
+		black_hole_market.visible = true
+
 	if playerState == PlayerState.Reeling:
 		elapsedComboTime += delta
 		if elapsedComboTime >= maxComboTime:
@@ -95,6 +109,7 @@ func AimMouse() -> void:
 		aimArrow.rotation = mouse_direction.angle()
 	
 func _physics_process(delta: float) -> void:
+	uiController.UpdateFuelText()
 	#thanks to this article: https://forum.godotengine.org/t/how-to-display-a-float-with-two-decimal-points/133086/3
 	characterDirection.x = Input.get_axis("MoveLeft", "MoveRight")
 	characterDirection.y = Input.get_axis("MoveUp", "MoveDown")
@@ -122,7 +137,7 @@ func _physics_process(delta: float) -> void:
 	if characterDirection != Vector2.ZERO:
 		boat_audio.accelerating()
 		ScoreAndUpgrades.fuel_quantity -= 0.075
-		var target_velocity = characterDirection * (maxMovementSpeed + (30 * (ScoreAndUpgrades.faster_ship_progress)))
+		var target_velocity = characterDirection * (maxMovementSpeed + (50 * (ScoreAndUpgrades.faster_ship_progress)))
 		velocity = velocity.move_toward(target_velocity, (acceleration + (50 * (ScoreAndUpgrades.faster_ship_progress))) * delta)
 	else:
 		boat_audio.decelerating()
@@ -139,6 +154,11 @@ func _physics_process(delta: float) -> void:
 			velocity = velocity.slide(normal)
 	
 func _input(event: InputEvent) -> void:
+	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		input_button.play("A_button")
+	else:
+		input_button.play("E_button")
+
 	if Input.is_action_just_released("CastReel") && playerState == PlayerState.Casting:
 		rod_audio.stop_reeling()
 		rod_audio.throwing()
@@ -282,9 +302,11 @@ func EndFishing(success: bool) -> void:
 				rod_audio.winning()
 				moneyVboxContainer.add_child(moneyText)
 				moneyText.DisplayText(fish.value)
+				#fishvalue *comboSize * 1.1
+				uiController.UpdateMoneyText()
 			fish.KillFish(success)
-			
 	
+	LevelManager.shakeCameraComboClear()
 	comboFishList.clear()
 	fishList.clear()
 	comboSize = 0
@@ -300,3 +322,13 @@ func CompleteQuest():
 # call this to add a new quest fish
 func AddNewQuestFish(fishName: String):
 	fishNeededForQuest = fishName
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.name == "market":
+		input_button.visible = true
+
+
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	if area.name == "market":
+		input_button.visible = false

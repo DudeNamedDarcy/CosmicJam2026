@@ -46,10 +46,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("dialogue_next") and current_dialogue_index < dialogue.size() and doing_one_shot == false:
-		if text_done:
-			print("next!")
-			_advance(dialogue)
+	pass
 
 
 func show_text(array: Array[String]) -> void:
