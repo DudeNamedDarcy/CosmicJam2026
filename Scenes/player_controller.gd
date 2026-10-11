@@ -38,6 +38,7 @@ var castPower: float = 0.0
 @export var fishSpawner: FishSpawner
 
 @onready var area_2d: Area2D = $Area2D
+@onready var uiController = get_node("/root/GameScene/MoneyFuelUI")
 
 var playerState: PlayerState = PlayerState.Idle
 var characterDirection: Vector2
@@ -57,6 +58,9 @@ var comboSize: float
 func _ready() -> void:
 	aim_arrow_base_scale = aimArrow.scale.x
 	area_2d.name = "starship"
+	uiController.UpdateMoneyText()
+	uiController.UpdateFuelText()
+	
 
 func _process(delta: float) -> void:
 	if playerState == PlayerState.Reeling:
@@ -89,6 +93,7 @@ func AimMouse() -> void:
 	
 func _physics_process(delta: float) -> void:
 	print("Fuel: %.2f" % (ScoreAndUpgrades.fuel_quantity))
+	uiController.UpdateFuelText()
 	#thanks to this article: https://forum.godotengine.org/t/how-to-display-a-float-with-two-decimal-points/133086/3
 	characterDirection.x = Input.get_axis("MoveLeft", "MoveRight")
 	characterDirection.y = Input.get_axis("MoveUp", "MoveDown")
@@ -259,6 +264,7 @@ func EndFishing(success: bool) -> void:
 				var moneyText = MONEY_GAIN_TEXT.instantiate()
 				moneyVboxContainer.add_child(moneyText)
 				moneyText.DisplayText(fish.value)
+				uiController.UpdateMoneyText()
 			fish.KillFish(success)
 			
 	
