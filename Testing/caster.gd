@@ -20,11 +20,12 @@ func CastBobbers(mouse_pos: Vector2) -> void:
 	for bobberScene in bobbersList:
 		var bobber: Bobber = bobberScene.instantiate()
 		var bobberLine: Line2D = Line2D.new()
-		bobberLine.width = 1
 
 		add_child(bobber)
 		add_child(bobberLine)
 		bobber.global_position = global_position
+		bobberLine.width = 1
+		bobberLine.default_color = Color.REBECCA_PURPLE
 		
 		var randomAngle = randf_range(-castRandomSpread, castRandomSpread)
 		var randomizedDirection = cast_direction.rotated(randomAngle)
