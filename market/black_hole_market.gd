@@ -16,7 +16,7 @@ extends CanvasLayer
 @onready var money_label: Label = %MoneyLabel
 @onready var broke_alert_label: RichTextLabel = %BrokeAlertLabel
 @onready var fuel_label: Label = %FuelLabel
-@onready var fuel_button: Button = $VBoxContainer2/FuelButton
+@onready var fuel_button: Button = $VBoxContainer/FuelButton
 @onready var quit_button: Button = %QuitButton
 
 

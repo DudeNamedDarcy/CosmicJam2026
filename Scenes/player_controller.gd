@@ -50,6 +50,7 @@ var aim_arrow_base_scale: float
 #Market
 @onready var black_hole_market: CanvasLayer = $BlackHoleMarket
 
+@onready var input_button: AnimatedSprite2D = $InputButton
 
 # Quest
 var fishNeededForQuest: String = ""
@@ -61,6 +62,7 @@ var comboSize: float
 func _ready() -> void:
 	black_hole_market.visible = false
 	aim_arrow_base_scale = aimArrow.scale.x
+	input_button.visible = false
 	area_2d.name = "starship"
 
 func _process(delta: float) -> void:
@@ -137,6 +139,11 @@ func _physics_process(delta: float) -> void:
 			velocity = velocity.slide(normal)
 	
 func _input(event: InputEvent) -> void:
+	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		input_button.play("A_button")
+	else:
+		input_button.play("E_button")
+
 	if Input.is_action_just_released("CastReel") && playerState == PlayerState.Casting:
 		print("Total hold duration was: ", min(castPower, maxCastPower)) 
 		if min(castPower, maxCastPower) < 0.3:
@@ -285,3 +292,13 @@ func CompleteQuest():
 # call this to add a new quest fish
 func AddNewQuestFish(fishName: String):
 	fishNeededForQuest = fishName
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.name == "market":
+		input_button.visible = true
+
+
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	if area.name == "market":
+		input_button.visible = false
