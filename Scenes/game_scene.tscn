@@ -9,18 +9,18 @@
 [ext_resource type="PackedScene" uid="uid://d3oxvy0grl375" path="res://Scenes/Fish/red_dwarf_herring.tscn" id="4_2fmhe"]
 [ext_resource type="Script" uid="uid://dqlo4uebgxkyw" path="res://Scenes/rod_noise.gd" id="5_2fmhe"]
 [ext_resource type="PackedScene" uid="uid://bvboagsrhp2c7" path="res://glorp/glorp_starship.tscn" id="6_2fmhe"]
-[ext_resource type="PackedScene" uid="uid://b7m36bfujolqs" path="res://Scenes/Fish/supermassive_squid.tscn" id="6_4xiap"]
 [ext_resource type="Script" uid="uid://c4evtl6kbwuw2" path="res://Scenes/fish_spawner.gd" id="6_rgj8m"]
 [ext_resource type="Texture2D" uid="uid://ck5uv4d76r727" path="res://Assets/Final/Parallax/stars.png" id="7_2fmhe"]
 [ext_resource type="PackedScene" uid="uid://dgyunkaa44mbx" path="res://Scenes/Fish/starfish.tscn" id="7_wywco"]
+[ext_resource type="PackedScene" uid="uid://b05brc3bel6c1" path="res://Scenes/Fish/angler_fish.tscn" id="8_5q52j"]
 [ext_resource type="PackedScene" uid="uid://co5te5e76e4vk" path="res://Scenes/Fish/patrick_starfish.tscn" id="8_ldntv"]
 [ext_resource type="PackedScene" uid="uid://w7gafq2uiia1" path="res://Scenes/Fish/gold_fish.tscn" id="9_w8jfd"]
 [ext_resource type="PackedScene" uid="uid://wgsgx4i8wbue" path="res://Scenes/Fish/big_fish.tscn" id="10_a7fet"]
+[ext_resource type="PackedScene" uid="uid://d3misjkjktbfc" path="res://Scenes/Fish/cgd_cube.tscn" id="10_e624q"]
 [ext_resource type="Texture2D" uid="uid://dgqiixt65f3lo" path="res://Assets/Final/big-asteroid.png" id="13_w8jfd"]
+[ext_resource type="PackedScene" uid="uid://buf18n2jp25y4" path="res://Scenes/money_fuel_ui.tscn" id="13_wywco"]
 [ext_resource type="Texture2D" uid="uid://cll5bs5f8a81p" path="res://Assets/Final/medium-asteroid.png" id="14_a7fet"]
 [ext_resource type="Texture2D" uid="uid://wb6i18c7r4pi" path="res://Assets/Final/small-asteroid.png" id="15_8m72m"]
-[ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="13_wywco"]
-[ext_resource type="PackedScene" uid="uid://buf18n2jp25y4" path="res://Scenes/money_fuel_ui.tscn" id="13_wywco"]
 [ext_resource type="Texture2D" uid="uid://co5l18et1fp0f" path="res://Assets/Final/nebulae/barfcoloured-nebula.png" id="16_vtwju"]
 [ext_resource type="Texture2D" uid="uid://67jw5hhk1xk6" path="res://Assets/Final/nebulae/blue-nebula.png" id="17_fnr0w"]
 [ext_resource type="Texture2D" uid="uid://b5qgb54g2bdhj" path="res://Assets/Final/nebulae/eye-nebula.png" id="18_gqlrj"]
@@ -163,13 +163,14 @@ metadata/_custom_type_script = "uid://xiufvpalhvi1"
 [node name="Fish Spawner" type="Node2D" parent="." unique_id=1574152278 node_paths=PackedStringArray("spawnableArea")]
 script = ExtResource("6_rgj8m")
 fishDict = Dictionary[PackedScene, int]({
-ExtResource("3_rgj8m"): 1,
-ExtResource("4_2fmhe"): 1,
-ExtResource("6_4xiap"): 1,
-ExtResource("7_wywco"): 1,
-ExtResource("8_ldntv"): 1,
+ExtResource("8_5q52j"): 1,
+ExtResource("10_a7fet"): 1,
+ExtResource("10_e624q"): 1,
 ExtResource("9_w8jfd"): 1,
-ExtResource("10_a7fet"): 1
+ExtResource("3_rgj8m"): 1,
+ExtResource("8_ldntv"): 1,
+ExtResource("4_2fmhe"): 1,
+ExtResource("7_wywco"): 1
 })
 spawnableArea = NodePath("../SpawnableArea")
 maxFishInLevel = 1000
