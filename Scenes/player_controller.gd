@@ -4,8 +4,6 @@ enum PlayerState { Idle, Moving, Casting, Fishing, Reeling }
 const DIRECTIONAL_ARROW = preload("res://Scenes/directional_arrow.tscn")
 const COMBO_FISH = preload("res://Scenes/Fish/fish_combo_sprite.tscn")
 
-@onready var cameraController = $FollowCamera
-
 #Upgradeable
 var bobbersList: Array[PackedScene] = [
 	preload("res://Scenes/Bobbers/Pluto.tscn"),
@@ -106,7 +104,7 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("CastReel") && playerState == PlayerState.Casting:
 		print("Total hold duration was: ", min(castPower, maxCastPower)) 
 		if min(castPower, maxCastPower) < 0.3:
-			EndFishing()
+			EndFishing(false)
 			castPower = 0.0
 			return
 		playerState = PlayerState.Fishing #the time spent waiting for fish
@@ -139,17 +137,17 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 		return
 
 	if arrow.GetArrowType() == input_arrow:
-		cameraController.ApplyShake(2.0)
+		LevelManager.shakeCamera(2.0)
 		arrows.pop_front()
 		arrow.KillArrow()
 
 		if arrows.is_empty():
-			cameraController.ApplyShake(2.0)
+			LevelManager.shakeCamera(2.0)
 			print("Combo complete!")
-			EndFishing()
+			EndFishing(true)
 	else:
-		cameraController.ApplyShake(7.0)
-		EndFishing()
+		LevelManager.shakeCamera(7.0)
+		EndFishing(false)
 
 func CastBobbers(castPower: float) -> void:
 	aimArrow.hide()
@@ -175,9 +173,10 @@ func CastBobbers(castPower: float) -> void:
 func StartReelingMinigame() -> void:
 	for activeBobber in activeBobbers:
 		fishList.append_array(activeBobber.reelIn())
-		
+		print(fishList.size())
 	if fishList.size() == 0:
-		EndFishing()
+		EndFishing(false)
+		DeletePlanets()
 		return
 	var comboLength = 4 + fishList.size() - 1
 
@@ -190,12 +189,15 @@ func StartReelingMinigame() -> void:
 		fish_instance.PopulateData(fish)
 		comboFishList.append(fish_instance)
 		vboxContainer.add_child(fish_instance)
+	DeletePlanets()
+
+func DeletePlanets() -> void:
 	#delete planets
 	for child in planetParent.get_children():
 		child.queue_free()
 	activeBobbers.clear()
-
-func EndFishing() -> void:
+	
+func EndFishing(success: bool) -> void:
 	playerState = PlayerState.Idle
 
 	for arrow in arrows.duplicate():
@@ -205,6 +207,10 @@ func EndFishing() -> void:
 	arrows.clear()
 	for fish in comboFishList.duplicate():
 		if is_instance_valid(fish):
-			fish.KillFish()
+			fish.KillFish(success)
+	
+	comboFishList.clear()
+	fishList.clear()
+		
 			
 	aimArrow.show()
