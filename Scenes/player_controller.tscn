@@ -229,7 +229,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
-size = Vector2(59, 43)
+size = Vector2(56, 46)
 
 [node name="PlayerController" type="CharacterBody2D" unique_id=743970108 node_paths=PackedStringArray("aimArrow", "sprite", "planetParent")]
 motion_mode = 1
@@ -251,7 +251,6 @@ autoplay = "Idle"
 frame_progress = 0.96344775
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1640096837]
-position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="FollowCamera" type="Camera2D" parent="." unique_id=813711711]
@@ -271,3 +270,8 @@ texture = ExtResource("5_1esxm")
 offset = Vector2(50, 0)
 
 [node name="PlanetParent" type="Node2D" parent="." unique_id=2138822925]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=860758068]
+
+[node name="AreaCollision" type="CollisionShape2D" parent="Area2D" unique_id=1705928021]
+shape = SubResource("RectangleShape2D_g4v7s")

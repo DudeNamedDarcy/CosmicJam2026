@@ -34,6 +34,8 @@ var castPower: float = 0.0
 @export var vboxContainer: VBoxContainer
 @export var planetParent: Node2D
 
+@onready var area_2d: Area2D = $Area2D
+
 var playerState: PlayerState = PlayerState.Idle
 var characterDirection: Vector2
 var arrows: Array[DirectionalArrow] = []
@@ -44,6 +46,7 @@ var aim_arrow_base_scale: float
 
 func _ready() -> void:
 	aim_arrow_base_scale = aimArrow.scale.x
+	area_2d.name = "starship"
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("CastReel"):
