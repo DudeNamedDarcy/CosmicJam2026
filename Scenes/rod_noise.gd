@@ -54,7 +54,7 @@ func losing():
 func comboing():
 	comboCount+=1
 	stream = combo
-	pitch_scale = 1+float(1+comboCount)/10 if comboCount<6 else 1.7
+	pitch_scale = 1+float(1+comboCount)/10 if comboCount<9 else 2
 	play()
 	
 func reeling(reelTime):
