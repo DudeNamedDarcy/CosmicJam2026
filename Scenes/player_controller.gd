@@ -60,6 +60,7 @@ var castingPoint: Marker2D
 @onready var input_button: AnimatedSprite2D = $InputButton
 
 # Quest
+var questStep: int = 0
 var fishNeededForQuest: String = ""
 var caughtFishForQuest = false
 
@@ -67,6 +68,7 @@ var elapsedComboTime: float
 @export var maxComboTime: float = 1.0
 var comboSize: float
 var closeToShop: bool = false
+
 
 func _ready() -> void:
 	aim_arrow_base_scale = aimArrow.scale.x
@@ -91,7 +93,37 @@ func _process(delta: float) -> void:
 
 	aimArrow.scale = Vector2(aim_arrow_base_scale * (1.0 + charge_ratio), aim_arrow_base_scale * (1.0 + charge_ratio))
 	AimMouse()
-		
+
+func _handle_quests() -> void:
+	match questStep:
+		0:
+			fishNeededForQuest = "Starfish" #Pluto
+			uiController.UpdateQuestText(fishNeededForQuest)
+		1:
+			fishNeededForQuest = "Moon Jelly" #Mercury
+			uiController.UpdateQuestText(fishNeededForQuest)
+		2:
+			fishNeededForQuest = "Red Dwarf Herring" #Mars
+			uiController.UpdateQuestText(fishNeededForQuest)
+		3:
+			fishNeededForQuest = "Angler Fish" #Venus
+			uiController.UpdateQuestText(fishNeededForQuest)
+		4:
+			fishNeededForQuest = "r.dia" #Earth
+			uiController.UpdateQuestText(fishNeededForQuest)
+		5:
+			fishNeededForQuest = "Supermassive Squid" #Neptune
+			uiController.UpdateQuestText(fishNeededForQuest)
+		6:
+			fishNeededForQuest = "Patrick Starfish" #Uranus
+			uiController.UpdateQuestText(fishNeededForQuest)
+		7:
+			fishNeededForQuest = "Gold Fish" #Saturn
+			uiController.UpdateQuestText(fishNeededForQuest)
+		8:
+			fishNeededForQuest = "Gold Fish" #Jupiter
+			uiController.UpdateQuestText(fishNeededForQuest)
+
 
 func AimMouse() -> void:
 	# Mouse aiming
@@ -107,6 +139,7 @@ func AimMouse() -> void:
 		aimArrow.rotation = mouse_direction.angle()
 	
 func _physics_process(delta: float) -> void:
+	_handle_quests()
 	maxComboTime = (ScoreAndUpgrades.longer_combo_progress + 1)
 	uiController.UpdateFuelText()
 	#thanks to this article: https://forum.godotengine.org/t/how-to-display-a-float-with-two-decimal-points/133086/3
@@ -266,7 +299,7 @@ func StartReelingMinigame() -> void:
 	for fish in fishList:
 		if fish.name == fishNeededForQuest:
 			caughtFishForQuest = true
-		
+			
 		var fish_instance = COMBO_FISH.instantiate()
 		fish_instance.PopulateData(fish)
 		comboFishList.append(fish_instance)
@@ -316,19 +349,23 @@ func EndFishing(success: bool) -> void:
 	fishList.clear()
 	comboSize = 0
 	aimArrow.show()
-	CompleteQuest()
+	if caughtFishForQuest:
+		CompleteQuest()
 	await get_tree().create_timer(0.4).timeout
 	input_button.visible = closeToShop
 	
 func CompleteQuest():
 	print("quest complete")
 	caughtFishForQuest = false
-	fishNeededForQuest = ""
+	questStep += 1
+	LevelManager.next_level()
+	LevelManager.level_up.connect(AddNewQuest)
 	# start popup for next quest
 	
 # call this to add a new quest fish
-func AddNewQuestFish(fishName: String):
+func AddNewQuest(fishName: String):
 	fishNeededForQuest = fishName
+	uiController
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:

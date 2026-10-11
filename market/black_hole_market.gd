@@ -10,8 +10,8 @@ extends CanvasLayer
 @onready var larger_combos_progress: ProgressBar = $VBoxContainer/LargerCombosProgress
 @onready var longer_combo_button: Button = $VBoxContainer/LongerComboButton
 @onready var longer_combo_progress: ProgressBar = $VBoxContainer/LongerComboProgress
-@onready var larger_fuel_button: Button = $VBoxContainer/LargerFuelButton
-@onready var larger_fuel_progress: ProgressBar = $VBoxContainer/LargerFuelProgress
+#@onready var larger_fuel_button: Button = $VBoxContainer/LargerFuelButton
+#@onready var larger_fuel_progress: ProgressBar = $VBoxContainer/LargerFuelProgress
 
 @onready var money_label: Label = %MoneyLabel
 @onready var broke_alert_label: RichTextLabel = %BrokeAlertLabel
@@ -24,6 +24,8 @@ extends CanvasLayer
 @onready var cha_ching_audio_stream_player: AudioStreamPlayer = $ChaChingAudioStreamPlayer
 @onready var no_money_stream_player: AudioStreamPlayer = $NoMoneyStreamPlayer
 @onready var dialogue_box: Control = $DialogueBox
+
+@onready var uiController = get_node("/root/GameScene/MoneyFuelUI")
 
 
 #Shoutout to Gwizz for the tutorial on subViewportContainers:
@@ -127,10 +129,7 @@ func _on_longer_combo_button_pressed() -> void:
 
 
 func _on_larger_fuel_button_pressed() -> void:
-	if ScoreAndUpgrades.larger_fuel_progress < 2 and (ScoreAndUpgrades.money) > 0:
-		ScoreAndUpgrades.larger_fuel_progress += 1
-	print(ScoreAndUpgrades.larger_fuel_progress)
-	_handle_money(larger_fuel_progress, 200, larger_fuel_button)
+	pass
 
 
 
@@ -169,6 +168,8 @@ func _add_fuel() -> void:
 			_out_of_money()
 	else:
 		ScoreAndUpgrades.fuel_quantity += 20
+		if ScoreAndUpgrades.fuel_quantity > 100.0:
+			ScoreAndUpgrades.fuel_quantity = 100
 		(ScoreAndUpgrades.money) -= 200
 		cha_ching_audio_stream_player.play()
 
@@ -180,6 +181,7 @@ func _on_quit_button_pressed() -> void:
 		pass
 
 func _leave_market() -> void:
+	uiController.UpdateMoneyText()
 	quit_pressed = true
 	dialogue_box.dialogue = leave_dialogue
 	dialogue_box.current_dialogue_index = randi_range(0, len(leave_dialogue) -1)

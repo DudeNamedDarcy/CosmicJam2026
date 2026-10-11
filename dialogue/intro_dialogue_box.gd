@@ -11,48 +11,79 @@ var dialogue: Array[String] = ["Test1",
 "Test3Test3Test3",
 ]
 
-var intro_dialogue: Array[String] = ["You again. Ugh. If you want to quell my foul mood, buy my Wares.",
-"I am Glorp of the Celestial Mob, and you will buy my Wares.",
-"Now I have become Glorp, the seller of Wares.",
-"Welcome to the BlackHole market. Prepare to Purchase my Wares.",
-"You are truly an insatiable fellow."
-]
+var pluto_dialogue: Array[String] = ["Ok. All I'm giving you is this tiny dwarf planet to start with.",
+"Pluto was its name or something like that.",
+"Catch some fish and I'll give you a bigger bobber :3."]
 
-var purchase_dialogue: Array[String] = ["Eh, that upgrade's okay, I guess!",
-"Good boy",
-"Holy mackerel! Took you long enough!",
-"A worthless purchase",
-"Just big and greedy, you are"
-]
+var mercury_dialogue: Array[String] = ["Huh. You're doing better than I thought.",
+"Ok, here's a larger bobber for you. Name's Mercury.",
+"There's even larger ones from where that iron ball came from if you keep this up!"]
 
-var broke_dialogue: Array[String] = ["Imagine being broke LOL",
-"Come back when you're a little... richer!"]
+var mars_dialogue: Array[String] = ["Mars1", "Mars2"]
+
+var venus_dialogue: Array[String] = ["Venus1", "Venus2"]
+
+var earth_dialogue: Array[String] = ["Earth1", "Earth2"]
+
+var neptune_dialogue: Array[String] = ["Neptune1", "Neptune2"]
+
+var uranus_dialogue: Array[String] = ["Uranus1", "Uranus2"]
+
+var saturn_dialogue: Array[String] = ["Saturn1", "Saturn2"]
+
+var jupiter_dialogue: Array[String] = ["Jupiter1", "Jupiter2"]
 
 var active_tween:Tween
 
 var current_dialogue_index = 0
 
+var current_array:Array[String]
+
 var text_done: bool = false
 var doing_one_shot: bool = false
+
+var current_quest = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	await get_tree().process_frame #yeah checks out
 	await get_tree().process_frame
-	show_text(dialogue)
+	show_text(pluto_dialogue)
 	#button.pressed.connect(_advance)
 	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("dialogue_next") and current_dialogue_index < dialogue.size() and doing_one_shot == false:
-		if text_done:
-			print("next!")
-			_advance(dialogue)
+	pass
+
+func calling_dialogues():
+	#calling_dialogues called in Intro Dialogue called!
+	current_quest += 1
+	match current_quest:
+		0:
+			show_text(pluto_dialogue)
+		1:
+			show_text(mercury_dialogue)
+		2:
+			show_text(mars_dialogue)
+		3:
+			show_text(venus_dialogue)
+		4:
+			show_text(earth_dialogue)
+		5:
+			show_text(neptune_dialogue)
+		6:
+			show_text(uranus_dialogue)
+		7:
+			show_text(saturn_dialogue)
+		8:
+			show_text(jupiter_dialogue)
+
 
 
 func show_text(array: Array[String]) -> void:
+	current_array = array
 	text_done = false
 	
 	audio_stream_player.stop()
@@ -73,15 +104,17 @@ func show_text(array: Array[String]) -> void:
 	active_tween.tween_property(rich_text_label, "visible_ratio", 1, tween_duration)
 	active_tween.finished.connect(audio_stream_player.stop)
 	active_tween.finished.connect(_text_is_done)
+	await get_tree().create_timer(tween_duration + 1.2).timeout 
+	_advance()
 
 
 func _text_is_done() -> void:
 	text_done = true
 
 
-func _advance(array: Array[String]) -> void:
+func _advance() -> void:
 	current_dialogue_index += 1
 	if current_dialogue_index == dialogue.size():
-		return
+		hide()
 	else:
-		show_text(array)
+		show_text(current_array)

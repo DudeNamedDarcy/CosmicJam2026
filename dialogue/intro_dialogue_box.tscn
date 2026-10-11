@@ -3,13 +3,14 @@
 [ext_resource type="Theme" uid="uid://t2kcdkvabp2d" path="res://dialogue/dialogue_box.tres" id="1_yvd7p"]
 [ext_resource type="Script" uid="uid://c5x0npa0pwsbs" path="res://dialogue/intro_dialogue_box.gd" id="2_yvd7p"]
 [ext_resource type="AudioStream" uid="uid://cs33gpy7nqym6" path="res://dialogue/dialogue_sfx/glorp_blabble_test2.wav" id="3_1ey51"]
+[ext_resource type="Texture2D" uid="uid://t1dc2pbkxolm" path="res://glorp/glorp.png" id="4_0nd35"]
 
 [node name="IntroDialogueBox" type="Control" unique_id=1166612431]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -318.0
+offset_bottom = -498.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_yvd7p")
@@ -31,3 +32,11 @@ vertical_alignment = 1
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=287376721]
 unique_name_in_owner = true
 stream = ExtResource("3_1ey51")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1254498578]
+layout_mode = 0
+offset_top = -80.0
+offset_right = 40.0
+offset_bottom = -40.0
+scale = Vector2(2, 2)
+texture = ExtResource("4_0nd35")
