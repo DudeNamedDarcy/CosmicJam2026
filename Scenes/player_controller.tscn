@@ -6,8 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://d0d4myx373kr1" path="res://Assets/Final/boat-move.png" id="4_3b8x7"]
 [ext_resource type="Texture2D" uid="uid://cwncb0hdu7ay6" path="res://Assets/Final/aimer.png" id="5_1esxm"]
 [ext_resource type="Script" uid="uid://f5wiuad0pepu" path="res://Scenes/follow_camera.gd" id="5_3b8x7"]
-[ext_resource type="Script" uid="uid://b4dpoqejtr8d5" path="res://Scenes/boat_noises.gd" id="6_boat"]
-[ext_resource type="Script" uid="uid://dqlo4uebgxkyw" path="res://Scenes/rod_noise.gd" id="7_rod"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4jfj4"]
 atlas = ExtResource("2_1esxm")
@@ -278,9 +276,3 @@ offset = Vector2(50, 0)
 
 [node name="AreaCollision" type="CollisionShape2D" parent="Area2D" unique_id=1705928021]
 shape = SubResource("RectangleShape2D_g4v7s")
-[node name="BoatNoise" type="AudioStreamPlayer2D" parent="." unique_id=1464942758]
-volume_db = -3.888
-script = ExtResource("6_boat")
-
-[node name="RodNoise" type="AudioStreamPlayer2D" parent="." unique_id=2085605005]
-script = ExtResource("7_rod")
