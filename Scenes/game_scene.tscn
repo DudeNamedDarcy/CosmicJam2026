@@ -46,7 +46,7 @@ scale = Vector2(1.7024027, 2.1599998)
 texture = ExtResource("1_b6fju")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Background" unique_id=684806575]
-volume_db = 3.888
+volume_db = 7.94
 script = ExtResource("2_fiftr")
 
 [node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer") instance=ExtResource("1_x87qo")]

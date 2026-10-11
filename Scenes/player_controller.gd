@@ -116,6 +116,7 @@ func _physics_process(delta: float) -> void:
 	
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("CastReel") && playerState == PlayerState.Casting:
+		rod_audio.stop_reeling()
 		rod_audio.throwing()
 		print("Total hold duration was: ", min(castPower, maxCastPower)) 
 		if min(castPower, maxCastPower) < 0.3:
@@ -126,12 +127,15 @@ func _input(event: InputEvent) -> void:
 		CastBobbers(min(castPower, maxCastPower))
 		castPower = 0.0 
 	elif event.is_action_pressed("CastReel"):
+		#if(playerState == PlayerState.Reeling):
+		rod_audio.reeling(maxCastPower)			
 		if playerState == PlayerState.Idle || playerState == PlayerState.Moving:
 				playerState = PlayerState.Casting
 		elif playerState == PlayerState.Fishing:
 			playerState = PlayerState.Reeling
 			StartReelingMinigame()
 	elif playerState == PlayerState.Reeling:
+		rod_audio.stop_reeling()
 		if event.is_action_pressed("ComboUp"):
 			CheckArrow(DirectionalArrow.ArrowType.Up)
 		elif event.is_action_pressed("ComboRight"):
@@ -191,6 +195,7 @@ func CastBobbers(castPower: float) -> void:
 		print(bobber.bobberType)
 	
 func StartReelingMinigame() -> void:
+	rod_audio.stop_reeling()
 	for activeBobber in activeBobbers:
 		fishList.append_array(activeBobber.reelIn())
 		print(fishList.size())
@@ -220,6 +225,7 @@ func DeletePlanets() -> void:
 	activeBobbers.clear()
 	
 func EndFishing(success: bool) -> void:
+	rod_audio.stop_reeling()
 	playerState = PlayerState.Idle
 
 	for arrow in arrows.duplicate():

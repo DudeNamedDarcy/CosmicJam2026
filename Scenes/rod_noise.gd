@@ -1,11 +1,14 @@
 extends AudioStreamPlayer2D
 
-@export var throw: AudioStream = preload("res://Scenes/Audio/SFX/throw.mp3")
-@export var win: AudioStream = preload("res://Scenes/Audio/SFX/get_fish.mp3")
-@export var lose: AudioStream = preload("res://Scenes/Audio/SFX/lose_fish.mp3")
-@export var combo: AudioStream = preload("res://Scenes/Audio/SFX/combo.mp3")
+@export var throw: AudioStream = preload("res://Scenes/Audio/SFX/v2/throw.mp3")
+@export var win: AudioStream = preload("res://Scenes/Audio/SFX/v2/get_fish.mp3")
+@export var lose: AudioStream = preload("res://Scenes/Audio/SFX/v2/lose_fish.mp3")
+@export var combo: AudioStream = preload("res://Scenes/Audio/SFX/v2/combo.mp3")
+@export var reel: AudioStream = preload("res://Scenes/Audio/SFX/v2/reeling.mp3")
 
 var comboCount
+var reelMax
+var reelPossible = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,6 +17,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if(stream == reel):
+		if(get_playback_position()>=reelMax):
+			stop_reeling()
 	pass
 
 func throwing():
@@ -40,3 +46,22 @@ func comboing():
 	pitch_scale = 1+float(1+comboCount)/10 if comboCount<7 else 1.8
 	print(pitch_scale)
 	play()
+	
+func reeling(reelTime):
+	if reelPossible:
+		pitch_scale = 1
+		reelMax = reelTime
+		stream = reel
+		if(not playing):
+			play()
+	
+func stop_reeling():
+	if(stream == reel):
+		stop()
+	pass
+	
+func fuck_reeling():
+	reelPossible = false;
+
+func yes_reeling():
+	reelPossible = true;

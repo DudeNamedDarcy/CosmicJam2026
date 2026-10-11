@@ -1,8 +1,10 @@
 extends AudioStreamPlayer2D
 
-@export var acceleration: AudioStream = preload("res://Scenes/Audio/SFX/boat_accelerating.mp3")
-@export var deceleration: AudioStream = preload("res://Scenes/Audio/SFX/boat_decelerating.mp3")
-@export var motion: AudioStream = preload("res://Scenes/Audio/SFX/boat_motion.mp3")
+@export var acceleration: AudioStream = preload("res://Scenes/Audio/SFX/v2/boat_accelerating.mp3")
+@export var deceleration: AudioStream = preload("res://Scenes/Audio/SFX/v2/boat_decelerating.mp3")
+@export var motion: AudioStream = preload("res://Scenes/Audio/SFX/v2/boat_motion.mp3")
+
+var sema = false
 
 func _process(_delta: float) -> void:
 	if stream == acceleration:
@@ -16,16 +18,23 @@ func accelerating() -> void:
 	if stream != acceleration:
 		stream = acceleration
 	if not playing:
+		sema = true
 		play()
 
 func decelerating() -> void:
-	if stream != deceleration:
-		stream = deceleration
-	if not playing:
-		play()
+	if sema:
+		if stream != deceleration:
+			stream = deceleration
+		if not playing:
+			stream.loop = false
+			print(stream)
+			print(stream.loop)
+			play()
+		sema = false
 
 func motioning() -> void:
 	if stream != motion:
 		stream = motion
+		stream.loop = true
 	if not playing:
 		play()
