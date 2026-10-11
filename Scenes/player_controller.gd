@@ -121,7 +121,7 @@ func _physics_process(delta: float) -> void:
 	# Smooth acceleration and deceleration
 	if characterDirection != Vector2.ZERO:
 		ScoreAndUpgrades.fuel_quantity -= 0.075
-		var target_velocity = characterDirection * (maxMovementSpeed + (30 * (ScoreAndUpgrades.faster_ship_progress)))
+		var target_velocity = characterDirection * (maxMovementSpeed + (50 * (ScoreAndUpgrades.faster_ship_progress)))
 		velocity = velocity.move_toward(target_velocity, (acceleration + (50 * (ScoreAndUpgrades.faster_ship_progress))) * delta)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
