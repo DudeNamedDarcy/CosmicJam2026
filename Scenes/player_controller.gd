@@ -75,6 +75,8 @@ func AimMouse() -> void:
 	#print(aimArrow.rotation)
 	
 func _physics_process(delta: float) -> void:
+	print("Fuel: %.2f" % (ScoreAndUpgrades.fuel_quantity))
+	#thanks to this article: https://forum.godotengine.org/t/how-to-display-a-float-with-two-decimal-points/133086/3
 	characterDirection.x = Input.get_axis("MoveLeft", "MoveRight")
 	characterDirection.y = Input.get_axis("MoveUp", "MoveDown")
 	characterDirection = characterDirection.normalized()
@@ -97,6 +99,7 @@ func _physics_process(delta: float) -> void:
 
 	# Smooth acceleration and deceleration
 	if characterDirection != Vector2.ZERO:
+		ScoreAndUpgrades.fuel_quantity -= 0.075
 		var target_velocity = characterDirection * (maxMovementSpeed + (30 * (ScoreAndUpgrades.faster_ship_progress)))
 		velocity = velocity.move_toward(target_velocity, (acceleration + (50 * (ScoreAndUpgrades.faster_ship_progress))) * delta)
 	else:

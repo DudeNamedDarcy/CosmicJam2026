@@ -48,7 +48,9 @@ var purchase_dialogue: Array[String] = ["Eh, that upgrade's okay, I guess!",
 ]
 
 var leave_dialogue: Array[String] = ["zeep zorp",
-"Best of luck on those catches!"
+"Best of luck on those catches!",
+"Never come back. Wait, you owe me money. Okay come back later. But not now, I’m tired of you.",
+"It’s never too late to repent."
 ]
 
 var broke_dialogue: Array[String] = ["Imagine being broke LOL",
@@ -69,7 +71,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	money_label.text = "Money: $" + str(ScoreAndUpgrades.money)
-	fuel_label.text = "Fuel: " + str(ScoreAndUpgrades.fuel_quantity) + "%"
+	fuel_label.text = "Fuel: %.2f" % (ScoreAndUpgrades.fuel_quantity) + "%"
 	#print(ScoreAndUpgrades.money)
 
 func _out_of_money() -> void:

@@ -9,7 +9,7 @@ var larger_combo_progress: int = 0
 var longer_combo_progress: int = 0
 var larger_fuel_progress: int = 0
 
-var fuel_quantity = 60
+var fuel_quantity = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
