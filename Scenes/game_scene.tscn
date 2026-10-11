@@ -83,6 +83,7 @@ atlas = ExtResource("7_2fmhe")
 region = Rect2(256, 0, 128, 128)
 
 [node name="GameScene" type="Node2D" unique_id=459147446 node_paths=PackedStringArray("screenFade")]
+process_mode = 3
 script = ExtResource("1_e624q")
 screenFade = NodePath("MoneyFuelUI/Screen Fade")
 
@@ -94,6 +95,7 @@ volume_db = 7.94
 script = ExtResource("2_fiftr")
 
 [node name="PlayerController" parent="." unique_id=743970108 node_paths=PackedStringArray("vboxContainer", "moneyVboxContainer", "fishSpawner", "black_hole_market") instance=ExtResource("1_x87qo")]
+process_mode = 1
 z_index = 1
 position = Vector2(95, 64)
 collision_layer = 4
@@ -160,6 +162,7 @@ script = ExtResource("3_fiftr")
 metadata/_custom_type_script = "uid://xiufvpalhvi1"
 
 [node name="Fish Spawner" type="Node2D" parent="." unique_id=1574152278 node_paths=PackedStringArray("spawnableArea")]
+process_mode = 1
 script = ExtResource("6_rgj8m")
 fishDict = Dictionary[PackedScene, int]({
 ExtResource("8_5q52j"): 2,
@@ -310,6 +313,7 @@ texture = ExtResource("22_e624q")
 process_mode = 3
 
 [node name="Screen Fade" type="ColorRect" parent="MoneyFuelUI" unique_id=516681232]
+process_mode = 3
 z_index = 1000
 anchors_preset = 15
 anchor_right = 1.0
