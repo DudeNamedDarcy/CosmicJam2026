@@ -86,3 +86,5 @@ func combo_win():
 	stream = success
 	if(not playing):
 		play()
+		await get_tree().create_timer(0.02).timeout
+		comboing()
