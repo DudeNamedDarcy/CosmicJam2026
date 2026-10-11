@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://bqsd77la320wk"]
+
+[ext_resource type="Texture2D" uid="uid://g48vbhsqoua7" path="res://Assets/Final/fish stars/shiny.png" id="1_upxdy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b483y"]
+atlas = ExtResource("1_upxdy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4blg"]
+atlas = ExtResource("1_upxdy")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7myxm"]
+atlas = ExtResource("1_upxdy")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbhp1"]
+atlas = ExtResource("1_upxdy")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rwdv"]
+atlas = ExtResource("1_upxdy")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1vu6"]
+atlas = ExtResource("1_upxdy")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whgp4"]
+atlas = ExtResource("1_upxdy")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gem73"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b483y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4blg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7myxm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bbhp1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rwdv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1vu6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whgp4")
+}],
+"loop": 1,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="Fish Star Animation" type="AnimatedSprite2D" unique_id=196298808]
+sprite_frames = SubResource("SpriteFrames_gem73")
+animation = &"new_animation"
+autoplay = "new_animation"

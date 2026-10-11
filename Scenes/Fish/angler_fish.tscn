@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://b05brc3bel6c1"]
+[gd_scene format=3 uid="uid://debkpvo4akucv"]
 
 [ext_resource type="Script" uid="uid://px7q08a74a0y" path="res://Scripts/fish.gd" id="1_fl7b5"]
 [ext_resource type="Texture2D" uid="uid://b2oxbwkh61mi7" path="res://Assets/Final/anglerfish.png" id="2_oa8xh"]
-[ext_resource type="Texture2D" uid="uid://r8nfl3wtq8mw" path="res://Assets/Placeholders/star_2.png" id="3_tj43r"]
+[ext_resource type="PackedScene" uid="uid://bqsd77la320wk" path="res://Scenes/Fish/fish_star_animation.tscn" id="3_tj43r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gem73"]
 size = Vector2(15, 13)
@@ -19,9 +19,7 @@ fishTexture = ExtResource("2_oa8xh")
 probabilityWeight = 30
 IdleBurstTimer = NodePath("IdleBurstTimer")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2019505940]
-scale = Vector2(0.00807682, 0.00807682)
-texture = ExtResource("3_tj43r")
+[node name="Fish Star Animation" parent="." unique_id=196298808 instance=ExtResource("3_tj43r")]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=889486571]
 

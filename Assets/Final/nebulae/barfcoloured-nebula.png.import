@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cll5bs5f8a81p"
-path="res://.godot/imported/medium-asteroid.png-42c0d2138e3067ac461e72d73e1caaea.ctex"
+uid="uid://co5l18et1fp0f"
+path="res://.godot/imported/barfcoloured-nebula.png-4e2a363c96e57bda50ae365d4776b1d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Final/medium-asteroid.png"
-dest_files=["res://.godot/imported/medium-asteroid.png-42c0d2138e3067ac461e72d73e1caaea.ctex"]
+source_file="res://Assets/Final/nebulae/barfcoloured-nebula.png"
+dest_files=["res://.godot/imported/barfcoloured-nebula.png-4e2a363c96e57bda50ae365d4776b1d2.ctex"]
 
 [params]
 

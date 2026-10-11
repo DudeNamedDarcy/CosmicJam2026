@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://d0d4myx373kr1" path="res://Assets/Final/boat-move.png" id="4_3b8x7"]
 [ext_resource type="Texture2D" uid="uid://cwncb0hdu7ay6" path="res://Assets/Final/aimer.png" id="5_1esxm"]
 [ext_resource type="Script" uid="uid://f5wiuad0pepu" path="res://Scenes/follow_camera.gd" id="5_3b8x7"]
+[ext_resource type="PackedScene" uid="uid://bqx38paaff4tm" path="res://market/black_hole_market.tscn" id="7_53kst"]
+[ext_resource type="Texture2D" uid="uid://ttch4ompine3" path="res://market/a-button.png" id="8_1cmmd"]
+[ext_resource type="Texture2D" uid="uid://c5wn4mxv08165" path="res://market/e-button.png" id="8_iy555"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4jfj4"]
 atlas = ExtResource("2_1esxm")
@@ -231,7 +234,49 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(56, 46)
 
-[node name="PlayerController" type="CharacterBody2D" unique_id=743970108 node_paths=PackedStringArray("aimArrow", "sprite", "planetParent", "castingPointLeft", "castingPointRight")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_14oss"]
+atlas = ExtResource("8_1cmmd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1xkc"]
+atlas = ExtResource("8_1cmmd")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irf8t"]
+atlas = ExtResource("8_iy555")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iypmw"]
+atlas = ExtResource("8_iy555")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_768q2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_14oss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1xkc")
+}],
+"loop": 1,
+"name": &"A_button",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irf8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iypmw")
+}],
+"loop": 1,
+"name": &"E_button",
+"speed": 4.0
+}]
+
+[node name="PlayerController" type="CharacterBody2D" unique_id=743970108 node_paths=PackedStringArray("aimArrow", "sprite", "planetParent")]
+position = Vector2(0, -0.19)
 motion_mode = 1
 script = ExtResource("1_5ur5x")
 maxMovementSpeed = 200.0
@@ -243,11 +288,8 @@ castRandomPower = 1.0
 aimArrow = NodePath("AimRingPivot/Sprite2D")
 sprite = NodePath("AnimatedSprite2D")
 planetParent = NodePath("PlanetParent")
-castingPointLeft = NodePath("Casting Point")
-castingPointRight = NodePath("Flip H Casting Point")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1706531453]
-z_index = 10
 sprite_frames = SubResource("SpriteFrames_5ur5x")
 animation = &"Move"
 autoplay = "Idle"
@@ -278,10 +320,18 @@ offset = Vector2(50, 0)
 [node name="Area2D" type="Area2D" parent="." unique_id=860758068]
 
 [node name="AreaCollision" type="CollisionShape2D" parent="Area2D" unique_id=1705928021]
+scale = Vector2(1.1, 1.1)
 shape = SubResource("RectangleShape2D_g4v7s")
 
-[node name="Casting Point" type="Marker2D" parent="." unique_id=358627330]
-position = Vector2(-29, -19)
+[node name="BlackHoleMarket" parent="." unique_id=1787878085 instance=ExtResource("7_53kst")]
 
-[node name="Flip H Casting Point" type="Marker2D" parent="." unique_id=445897015]
-position = Vector2(30, -19)
+[node name="InputButton" type="AnimatedSprite2D" parent="." unique_id=1040862489]
+position = Vector2(0, -39.999996)
+scale = Vector2(1.2, 1.2)
+sprite_frames = SubResource("SpriteFrames_768q2")
+animation = &"E_button"
+autoplay = "E_button"
+frame_progress = 0.51284575
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

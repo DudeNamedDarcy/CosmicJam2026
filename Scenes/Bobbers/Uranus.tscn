@@ -14,8 +14,7 @@ radius = 27.0
 
 [node name="Uranus" type="CharacterBody2D" unique_id=2079869234 node_paths=PackedStringArray("bobberSprite", "orbitArea", "catchArea")]
 rotation = -1.5707964
-collision_layer = 8
-collision_mask = 2
+collision_mask = 0
 script = ExtResource("1_q31fv")
 bobberType = "Uranus"
 bobberTexture = ExtResource("2_mtni1")
@@ -30,7 +29,6 @@ z_index = 5
 shape = SubResource("CircleShape2D_gem73")
 
 [node name="Planet" type="Sprite2D" parent="." unique_id=1052726689]
-z_index = 10
 position = Vector2(-0.30499983, 0.93000007)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("2_mtni1")

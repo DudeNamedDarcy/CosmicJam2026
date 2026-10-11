@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://px7q08a74a0y" path="res://Scripts/fish.gd" id="1_te2vv"]
 [ext_resource type="Texture2D" uid="uid://b34jl0vtbswuu" path="res://Assets/Final/bigfishy.png" id="2_te2vv"]
+[ext_resource type="PackedScene" uid="uid://bqsd77la320wk" path="res://Scenes/Fish/fish_star_animation.tscn" id="3_te2vv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gem73"]
 size = Vector2(15, 13)
@@ -18,9 +19,7 @@ fishTexture = ExtResource("2_te2vv")
 probabilityWeight = 20
 IdleBurstTimer = NodePath("IdleBurstTimer")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2019505940]
-scale = Vector2(0.008, 0.008)
-texture = ExtResource("2_te2vv")
+[node name="Fish Star Animation" parent="." unique_id=196298808 instance=ExtResource("3_te2vv")]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=889486571]
 
