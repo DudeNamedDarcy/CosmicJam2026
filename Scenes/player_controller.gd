@@ -8,13 +8,13 @@ const MONEY_GAIN_TEXT = preload("res://Scenes/fish_money_text.tscn")
 #Upgradeable
 var bobbersList: Array[PackedScene] = [
 	preload("res://Scenes/Bobbers/Pluto.tscn"),
-	#preload("res://Scenes/Bobbers/Mercury.tscn"),
-	#preload("res://Scenes/Bobbers/Venus.tscn"),
-	#preload("res://Scenes/Bobbers/Earth.tscn"),
-	#preload("res://Scenes/Bobbers/Mars.tscn"),
-	#preload("res://Scenes/Bobbers/Neptune.tscn"),
-	#preload("res://Scenes/Bobbers/Uranus.tscn"),
-	#preload("res://Scenes/Bobbers/Saturn.tscn"),
+	preload("res://Scenes/Bobbers/Mercury.tscn"),
+	preload("res://Scenes/Bobbers/Venus.tscn"),
+	preload("res://Scenes/Bobbers/Earth.tscn"),
+	preload("res://Scenes/Bobbers/Mars.tscn"),
+	preload("res://Scenes/Bobbers/Neptune.tscn"),
+	preload("res://Scenes/Bobbers/Uranus.tscn"),
+	preload("res://Scenes/Bobbers/Saturn.tscn"),
 	preload("res://Scenes/Bobbers/Jupiter.tscn")
 ]
 @export_category("Movement")
@@ -68,6 +68,8 @@ var elapsedComboTime: float
 @export var maxComboTime: float = 1.0
 var comboSize: float
 var closeToShop: bool = false
+var last_direction := 0
+var isScoring: bool = false
 
 
 func _ready() -> void:
@@ -77,6 +79,7 @@ func _ready() -> void:
 	castingPoint = castingPointLeft
 	uiController.UpdateMoneyText()
 	uiController.UpdateFuelText()
+	_handle_quests()
 
 
 func _process(delta: float) -> void:
@@ -140,6 +143,8 @@ func AimMouse() -> void:
 	
 func _physics_process(delta: float) -> void:
 	_handle_quests()
+	if isScoring:
+		return
 	maxComboTime = (ScoreAndUpgrades.longer_combo_progress + 1)
 	uiController.UpdateFuelText()
 	#thanks to this article: https://forum.godotengine.org/t/how-to-display-a-float-with-two-decimal-points/133086/3
@@ -152,19 +157,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		if characterDirection == Vector2.ZERO:
 			playerState = PlayerState.Idle
-			sprite.animation = "Idle"
+			SetIdle()
 		else:
 			playerState = PlayerState.Moving
-			sprite.animation = "Move"
+			SetMove()
 
-	# Flip sprite TODO: Add squash and stretch
-	if characterDirection.x > 0:
-		sprite.flip_h = true
-		castingPoint = castingPointRight
-	elif characterDirection.x < 0:
-		sprite.flip_h = false
-		castingPoint = castingPointLeft
-
+	update_facing()
 	# Smooth acceleration and deceleration
 	if characterDirection != Vector2.ZERO:
 		boat_audio.accelerating()
@@ -184,6 +182,31 @@ func _physics_process(delta: float) -> void:
 
 		if velocity.dot(normal) < 0:
 			velocity = velocity.slide(normal)
+
+func update_facing():
+	if characterDirection.x > 0:
+		sprite.flip_h = true
+		castingPoint = castingPointRight
+
+		if last_direction == -1:
+			squash_and_stretch()
+
+		last_direction = 1
+
+	elif characterDirection.x < 0:
+		sprite.flip_h = false
+		castingPoint = castingPointLeft
+
+		if last_direction == 1:
+			squash_and_stretch()
+
+		last_direction = -1
+		
+func squash_and_stretch():
+	var tween = create_tween()
+	tween.tween_property(sprite, "scale", Vector2(1.15, 0.85), 0.08)
+	tween.tween_property(sprite, "scale", Vector2(0.9, 1.1), 0.08)
+	tween.tween_property(sprite, "scale", Vector2(1.0, 1.0), 0.08)
 	
 func _input(event: InputEvent) -> void:
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
@@ -248,7 +271,7 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 		elapsedComboTime = 0.0
 
 	else:
-		LevelManager.shakeCamera(7.0)
+		#LevelManager.shakeCamera(20.0, 0.5)
 		rod_audio.losing()
 		EndFishing(false)
 
@@ -257,8 +280,9 @@ func CastBobbers(castPower: float) -> void:
 	aimArrow.scale = Vector2(aim_arrow_base_scale, aim_arrow_base_scale)
 
 	var cast_direction: Vector2 = Vector2.RIGHT.rotated(aimArrow.global_rotation).normalized()
-	for bobberScene in bobbersList:
-		var bobber: Bobber = bobberScene.instantiate()
+	for i in range(0, questStep + 1):
+		print("casting bobber: ", i)
+		var bobber: Bobber = bobbersList[i].instantiate()
 		var bobberLine: Line2D = Line2D.new()
 		bobberLine.width = 1
 
@@ -296,8 +320,8 @@ func StartReelingMinigame() -> void:
 		vboxContainer.add_child(arrow_instance)
 		if i == 0:
 			arrows[0].TurnRed((ScoreAndUpgrades.longer_combo_progress) + 1)
-	for fish in fishList:
-		if fish.name == fishNeededForQuest:
+	for fish: Fish in fishList:
+		if fish.typeName == fishNeededForQuest:
 			caughtFishForQuest = true
 			print("caughtFishForQuest!")
 			
@@ -315,10 +339,9 @@ func DeletePlanets() -> void:
 	activeBobbers.clear()
 	
 func EndFishing(success: bool) -> void:
-	var fishTotal = 0
 	rod_audio.stop_reeling()
 	playerState = PlayerState.Idle
-
+	isScoring = true
 	for arrow in arrows.duplicate():
 		if is_instance_valid(arrow):
 			arrow.KillArrow()
@@ -327,7 +350,8 @@ func EndFishing(success: bool) -> void:
 	arrows.clear()
 	if success:
 		rod_audio.combo_win()
-		await get_tree().create_timer(0.2).timeout 
+		await get_tree().create_timer(0.2).timeout
+	var totalMoney: float = 0 
 	for fish in comboFishList.duplicate():
 		#print(fish)
 		if is_instance_valid(fish):
@@ -337,21 +361,33 @@ func EndFishing(success: bool) -> void:
 				rod_audio.winning()
 				moneyVboxContainer.add_child(moneyText)
 				var fishValueWithUpgrade = (fish.value) + ((ScoreAndUpgrades.larger_combo_progress) * ((fish.value)/5))
+				totalMoney += fishValueWithUpgrade
 				moneyText.DisplayText(fishValueWithUpgrade)
 				ScoreAndUpgrades.money += fishValueWithUpgrade
-				fishTotal += fishValueWithUpgrade
 			fish.KillFish(success)
-				#fishvalue *comboSize * 1.1
 			uiController.UpdateMoneyText()
 			fish.KillFish(success)
+	if success:
+		await get_tree().create_timer(0.2).timeout	
+		var moneyText = MONEY_GAIN_TEXT.instantiate()
+		moneyVboxContainer.add_child(moneyText)
+		moneyText.DisplayTotalEarnings(totalMoney)
+
+		
+
 	
+	if (!success):
+		LevelManager.shakeCamera(20.0, 0.5)
 	LevelManager.shakeCameraComboClear()
 	comboFishList.clear()
 	fishList.clear()
 	comboSize = 0
 	aimArrow.show()
-	if caughtFishForQuest:
+	isScoring = false
+	if caughtFishForQuest && success:
 		CompleteQuest()
+	else:
+		caughtFishForQuest = false
 	await get_tree().create_timer(0.4).timeout
 	input_button.visible = closeToShop
 	
@@ -360,15 +396,28 @@ func CompleteQuest():
 	caughtFishForQuest = false
 	questStep += 1
 	LevelManager.next_level()
-	LevelManager.level_up.connect(AddNewQuest)
+	_handle_quests()
+	AddNewQuest(fishNeededForQuest)
 	# start popup for next quest
 	
 # call this to add a new quest fish
 func AddNewQuest(fishName: String):
-	fishNeededForQuest = fishName
 	uiController.updateDialogue()
 
+func SetIdle():
+	if ScoreAndUpgrades.faster_ship_progress == 0:
+		sprite.animation = "Idle"
+	else:
+		sprite.animation = "IdleUpgraded"
 
+func SetMove():
+	if ScoreAndUpgrades.faster_ship_progress == 0:
+		sprite.animation = "Move"
+	else:
+		sprite.animation = "MoveUpgraded"
+
+
+		
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.name == "market":
 		input_button.visible = true

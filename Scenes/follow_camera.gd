@@ -12,10 +12,15 @@ func _ready() -> void:
 	
 func ApplyShake(str: float,  time: float = 0.2):
 	shakeStrength = str
+	Input.start_joy_vibration(0, 0.5, 0.8, time)
 
 func FishComboShake():
 	comboCount += 1
-	ApplyShake(min(2.0*(comboCount*2), 5.0), .1)
+	var time = 0.1
+	ApplyShake(min(2.0*(comboCount*2), 5.0), time)
+	Input.start_joy_vibration(0, 0.5, 0.8, time)
+
+	
 
 func ResetFishComboShake():
 	comboCount = 0

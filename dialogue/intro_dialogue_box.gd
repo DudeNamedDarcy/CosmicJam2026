@@ -57,6 +57,7 @@ func _process(delta: float) -> void:
 	pass
 
 func calling_dialogues():
+	current_dialogue_index = 0
 	#calling_dialogues called in Intro Dialogue called!
 	current_quest += 1
 	match current_quest:
@@ -82,6 +83,7 @@ func calling_dialogues():
 
 
 func show_text(array: Array[String]) -> void:
+	LevelManager.pauseGame()
 	current_array = array
 	text_done = false
 	
@@ -113,7 +115,8 @@ func _text_is_done() -> void:
 
 func _advance() -> void:
 	current_dialogue_index += 1
-	if current_dialogue_index == dialogue.size():
+	if current_dialogue_index == current_array.size():
+		LevelManager.unpauseGame()
 		hide()
 	else:
 		show_text(current_array)
