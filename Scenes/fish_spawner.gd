@@ -1,12 +1,15 @@
 extends Node2D
+class_name FishSpawner
 
 @export var fishDict: Dictionary[PackedScene, int] = {}
 @export var spawnableArea: Polygon2D
+@export var maxFishInLevel = 100
 
 var currentSpawnableFish: Array[PackedScene] = []
 var active = true
 var coolingDown = false
 var level = 0
+var currentFishInLevel = 0
 
 func _ready() -> void:
 	active = false
@@ -14,7 +17,7 @@ func _ready() -> void:
 	LevelManager.next_level()
 
 func _process(delta: float) -> void:
-	if active && not coolingDown:
+	if active && not coolingDown && currentFishInLevel < maxFishInLevel:
 		spawnFish()
 		coolingDown = true
 		$"Spawn Timer".start()
@@ -27,15 +30,25 @@ func newLevel():
 			currentSpawnableFish.append(fish)
 			
 	active = true
+	print(currentSpawnableFish)
 			
 func spawnFish():
-	#full random
-	var fishIndex = randi_range(0,currentSpawnableFish.size()-1)
+	var weights: Array[float] = []
+	
+	for fish in currentSpawnableFish:
+		var fishInstance: Fish = fish.instantiate()
+		weights.append(fishInstance.probabilityWeight)
+		fishInstance.queue_free()
+	
+	var rng = RandomNumberGenerator.new()
+	var fishIndex = rng.rand_weighted(weights)
 	var fishToSpawn = currentSpawnableFish[fishIndex]
+
 	var spawnPoint = generateSpawnLocation()
 	var fish = fishToSpawn.instantiate()
 	fish.global_position = spawnPoint
 	add_child(fish)
+	currentFishInLevel += 1
 	
 func generateSpawnLocation() -> Vector2:
 	var polygon_points = spawnableArea.polygon
@@ -69,8 +82,9 @@ func generateSpawnLocation() -> Vector2:
 			return valid_point
 			
 	return Vector2(0,0)
-	
-
 
 func _on_spawn_timer_timeout() -> void:
 	coolingDown = false
+	
+func remove_fish_from_pool(num: int):
+	currentFishInLevel = min(currentFishInLevel - num, 0)

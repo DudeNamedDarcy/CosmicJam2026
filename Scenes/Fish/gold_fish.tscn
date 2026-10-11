@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://w7gafq2uiia1"]
+
+[ext_resource type="Script" uid="uid://px7q08a74a0y" path="res://Scripts/fish.gd" id="1_o1kyx"]
+[ext_resource type="Texture2D" uid="uid://ba1xwshqevdfa" path="res://Assets/Final/goldfish.png" id="2_o1kyx"]
+[ext_resource type="Texture2D" uid="uid://j76d3g8ogfg0" path="res://Assets/Placeholders/star_1.png" id="3_o1kyx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gem73"]
+size = Vector2(15, 13)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gem73"]
+radius = 5.0
+
+[node name="Gold Fish" type="CharacterBody2D" unique_id=1404079117 node_paths=PackedStringArray("IdleBurstTimer")]
+collision_mask = 2
+script = ExtResource("1_o1kyx")
+typeName = "Gold Fish"
+value = 100.0
+fishTexture = ExtResource("2_o1kyx")
+probabilityWeight = 10
+IdleBurstTimer = NodePath("IdleBurstTimer")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2019505940]
+scale = Vector2(0.008, 0.008)
+texture = ExtResource("3_o1kyx")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=889486571]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1960112096]
+shape = SubResource("RectangleShape2D_gem73")
+
+[node name="IdleBurstTimer" type="Timer" parent="." unique_id=415768935]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=169337993]
+shape = SubResource("CircleShape2D_gem73")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="IdleBurstTimer" to="." method="_on_idle_burst_timer_timeout"]

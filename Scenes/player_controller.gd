@@ -3,6 +3,7 @@ class_name PlayerController
 enum PlayerState { Idle, Moving, Casting, Fishing, Reeling }
 const DIRECTIONAL_ARROW = preload("res://Scenes/directional_arrow.tscn")
 const COMBO_FISH = preload("res://Scenes/Fish/fish_combo_sprite.tscn")
+const MONEY_GAIN_TEXT = preload("res://Scenes/fish_money_text.tscn")
 
 #Upgradeable
 var bobbersList: Array[PackedScene] = [
@@ -32,7 +33,11 @@ var castPower: float = 0.0
 @export var aimArrow: Sprite2D
 @export var sprite: AnimatedSprite2D
 @export var vboxContainer: VBoxContainer
+@export var moneyVboxContainer: VBoxContainer
 @export var planetParent: Node2D
+@export var fishSpawner: FishSpawner
+
+@onready var area_2d: Area2D = $Area2D
 
 var playerState: PlayerState = PlayerState.Idle
 var characterDirection: Vector2
@@ -45,10 +50,23 @@ var activeBobbers: Array[Bobber] = []
 var comboFishList: Array[FishComboSprite] = []
 var aim_arrow_base_scale: float
 
+# Quest
+var fishNeededForQuest: String = ""
+var caughtFishForQuest = false
+
+var elapsedComboTime: float
+@export var maxComboTime: float = 1.0
+var comboSize: float
 func _ready() -> void:
 	aim_arrow_base_scale = aimArrow.scale.x
+	area_2d.name = "starship"
 
 func _process(delta: float) -> void:
+	if playerState == PlayerState.Reeling:
+		elapsedComboTime += delta
+		if elapsedComboTime >= maxComboTime:
+			EndFishing(false)
+			elapsedComboTime = 0.0
 	if Input.is_action_pressed("CastReel"):
 		castPower += delta
 	var charge_ratio: float = 0.0
@@ -56,7 +74,6 @@ func _process(delta: float) -> void:
 		charge_ratio = clamp(castPower / maxCastPower, 0.0, 1.0)
 
 	aimArrow.scale = Vector2(aim_arrow_base_scale * (1.0 + charge_ratio), aim_arrow_base_scale * (1.0 + charge_ratio))
-	#print(PlayerState.find_key(playerState))
 	AimMouse()
 		
 
@@ -72,9 +89,10 @@ func AimMouse() -> void:
 		aimArrow.rotation = joy_direction.angle()
 	else:
 		aimArrow.rotation = mouse_direction.angle()
-	#print(aimArrow.rotation)
 	
 func _physics_process(delta: float) -> void:
+	print("Fuel: %.2f" % (ScoreAndUpgrades.fuel_quantity))
+	#thanks to this article: https://forum.godotengine.org/t/how-to-display-a-float-with-two-decimal-points/133086/3
 	characterDirection.x = Input.get_axis("MoveLeft", "MoveRight")
 	characterDirection.y = Input.get_axis("MoveUp", "MoveDown")
 	characterDirection = characterDirection.normalized()
@@ -98,6 +116,7 @@ func _physics_process(delta: float) -> void:
 	# Smooth acceleration and deceleration
 	if characterDirection != Vector2.ZERO:
 		boat_audio.accelerating()
+		ScoreAndUpgrades.fuel_quantity -= 0.075
 		var target_velocity = characterDirection * (maxMovementSpeed + (30 * (ScoreAndUpgrades.faster_ship_progress)))
 		velocity = velocity.move_toward(target_velocity, (acceleration + (50 * (ScoreAndUpgrades.faster_ship_progress))) * delta)
 	else:
@@ -160,12 +179,17 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 		rod_audio.comboing()
 		arrows.pop_front()
 		arrow.KillArrow()
+		comboSize += 1
 
 		if arrows.is_empty():
 			LevelManager.shakeCamera(2.0)
-			print("Combo complete!")
+			print("Combo complete! Combo size", comboSize)
 			EndFishing(true)
 			rod_audio.winning()
+		else:
+			arrows[0].TurnRed()
+		elapsedComboTime = 0.0
+
 	else:
 		LevelManager.shakeCamera(7.0)
 		rod_audio.losing()
@@ -198,19 +222,26 @@ func StartReelingMinigame() -> void:
 	rod_audio.stop_reeling()
 	for activeBobber in activeBobbers:
 		fishList.append_array(activeBobber.reelIn())
-		print(fishList.size())
 		activeBobber.killAllFish()
 	if fishList.size() == 0:
 		EndFishing(false)
 		DeletePlanets()
 		return
+		
+	if fishSpawner:
+		fishSpawner.remove_fish_from_pool(fishList.size())
 	var comboLength = 4 + fishList.size() - 1
 
 	for i in comboLength:
 		var arrow_instance = DIRECTIONAL_ARROW.instantiate()
 		arrows.append(arrow_instance)
 		vboxContainer.add_child(arrow_instance)
+		if i == 0:
+			arrows[0].TurnRed()
 	for fish in fishList:
+		if fish.name == fishNeededForQuest:
+			caughtFishForQuest = true
+		
 		var fish_instance = COMBO_FISH.instantiate()
 		fish_instance.PopulateData(fish)
 		comboFishList.append(fish_instance)
@@ -231,15 +262,33 @@ func EndFishing(success: bool) -> void:
 	for arrow in arrows.duplicate():
 		if is_instance_valid(arrow):
 			arrow.KillArrow()
-
+	
 	arrows.clear()
-	await get_tree().create_timer(0.2).timeout 
+	if success:
+		await get_tree().create_timer(0.2).timeout 
 	for fish in comboFishList.duplicate():
+		print(fish)
 		if is_instance_valid(fish):
+			if success:
+				await get_tree().create_timer(0.2).timeout	
+				var moneyText = MONEY_GAIN_TEXT.instantiate()
+				moneyVboxContainer.add_child(moneyText)
+				moneyText.DisplayText(fish.value)
 			fish.KillFish(success)
+			
 	
 	comboFishList.clear()
 	fishList.clear()
-		
-			
+	comboSize = 0
 	aimArrow.show()
+	CompleteQuest()
+	
+func CompleteQuest():
+	print("quest complete")
+	caughtFishForQuest = false
+	fishNeededForQuest = ""
+	# start popup for next quest
+	
+# call this to add a new quest fish
+func AddNewQuestFish(fishName: String):
+	fishNeededForQuest = fishName

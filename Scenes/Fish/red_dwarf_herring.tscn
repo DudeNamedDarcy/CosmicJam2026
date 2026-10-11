@@ -13,11 +13,13 @@ radius = 5.0
 collision_mask = 2
 script = ExtResource("1_f6omv")
 typeName = "Red Dwarf Herring"
-value = 15.0
+value = 10.0
 fishTexture = ExtResource("2_vb3eg")
+probabilityWeight = 70
 IdleBurstTimer = NodePath("IdleBurstTimer")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2019505940]
+scale = Vector2(0.008, 0.008)
 texture = ExtResource("2_vb3eg")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=889486571]

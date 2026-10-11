@@ -12,4 +12,3 @@ func next_level():
 
 func shakeCamera(str: float):
 	shake_camera.emit(str)
-
