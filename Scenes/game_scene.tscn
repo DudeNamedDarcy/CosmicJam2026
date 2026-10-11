@@ -180,7 +180,7 @@ ExtResource("8_ldntv"): 7,
 ExtResource("9_w8jfd"): 8
 })
 spawnableArea = NodePath("../SpawnableArea")
-maxFishInLevel = 1000
+maxFishInLevel = 200
 
 [node name="Spawn Timer" type="Timer" parent="Fish Spawner" unique_id=1446234030]
 wait_time = 0.1

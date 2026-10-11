@@ -9,9 +9,9 @@ const MONEY_GAIN_TEXT = preload("res://Scenes/fish_money_text.tscn")
 var bobbersList: Array[PackedScene] = [
 	preload("res://Scenes/Bobbers/Pluto.tscn"),
 	preload("res://Scenes/Bobbers/Mercury.tscn"),
+	preload("res://Scenes/Bobbers/Mars.tscn"),
 	preload("res://Scenes/Bobbers/Venus.tscn"),
 	preload("res://Scenes/Bobbers/Earth.tscn"),
-	preload("res://Scenes/Bobbers/Mars.tscn"),
 	preload("res://Scenes/Bobbers/Neptune.tscn"),
 	preload("res://Scenes/Bobbers/Uranus.tscn"),
 	preload("res://Scenes/Bobbers/Saturn.tscn"),
