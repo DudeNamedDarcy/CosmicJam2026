@@ -17,6 +17,7 @@ extends CanvasLayer
 @onready var broke_alert_label: RichTextLabel = %BrokeAlertLabel
 @onready var fuel_label: Label = %FuelLabel
 @onready var fuel_button: Button = $VBoxContainer2/FuelButton
+@onready var quit_button: Button = %QuitButton
 
 
 
@@ -48,8 +49,6 @@ var purchase_dialogue: Array[String] = ["Finally!",
 var broke_dialogue: Array[String] = ["Imagine being broke LOL",
 "Come back when you're a little... richer!"]
 
-var totalMoney = (ScoreAndUpgrades.money)
-
 var out_of_money_bool = true
 
 
@@ -63,9 +62,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	money_label.text = "Money: $" + str(totalMoney)
+	money_label.text = "Money: $" + str(ScoreAndUpgrades.money)
 	fuel_label.text = "Fuel: " + str(ScoreAndUpgrades.fuel_quantity) + "%"
-	
+	#print(ScoreAndUpgrades.money)
 
 func _out_of_money() -> void:
 	out_of_money_bool = false
@@ -77,33 +76,54 @@ func _out_of_money() -> void:
 	out_of_money_bool = true
 
 func _on_orbit_radius_button_pressed() -> void:
+	if ScoreAndUpgrades.orbit_radius_progress < 2 and (ScoreAndUpgrades.money) > 0:
+		ScoreAndUpgrades.orbit_radius_progress += 1
+	print(ScoreAndUpgrades.orbit_radius_progress)
 	_handle_money(orbit_radius_progress, 200, orbit_radius_button)
 
 func _on_catch_radius_button_pressed() -> void:
+	if ScoreAndUpgrades.catch_radius_progress < 2 and (ScoreAndUpgrades.money) > 0:
+		ScoreAndUpgrades.catch_radius_progress += 1
+	print(ScoreAndUpgrades.catch_radius_progress)
 	_handle_money(catch_radius_progress, 200, catch_radius_button)
 
 func _on_faster_ship_button_pressed() -> void:
+	if ScoreAndUpgrades.faster_ship_progress < 2 and (ScoreAndUpgrades.money) > 0:
+		ScoreAndUpgrades.faster_ship_progress += 1
+	print(ScoreAndUpgrades.faster_ship_progress)
 	_handle_money(faster_ship_progress, 200, faster_ship_button)
 
 func _on_larger_combos_button_pressed() -> void:
+	if ScoreAndUpgrades.larger_combo_progress < 2 and (ScoreAndUpgrades.money) > 0:
+		ScoreAndUpgrades.larger_combo_progress += 1
+	print(ScoreAndUpgrades.larger_combo_progress)
 	_handle_money(larger_combos_progress, 200, larger_combos_button)
 
 func _on_longer_combo_button_pressed() -> void:
+	if ScoreAndUpgrades.longer_combo_progress < 2 and (ScoreAndUpgrades.money) > 0:
+		ScoreAndUpgrades.longer_combo_progress += 1
+	print(ScoreAndUpgrades.longer_combo_progress)
 	_handle_money(longer_combo_progress, 200, longer_combo_button)
 
+
 func _on_larger_fuel_button_pressed() -> void:
+	if ScoreAndUpgrades.larger_fuel_progress < 2 and (ScoreAndUpgrades.money) > 0:
+		ScoreAndUpgrades.larger_fuel_progress += 1
+	print(ScoreAndUpgrades.larger_fuel_progress)
 	_handle_money(larger_fuel_progress, 200, larger_fuel_button)
 
+
+
 func _handle_money(given_progress_bar: ProgressBar, moneyAmount:int, given_button: Button):
-	if totalMoney >= moneyAmount and given_progress_bar.value < 100:
+	if (ScoreAndUpgrades.money) >= moneyAmount and given_progress_bar.value < 100:
 		activate_buy_dialogue()
 		print("enough money!")
-		totalMoney -= moneyAmount
+		(ScoreAndUpgrades.money) -= moneyAmount
 		given_progress_bar.value += 50
 		cha_ching_audio_stream_player.play()
 		if given_progress_bar.value >= 100:
 			given_button.text = "Sold Out!"
-	elif totalMoney < moneyAmount:
+	elif (ScoreAndUpgrades.money) < moneyAmount:
 		if out_of_money_bool:
 			_out_of_money()
 	else:
@@ -119,15 +139,19 @@ func _on_fuel_button_pressed() -> void:
 	_add_fuel()
 
 func _add_fuel() -> void:
-	if ScoreAndUpgrades.fuel_quantity >= 100 and totalMoney >= 200:
+	if ScoreAndUpgrades.fuel_quantity >= 100 and (ScoreAndUpgrades.money) >= 200:
 		return
-	elif ScoreAndUpgrades.fuel_quantity < 100 and totalMoney < 200:
+	elif ScoreAndUpgrades.fuel_quantity < 100 and (ScoreAndUpgrades.money) < 200:
 		if out_of_money_bool:
 			_out_of_money()
-	elif ScoreAndUpgrades.fuel_quantity >= 100 and totalMoney < 200:
+	elif ScoreAndUpgrades.fuel_quantity >= 100 and (ScoreAndUpgrades.money) < 200:
 		if out_of_money_bool:
 			_out_of_money()
 	else:
 		ScoreAndUpgrades.fuel_quantity += 20
-		totalMoney -= 200
+		(ScoreAndUpgrades.money) -= 200
 		cha_ching_audio_stream_player.play()
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()
