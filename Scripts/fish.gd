@@ -72,8 +72,8 @@ func startBurst():
 
 func squash_and_stretch():
 	var tween = create_tween()
-	tween.tween_property(animated_sprite_2d, "scale", Vector2(1.15, 0.85), 0.08)
-	tween.tween_property(animated_sprite_2d, "scale", Vector2(0.9, 1.1), 0.08)
+	tween.tween_property(animated_sprite_2d, "scale", Vector2(1.5, 0.5), 0.08)
+	tween.tween_property(animated_sprite_2d, "scale", Vector2(0.5, 1.5), 0.08)
 	tween.tween_property(animated_sprite_2d, "scale", Vector2(1.0, 1.0), 0.08)
 	
 func handleOrbit(delta:float):
