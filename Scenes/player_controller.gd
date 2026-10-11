@@ -3,26 +3,32 @@ class_name PlayerController
 enum PlayerState { Idle, Moving, Casting, Fishing, Reeling }
 const DIRECTIONAL_ARROW = preload("res://Scenes/directional_arrow.tscn")
 
+@onready var cameraController = $FollowCamera
+
 #Upgradeable
 var bobbersList: Array[PackedScene] = [
 	preload("res://Scenes/Bobbers/Pluto.tscn")
 ]
+@export_category("Movement")
 @export var maxMovementSpeed: float
 @export var acceleration: float
 @export var friction: float
-@export var maxCastPower: float
 
+@export_category("Casting")
+@export var maxCastPower: float
+@export var castRandomSpread: float = 0.0
+@export var castRandomPower: float = 0.0
+@export var castDeceleration: float = 100
+var castPower: float = 0.0
+
+@export_category("References")
 @export var aimArrow: Sprite2D
 @export var sprite: AnimatedSprite2D
 @export var vboxContainer: VBoxContainer
 @export var planetParent: Node2D
-@export var castDistance: float = 150.0
-@export var fishingLineMarker: Marker2D
-
 
 var playerState: PlayerState = PlayerState.Idle
 var characterDirection: Vector2
-var castPower: float = 0.0
 var arrows: Array[DirectionalArrow] = []
 var fishList: Array[Fish] = []
 var activeBobbers: Array[Bobber] = []
@@ -32,7 +38,7 @@ var activeBobbers: Array[Bobber] = []
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("CastReel"):
 		castPower += delta
-	print(PlayerState.find_key(playerState))
+	#print(PlayerState.find_key(playerState))
 	AimMouse()
 		
 
@@ -127,43 +133,48 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 		return
 
 	if arrow.GetArrowType() == input_arrow:
+		cameraController.ApplyShake(2.0)
 		arrows.pop_front()
 		arrow.queue_free()
 
 		if arrows.is_empty():
+			cameraController.ApplyShake(2.0)
 			print("Combo complete!")
 			EndFishing()
 	else:
+		cameraController.ApplyShake(7.0)
 		EndFishing()
 
 func CastBobbers(castPower: float) -> void:
 	aimArrow.hide()
-
-	var cast_direction: Vector2 = Vector2.RIGHT.rotated(aimArrow.global_rotation)
-
+	var cast_direction: Vector2 = Vector2.RIGHT.rotated(aimArrow.global_rotation).normalized()
 	for bobberScene in bobbersList:
 		var bobber: Bobber = bobberScene.instantiate()
+		var bobberLine: Line2D = Line2D.new()
+		bobberLine.width = 1
 
-		planetParent.add_child(bobber)
+		add_child(bobber)
+		add_child(bobberLine)
 		bobber.global_position = global_position
-
-		# Cast the bobber in the aiming direction
-		#bobber.cast(cast_direction, castPower)
-		# draw line connecting fishing rod marker and planet
-
-		activeBobbers.append(bobber)
-		print(bobber.getBobberName())
-
-func StartReelingMinigame() -> void:
-	#for activeBobber in activeBobbers:
-		#fishList.append_array(activeBobber.reelIn())
 		
-	#if fishList.size() == 0:
-		#EndFishing()
-		#return
-	var comboLength = 4 + 8 - 1
+		var randomAngle = randf_range(-castRandomSpread, castRandomSpread)
+		var randomizedDirection = cast_direction.rotated(randomAngle)
+		var randomizedPower = (castPower*100) + randf_range(-castRandomPower, castRandomPower)
+		# Cast the bobber in the aiming direction
+		bobber.cast(randomizedDirection, randomizedPower, castDeceleration, bobberLine)
+
+		#activeBobbers.append(bobber)
+		print(bobber.bobberType)
 	
-	#var comboLength = 4 + fishList.size() - 1
+func StartReelingMinigame() -> void:
+	for activeBobber in activeBobbers:
+		fishList.append_array(activeBobber.reelIn())
+		
+	if fishList.size() == 0:
+		EndFishing()
+		return
+	var comboLength = 4 + fishList.size() - 1
+	
 	for i in comboLength:
 		var arrow_instance = DIRECTIONAL_ARROW.instantiate()
 		arrows.append(arrow_instance)
@@ -178,6 +189,3 @@ func EndFishing() -> void:
 		activeBobbers.pop_front()
 		child.queue_free()
 	aimArrow.show()
-	
-func DrawFishingLines() -> void:
-	print("Hi")

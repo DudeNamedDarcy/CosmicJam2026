@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://1n0tt0ipxk48"]
+
+[ext_resource type="Script" uid="uid://c0r7auldfjjco" path="res://Testing/caster.gd" id="1_qcewj"]
+[ext_resource type="PackedScene" uid="uid://n45whogjbh85" path="res://Scenes/Bobbers/Pluto.tscn" id="2_s74hc"]
+[ext_resource type="PackedScene" uid="uid://diga0gfwjyvcg" path="res://Scenes/Fish/moon_jelly.tscn" id="3_coi6g"]
+[ext_resource type="PackedScene" uid="uid://d3oxvy0grl375" path="res://Scenes/Fish/red_dwarf_herring.tscn" id="4_sngl5"]
+[ext_resource type="PackedScene" uid="uid://b7m36bfujolqs" path="res://Scenes/Fish/supermassive_squid.tscn" id="5_enq7r"]
+[ext_resource type="Script" uid="uid://xiufvpalhvi1" path="res://Scripts/orbit_manager.gd" id="6_sngl5"]
+
+[node name="Node2D" type="Node2D" unique_id=1541033644]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1309753690]
+
+[node name="Caster" type="Node2D" parent="." unique_id=1615851469]
+script = ExtResource("1_qcewj")
+bobbersList = Array[PackedScene]([ExtResource("2_s74hc"), ExtResource("2_s74hc"), ExtResource("2_s74hc"), ExtResource("2_s74hc")])
+castRandomSpread = 0.5
+castRandomPower = 75.0
+
+[node name="Moon Jelly" parent="." unique_id=1404079117 node_paths=PackedStringArray("orbitManager") instance=ExtResource("3_coi6g")]
+position = Vector2(-372, 150)
+orbitManager = NodePath("../Node2D")
+
+[node name="Red Dwarf Herring" parent="." unique_id=843615539 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_sngl5")]
+position = Vector2(-98, 111)
+orbitManager = NodePath("../Node2D")
+
+[node name="Moon Jelly2" parent="." unique_id=856917835 node_paths=PackedStringArray("orbitManager") instance=ExtResource("3_coi6g")]
+position = Vector2(-368, -150)
+orbitManager = NodePath("../Node2D")
+
+[node name="Supermassive Squid" parent="." unique_id=674465445 node_paths=PackedStringArray("orbitManager") instance=ExtResource("5_enq7r")]
+position = Vector2(272, -222)
+orbitManager = NodePath("../Node2D")
+
+[node name="Red Dwarf Herring2" parent="." unique_id=565038917 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_sngl5")]
+position = Vector2(285, 48)
+orbitManager = NodePath("../Node2D")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1994392722]
+script = ExtResource("6_sngl5")

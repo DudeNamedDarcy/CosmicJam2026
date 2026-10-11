@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://nvb84pm3p0vl" path="res://Assets/Final/boat-idle.png" id="2_dl1v4"]
 [ext_resource type="Texture2D" uid="uid://d0d4myx373kr1" path="res://Assets/Final/boat-move.png" id="4_3b8x7"]
 [ext_resource type="Texture2D" uid="uid://cwncb0hdu7ay6" path="res://Assets/Final/aimer.png" id="5_1esxm"]
+[ext_resource type="Script" uid="uid://f5wiuad0pepu" path="res://Scenes/follow_camera.gd" id="5_3b8x7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4jfj4"]
 atlas = ExtResource("2_1esxm")
@@ -230,17 +231,18 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(59, 43)
 
-[node name="PlayerController" type="CharacterBody2D" unique_id=743970108 node_paths=PackedStringArray("aimArrow", "sprite", "planetParent", "fishingLineMarker")]
+[node name="PlayerController" type="CharacterBody2D" unique_id=743970108 node_paths=PackedStringArray("aimArrow", "sprite", "planetParent")]
 motion_mode = 1
 script = ExtResource("1_5ur5x")
 maxMovementSpeed = 200.0
 acceleration = 150.0
 friction = 180.0
 maxCastPower = 4.0
+castRandomSpread = 0.5
+castRandomPower = 1.0
 aimArrow = NodePath("AimRingPivot/Sprite2D")
 sprite = NodePath("AnimatedSprite2D")
 planetParent = NodePath("PlanetParent")
-fishingLineMarker = NodePath("")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1706531453]
 sprite_frames = SubResource("SpriteFrames_5ur5x")
@@ -252,7 +254,7 @@ frame_progress = 0.96344775
 position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_g4v7s")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=813711711]
+[node name="FollowCamera" type="Camera2D" parent="." unique_id=813711711]
 zoom = Vector2(1.5, 1.5)
 limit_left = 0
 limit_top = 0
@@ -260,6 +262,7 @@ limit_right = 1100
 limit_bottom = 700
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+script = ExtResource("5_3b8x7")
 
 [node name="AimRingPivot" type="Node2D" parent="." unique_id=186638772]
 
