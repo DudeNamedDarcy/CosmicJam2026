@@ -299,6 +299,7 @@ func StartReelingMinigame() -> void:
 	for fish in fishList:
 		if fish.name == fishNeededForQuest:
 			caughtFishForQuest = true
+			print("caughtFishForQuest!")
 			
 		var fish_instance = COMBO_FISH.instantiate()
 		fish_instance.PopulateData(fish)
@@ -365,7 +366,7 @@ func CompleteQuest():
 # call this to add a new quest fish
 func AddNewQuest(fishName: String):
 	fishNeededForQuest = fishName
-	uiController
+	uiController.updateDialogue()
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
