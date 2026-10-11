@@ -6,7 +6,7 @@ enum State { IDLE, ORBITING }
 @export_category("Fish Type Information")
 @export var typeName: String = "default"
 @export var value: float = 0.0
-
+@export var fishTexture: Texture2D
 
 @export_category("Idle Movement")
 @export var IdleBurstTimer: Timer
