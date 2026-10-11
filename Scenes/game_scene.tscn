@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://co5te5e76e4vk" path="res://Scenes/Fish/patrick_starfish.tscn" id="8_ldntv"]
 [ext_resource type="PackedScene" uid="uid://w7gafq2uiia1" path="res://Scenes/Fish/gold_fish.tscn" id="9_w8jfd"]
 [ext_resource type="PackedScene" uid="uid://wgsgx4i8wbue" path="res://Scenes/Fish/big_fish.tscn" id="10_a7fet"]
+[ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="13_wywco"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
 normal = Vector2(0, 1)
@@ -154,5 +155,41 @@ offset_bottom = -36.71998
 scale = Vector2(27.631252, 16.451735)
 color = Color(0.09112144, 0.09112146, 0.09112144, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1888502825]
+
+[node name="MoneyUI" type="Control" parent="CanvasLayer" unique_id=969162968]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_right = 400.0
+offset_bottom = 33.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MoneyUI" unique_id=1241626468]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 33.0
+theme_override_fonts/normal_font = ExtResource("13_wywco")
+theme_override_font_sizes/normal_font_size = 25
+text = "$100000000000000"
+fit_content = true
+
+[node name="FuelUI" type="Control" parent="CanvasLayer" unique_id=2131385606]
+z_index = 10
+propagate_maximum_size = true
+layout_mode = 3
+anchors_preset = 0
+offset_top = 33.0
+offset_right = 400.0
+offset_bottom = 66.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/FuelUI" unique_id=623553988]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 33.0
+theme_override_fonts/normal_font = ExtResource("13_wywco")
+theme_override_font_sizes/normal_font_size = 25
+text = "Fuel: 100%"
+fit_content = true
 
 [connection signal="timeout" from="Fish Spawner/Spawn Timer" to="Fish Spawner" method="_on_spawn_timer_timeout"]
