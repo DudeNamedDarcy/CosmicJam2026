@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://b4dpoqejtr8d5" path="res://Scenes/boat_noises.gd" id="3_6h5vk"]
 [ext_resource type="Script" uid="uid://xiufvpalhvi1" path="res://Scripts/orbit_manager.gd" id="3_fiftr"]
 [ext_resource type="PackedScene" uid="uid://diga0gfwjyvcg" path="res://Scenes/Fish/moon_jelly.tscn" id="4_1ixah"]
+[ext_resource type="Script" uid="uid://dqlo4uebgxkyw" path="res://Scenes/rod_noise.gd" id="5_2fmhe"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
 normal = Vector2(0, 1)
@@ -36,9 +37,12 @@ collision_layer = 4
 collision_mask = 0
 vboxContainer = NodePath("VBoxContainer")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="PlayerController" unique_id=1464942758]
+[node name="BoatNoise" type="AudioStreamPlayer2D" parent="PlayerController" unique_id=1464942758]
 volume_db = -3.888
 script = ExtResource("3_6h5vk")
+
+[node name="RodNoise" type="AudioStreamPlayer2D" parent="PlayerController" unique_id=2085605005]
+script = ExtResource("5_2fmhe")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PlayerController" unique_id=220851325]
 custom_minimum_size = Vector2(50, 50)

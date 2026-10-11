@@ -34,7 +34,8 @@ var arrows: Array[DirectionalArrow] = []
 var fishList: Array[Fish] = []
 var activeBobbers: Array[Bobber] = []
 
-@onready var boat_audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var boat_audio: AudioStreamPlayer2D = $BoatNoise
+@onready var rod_audio: AudioStreamPlayer2D = $RodNoise
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("CastReel"):
@@ -99,6 +100,7 @@ func _physics_process(delta: float) -> void:
 	
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("CastReel") && playerState == PlayerState.Casting:
+		rod_audio.throwing()
 		print("Total hold duration was: ", min(castPower, maxCastPower)) 
 		if min(castPower, maxCastPower) < 0.3:
 			EndFishing()
@@ -135,15 +137,18 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 
 	if arrow.GetArrowType() == input_arrow:
 		cameraController.ApplyShake(2.0)
+		rod_audio.comboing()
 		arrows.pop_front()
 		arrow.KillArrow()
 
 		if arrows.is_empty():
 			cameraController.ApplyShake(2.0)
 			print("Combo complete!")
+			rod_audio.winning()
 			EndFishing()
 	else:
 		cameraController.ApplyShake(7.0)
+		rod_audio.losing()
 		EndFishing()
 
 func CastBobbers(castPower: float) -> void:
