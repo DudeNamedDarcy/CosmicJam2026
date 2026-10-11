@@ -14,10 +14,16 @@ var comboCount
 var winCount = 0
 var reelMax = 0
 var reelPossible = true
+var comboWin
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	comboCount = 0
+	if comboWin == null:
+		comboWin = AudioStreamPlayer2D.new()
+		add_child(comboWin)
+
+	comboWin.stream = success
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -82,9 +88,8 @@ func start_fishing():
 		play()
 		
 func combo_win():
-	pitch_scale = randf_range(1,1.05)
+	comboWin.pitch_scale = randf_range(1,1.05)
 	stream = success
 	if(not playing):
-		play()
-		await get_tree().create_timer(0.02).timeout
+		comboWin.play()
 		comboing()

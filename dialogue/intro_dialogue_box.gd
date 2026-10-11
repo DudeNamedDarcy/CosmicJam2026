@@ -39,7 +39,7 @@ var doing_one_shot: bool = false
 func _ready() -> void:
 	await get_tree().process_frame #yeah checks out
 	await get_tree().process_frame
-	show_text(dialogue)
+	#show_text(dialogue)
 	#button.pressed.connect(_advance)
 	pass
 

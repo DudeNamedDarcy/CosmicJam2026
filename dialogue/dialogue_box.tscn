@@ -30,4 +30,5 @@ vertical_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=287376721]
 unique_name_in_owner = true
+autoplay = false
 stream = ExtResource("3_dcftc")
