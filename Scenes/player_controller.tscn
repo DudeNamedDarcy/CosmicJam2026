@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d0d4myx373kr1" path="res://Assets/Final/boat-move.png" id="4_3b8x7"]
 [ext_resource type="Texture2D" uid="uid://cwncb0hdu7ay6" path="res://Assets/Final/aimer.png" id="5_1esxm"]
 [ext_resource type="Script" uid="uid://f5wiuad0pepu" path="res://Scenes/follow_camera.gd" id="5_3b8x7"]
+[ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="6_53kst"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4jfj4"]
 atlas = ExtResource("2_1esxm")
@@ -263,6 +264,24 @@ limit_bottom = 700
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("5_3b8x7")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="FollowCamera" unique_id=1421098466]
+
+[node name="MoneyUI" type="Control" parent="FollowCamera/CanvasLayer" unique_id=1080989163]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_right = 400.0
+offset_bottom = 33.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="FollowCamera/CanvasLayer/MoneyUI" unique_id=1684469394]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 33.0
+theme_override_fonts/normal_font = ExtResource("6_53kst")
+theme_override_font_sizes/normal_font_size = 25
+text = "$100000000000000"
+fit_content = true
 
 [node name="AimRingPivot" type="Node2D" parent="." unique_id=186638772]
 
