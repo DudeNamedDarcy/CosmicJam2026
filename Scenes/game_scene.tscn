@@ -68,5 +68,3 @@ shape = SubResource("WorldBoundaryShape2D_6h5vk")
 
 [node name="Planet" type="Node2D" parent="." unique_id=797403716]
 position = Vector2(576, 93)
-
-[node name="FishingLine" parent="." unique_id=814618455]
