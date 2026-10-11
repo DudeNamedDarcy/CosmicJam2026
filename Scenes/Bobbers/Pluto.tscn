@@ -4,16 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://2u4t8pcme6ak" path="res://Scenes/Bobbers/planets-pluto.png" id="3_t5nd4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gem73"]
-radius = 40.0
+radius = 44.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6vkj"]
-radius = 20.0
+radius = 29.017237
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yysiv"]
 radius = 6.0
 
-[node name="Pluto2" type="CharacterBody2D" unique_id=2079869234 node_paths=PackedStringArray("bobberSprite", "orbitArea", "catchArea")]
-collision_mask = 0
+[node name="Pluto" type="CharacterBody2D" unique_id=2079869234 node_paths=PackedStringArray("bobberSprite", "orbitArea", "catchArea")]
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("1_0hars")
 bobberType = "Pluto"
 bobberTexture = ExtResource("3_t5nd4")
@@ -27,7 +28,7 @@ catchArea = NodePath("Catch Area")
 shape = SubResource("CircleShape2D_gem73")
 
 [node name="Planet" type="Sprite2D" parent="." unique_id=1052726689]
-z_index = 5
+z_index = 10
 scale = Vector2(2, 2)
 texture = ExtResource("3_t5nd4")
 
