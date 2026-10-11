@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://chbnvl3ke5ij"]
 
-[ext_resource type="Script" uid="uid://bnomxs6v8sm6g" path="res://Scenes/Menus/credits_controller.gd" id="1_snsnl"]
-[ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="2_gudcp"]
-[ext_resource type="AudioStream" uid="uid://dn27r08fperji" path="res://Scenes/Audio/Music/endcredits_normal.mp3" id="2_vbr67"]
-[ext_resource type="VideoStream" uid="uid://d2666aeqc4t6k" path="res://Scenes/Video/dpu47-ydq5k.ogv" id="3_f0gr2"]
+[ext_resource type="VideoStream" uid="uid://d2666aeqc4t6k" path="res://Scenes/Video/dpu47-ydq5k.ogv" id="1_gnt72"]
+[ext_resource type="FontFile" uid="uid://d0yv4rsexmrsw" path="res://fonts/Silkscreen/Silkscreen-Bold.ttf" id="2_2alx2"]
+[ext_resource type="Script" uid="uid://bnomxs6v8sm6g" path="res://Scenes/Credits/credits_controller.gd" id="3_4v6pm"]
+[ext_resource type="AudioStream" uid="uid://dn27r08fperji" path="res://Scenes/Audio/Music/endcredits_normal.mp3" id="4_p78hr"]
 
 [sub_resource type="FontVariation" id="FontVariation_h001g"]
-base_font = ExtResource("2_gudcp")
+base_font = ExtResource("2_2alx2")
 
 [node name="WinCredits" type="Node2D" unique_id=1059538705]
 
@@ -31,7 +31,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 offset_transform_enabled = true
 offset_transform_scale = Vector2(1.715, 1.715)
-stream = ExtResource("3_f0gr2")
+stream = ExtResource("1_gnt72")
 volume_db = -11.1
 autoplay = true
 loop = true
@@ -47,7 +47,7 @@ offset_transform_scale = Vector2(2.695, 2.695)
 layout_mode = 2
 size_flags_horizontal = 4
 offset_transform_enabled = true
-offset_transform_position = Vector2(5.975, 472.325)
+offset_transform_position = Vector2(5.975, 482.25)
 offset_transform_scale = Vector2(0.82, 0.82)
 theme_override_fonts/font = SubResource("FontVariation_h001g")
 theme_override_font_sizes/font_size = 14
@@ -96,14 +96,17 @@ Tess Leblanc
 Simon Menad
 
 
-Thank you to CGD for organizing."
+Thank you to CGD for organizing.
+
+
+Press start/escape to leave."
 horizontal_alignment = 1
 vertical_alignment = 1
 max_lines_visible = 87
-script = ExtResource("1_snsnl")
+script = ExtResource("3_4v6pm")
 metadata/_edit_group_ = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="PanelContainer/VBoxContainer/Label" unique_id=35715337]
-stream = ExtResource("2_vbr67")
+stream = ExtResource("4_p78hr")
 autoplay = true
 parameters/looping = true

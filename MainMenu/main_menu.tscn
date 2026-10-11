@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cgk5p01hihcku" path="res://MainMenu/main_menu.gd" id="1_3w4mj"]
 [ext_resource type="AudioStream" uid="uid://k05nkoq65th6" path="res://MainMenu/menu_105bpm.wav" id="1_nhkf3"]
+[ext_resource type="Script" uid="uid://b61kk0hg6mbb2" path="res://MainMenu/start_game_button.gd" id="2_po2gx"]
 [ext_resource type="Script" uid="uid://clyovkxg4cj4f" path="res://MainMenu/addons/perspective_quads/scripts/nodes/perspective_viewport_container_2d.gd" id="3_5de1l"]
 [ext_resource type="PackedScene" uid="uid://dsiq0ku6hhr" path="res://MainMenu/second_menu_part.tscn" id="4_ajn5b"]
 
@@ -49,18 +50,26 @@ offset_bottom = 50.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=2101989938]
+[node name="Control" type="Control" parent="CenterContainer" unique_id=726007084]
 layout_mode = 2
 
-[node name="StartGameButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=2089890686]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Control" unique_id=2101989938]
+layout_mode = 0
+offset_left = -48.0
+offset_top = -50.0
+offset_right = 48.0
+offset_bottom = 51.0
+
+[node name="StartGameButton" type="Button" parent="CenterContainer/Control/VBoxContainer" unique_id=2089890686]
 layout_mode = 2
 text = "Start Game"
+script = ExtResource("2_po2gx")
 
-[node name="CreditsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=610206053]
+[node name="CreditsButton" type="Button" parent="CenterContainer/Control/VBoxContainer" unique_id=610206053]
 layout_mode = 2
 text = "Credits"
 
-[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=185556139]
+[node name="QuitButton" type="Button" parent="CenterContainer/Control/VBoxContainer" unique_id=185556139]
 layout_mode = 2
 text = "Quit Game"
 
@@ -81,6 +90,6 @@ metadata/_custom_type_script = "uid://clyovkxg4cj4f"
 
 [node name="SecondPart" parent="PerspectiveViewportContainer2D/SubViewport" unique_id=1191171838 instance=ExtResource("4_ajn5b")]
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Control/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Control/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Control/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

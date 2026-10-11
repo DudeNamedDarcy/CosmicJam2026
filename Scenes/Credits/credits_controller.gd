@@ -7,5 +7,5 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	position += velocity * delta
-	if(Input.is_key_pressed(Key.KEY_ESCAPE)):
+	if(Input.is_action_just_pressed("ui_escape")):
 		get_tree().quit()
