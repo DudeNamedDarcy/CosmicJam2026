@@ -23,5 +23,10 @@ func KillArrow() -> void:
 	await sprite.animation_finished
 	queue_free()
 
+func TurnRed(duration: float = 1.0) -> void:
+	var target_color = Color.DARK_RED
+	var tween = create_tween()
+	tween.tween_property(self, "modulate", target_color, duration)
+
 	
 	

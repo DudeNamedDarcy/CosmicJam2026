@@ -42,10 +42,18 @@ var activeBobbers: Array[Bobber] = []
 var comboFishList: Array[FishComboSprite] = []
 var aim_arrow_base_scale: float
 
+var elapsedComboTime: float
+@export var maxComboTime: float = 1.0
+var comboSize: float
 func _ready() -> void:
 	aim_arrow_base_scale = aimArrow.scale.x
 
 func _process(delta: float) -> void:
+	if playerState == PlayerState.Reeling:
+		elapsedComboTime += delta
+		if elapsedComboTime >= maxComboTime:
+			EndFishing(false)
+			elapsedComboTime = 0.0
 	if Input.is_action_pressed("CastReel"):
 		castPower += delta
 	var charge_ratio: float = 0.0
@@ -149,11 +157,16 @@ func CheckArrow(input_arrow: DirectionalArrow.ArrowType) -> void:
 		LevelManager.shakeCamera(2.0)
 		arrows.pop_front()
 		arrow.KillArrow()
+		comboSize += 1
 
 		if arrows.is_empty():
 			LevelManager.shakeCamera(2.0)
-			print("Combo complete!")
+			print("Combo complete! Combo size", comboSize)
 			EndFishing(true)
+		else:
+			arrows[0].TurnRed()
+		elapsedComboTime = 0.0
+
 	else:
 		LevelManager.shakeCamera(7.0)
 		EndFishing(false)
@@ -184,7 +197,6 @@ func CastBobbers(castPower: float) -> void:
 func StartReelingMinigame() -> void:
 	for activeBobber in activeBobbers:
 		fishList.append_array(activeBobber.reelIn())
-		print(fishList.size())
 		activeBobber.killAllFish()
 	if fishList.size() == 0:
 		EndFishing(false)
@@ -196,6 +208,8 @@ func StartReelingMinigame() -> void:
 		var arrow_instance = DIRECTIONAL_ARROW.instantiate()
 		arrows.append(arrow_instance)
 		vboxContainer.add_child(arrow_instance)
+		if i == 0:
+			arrows[0].TurnRed()
 	for fish in fishList:
 		var fish_instance = COMBO_FISH.instantiate()
 		fish_instance.PopulateData(fish)
@@ -218,13 +232,15 @@ func EndFishing(success: bool) -> void:
 			arrow.KillArrow()
 
 	arrows.clear()
-	await get_tree().create_timer(0.2).timeout 
+	if success:
+		await get_tree().create_timer(0.2).timeout 
 	for fish in comboFishList.duplicate():
 		if is_instance_valid(fish):
+			if success:
+				await get_tree().create_timer(0.2).timeout	
 			fish.KillFish(success)
 	
 	comboFishList.clear()
 	fishList.clear()
-		
-			
+	comboSize = 0
 	aimArrow.show()
