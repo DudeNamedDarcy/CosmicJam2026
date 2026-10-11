@@ -36,6 +36,7 @@ var castPower: float = 0.0
 @export var moneyVboxContainer: VBoxContainer
 @export var planetParent: Node2D
 @export var fishSpawner: FishSpawner
+@export var castingPoint: Marker2D
 
 @onready var area_2d: Area2D = $Area2D
 
@@ -194,7 +195,7 @@ func CastBobbers(castPower: float) -> void:
 
 		planetParent.add_child(bobber)
 		planetParent.add_child(bobberLine)
-		bobber.global_position = global_position
+		bobber.global_position = castingPoint.global_position
 		
 		var randomAngle = randf_range(-castRandomSpread, castRandomSpread)
 		var randomizedDirection = cast_direction.rotated(randomAngle)

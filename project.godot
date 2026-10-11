@@ -117,6 +117,7 @@ dialogue_next={
 
 2d_physics/layer_1="Fish"
 2d_physics/layer_2="Walls"
+2d_physics/layer_4="Bobber"
 
 [physics]
 

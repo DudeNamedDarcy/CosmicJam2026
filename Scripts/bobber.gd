@@ -60,7 +60,6 @@ func handleCasting(delta: float):
 	castLine.add_point(position)
 	velocity = castDirection * castPower
 	castPower = move_toward(castPower, 0, castDeceleration * delta)
-	scale
 
 	var collision = move_and_collide(velocity * delta)
 
@@ -75,9 +74,9 @@ func handleCasting(delta: float):
 func _draw() -> void:
 	if state == State.FISHING:
 		# Orbit Circle
-		draw_circle(Vector2.ZERO, orbitRadius, Color(1,1,1,0.66), false, 3.0)
+		draw_circle(Vector2.ZERO, orbitRadius, Color(0.862, 0.196, 0.285, 0.33), false, 2.0)
 		# Catch Circle
-		draw_circle(Vector2.ZERO, catchRadius, Color(1,1,1,0.33), false, 1.0)
+		draw_circle(Vector2.ZERO, catchRadius, Color(0.617, 0.218, 0.413, 0.66), false, 1.0)
 	
 # call this function to get fish in range, after calling this function, queue free bobber and fish from caller function
 func reelIn() -> Array[Fish]:
@@ -93,6 +92,7 @@ func cast(direction: Vector2, power: float, deceleration: float, line: Line2D):
 	castDirection = direction
 	castPower = power
 	castLine = line
+	castLine.default_color = Color(0.3,0.3,0.4)
 	castDeceleration = deceleration
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 1.0)
