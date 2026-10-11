@@ -111,7 +111,7 @@ ExtResource("10_a7fet"): 1
 spawnableArea = NodePath("../SpawnableArea")
 
 [node name="Spawn Timer" type="Timer" parent="Fish Spawner" unique_id=1446234030]
-wait_time = 0.2
+wait_time = 0.1
 
 [node name="SpawnableArea" type="Polygon2D" parent="." unique_id=1898762879]
 visible = false

@@ -264,10 +264,11 @@ func EndFishing(success: bool) -> void:
 				var moneyText = MONEY_GAIN_TEXT.instantiate()
 				moneyVboxContainer.add_child(moneyText)
 				moneyText.DisplayText(fish.value)
+				#fishvalue *comboSize * 1.1
 				uiController.UpdateMoneyText()
 			fish.KillFish(success)
-			
 	
+	LevelManager.shakeCameraComboClear()
 	comboFishList.clear()
 	fishList.clear()
 	comboSize = 0
