@@ -25,7 +25,10 @@ var state: State
 var center: Node2D
 var inCatchRadius: bool
 
+var starTextures: Array[Texture2D] = [load("res://Assets/Placeholders/star_1.png"), load("res://Assets/Placeholders/star_2.png"), load("res://Assets/Placeholders/star_3.png")]
+
 func _ready() -> void:
+	$Sprite2D.texture = starTextures[randi_range(0,starTextures.size() - 1)]
 	state = State.IDLE
 	center = null
 	inCatchRadius = false
