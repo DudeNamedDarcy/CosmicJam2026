@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://diga0gfwjyvcg" path="res://Scenes/Fish/moon_jelly.tscn" id="3_coi6g"]
 [ext_resource type="PackedScene" uid="uid://d3oxvy0grl375" path="res://Scenes/Fish/red_dwarf_herring.tscn" id="4_sngl5"]
 [ext_resource type="PackedScene" uid="uid://b7m36bfujolqs" path="res://Scenes/Fish/supermassive_squid.tscn" id="5_enq7r"]
-[ext_resource type="Script" uid="uid://xiufvpalhvi1" path="res://Scripts/orbit_manager.gd" id="6_sngl5"]
+[ext_resource type="Script" uid="uid://xiufvpalhvi1" path="res://singletons/orbit_manager.gd" id="6_sngl5"]
 
 [node name="Node2D" type="Node2D" unique_id=1541033644]
 

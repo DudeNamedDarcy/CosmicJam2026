@@ -2,10 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://caiem5b8o2slt" path="res://Assets/Placeholders/360_F_546468872_b9emNBQeVDLbBqicXaFyoBUwutWcHmbl.jpg" id="1_b6fju"]
 [ext_resource type="PackedScene" uid="uid://cwjnrld5dv08f" path="res://Scenes/player_controller.tscn" id="1_x87qo"]
-[ext_resource type="Script" uid="uid://xiufvpalhvi1" path="res://Scripts/orbit_manager.gd" id="4_fiftr"]
-[ext_resource type="PackedScene" uid="uid://d3oxvy0grl375" path="res://Scenes/Fish/red_dwarf_herring.tscn" id="4_rgj8m"]
-[ext_resource type="PackedScene" uid="uid://b7m36bfujolqs" path="res://Scenes/Fish/supermassive_squid.tscn" id="5_2fmhe"]
-[ext_resource type="PackedScene" uid="uid://diga0gfwjyvcg" path="res://Scenes/Fish/moon_jelly.tscn" id="6_7iton"]
+[ext_resource type="PackedScene" uid="uid://diga0gfwjyvcg" path="res://Scenes/Fish/moon_jelly.tscn" id="3_rgj8m"]
+[ext_resource type="PackedScene" uid="uid://d3oxvy0grl375" path="res://Scenes/Fish/red_dwarf_herring.tscn" id="4_2fmhe"]
+[ext_resource type="Script" uid="uid://c4evtl6kbwuw2" path="res://Scenes/fish_spawner.gd" id="6_rgj8m"]
+[ext_resource type="Texture2D" uid="uid://bgakx05khov0y" path="res://Assets/Placeholders/24752-5-spaceship.png" id="7_2fmhe"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
 normal = Vector2(0, 1)
@@ -16,6 +16,9 @@ normal = Vector2(0, 1)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yf5fn"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6h5vk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gem73"]
+size = Vector2(124, 181)
 
 [node name="GameScene" type="Node2D" unique_id=459147446]
 
@@ -63,21 +66,30 @@ shape = SubResource("WorldBoundaryShape2D_6h5vk")
 [node name="Planet" type="Node2D" parent="." unique_id=797403716]
 position = Vector2(576, 93)
 
-[node name="manager" type="Node2D" parent="." unique_id=1542540264]
-script = ExtResource("4_fiftr")
+[node name="Fish Spawner" type="Node2D" parent="." unique_id=1574152278 node_paths=PackedStringArray("spawnableArea")]
+script = ExtResource("6_rgj8m")
+fishDict = Dictionary[PackedScene, int]({
+ExtResource("3_rgj8m"): 1,
+ExtResource("4_2fmhe"): 1
+})
+spawnableArea = NodePath("../SpawnableArea")
 
-[node name="Red Dwarf Herring" parent="." unique_id=843615539 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_rgj8m")]
-position = Vector2(233, 213)
-orbitManager = NodePath("../manager")
+[node name="Spawn Timer" type="Timer" parent="Fish Spawner" unique_id=1446234030]
+wait_time = 3.0
 
-[node name="Supermassive Squid" parent="." unique_id=674465445 node_paths=PackedStringArray("orbitManager") instance=ExtResource("5_2fmhe")]
-position = Vector2(350, 176)
-orbitManager = NodePath("../manager")
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=220877118]
+position = Vector2(689, 374)
 
-[node name="Red Dwarf Herring2" parent="." unique_id=1837972840 node_paths=PackedStringArray("orbitManager") instance=ExtResource("4_rgj8m")]
-position = Vector2(250, 172)
-orbitManager = NodePath("../manager")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=671663463]
+position = Vector2(-4, 0.5)
+shape = SubResource("RectangleShape2D_gem73")
 
-[node name="Moon Jelly2" parent="." unique_id=1404079117 node_paths=PackedStringArray("orbitManager") instance=ExtResource("6_7iton")]
-position = Vector2(309, 193)
-orbitManager = NodePath("../manager")
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=840347061]
+scale = Vector2(0.24782608, 0.2478261)
+texture = ExtResource("7_2fmhe")
+
+[node name="SpawnableArea" type="Polygon2D" parent="." unique_id=1898762879]
+visible = false
+polygon = PackedVector2Array(1146, 2, 1146, 694, 9, 699, 622, 468, 747, 468, 750, 276, 619, 281, 619, 443, 6, 680, 9, 4)
+
+[connection signal="timeout" from="Fish Spawner/Spawn Timer" to="Fish Spawner" method="_on_spawn_timer_timeout"]

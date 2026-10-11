@@ -6,7 +6,6 @@ enum State { IDLE, ORBITING }
 @export_category("Fish Type Information")
 @export var typeName: String = "default"
 @export var value: float = 0.0
-@export var orbitManager: OrbitManager
 
 
 @export_category("Idle Movement")
@@ -26,8 +25,6 @@ var center: Node2D
 var inCatchRadius: bool
 
 func _ready() -> void:
-	if !orbitManager:
-		printerr("No orbit manager assigned!")
 	state = State.IDLE
 	center = null
 	inCatchRadius = false
@@ -87,28 +84,28 @@ func handleOrbit(delta:float):
 	# Negative = move outward.
 	var radial_speed: float
 
-	if distance > orbitManager.orbit_radius * 3.0:
+	if distance > OrbitManager.orbit_radius * 3.0:
 		radial_speed = minf(
-			(distance - orbitManager.orbit_radius) * orbitManager.radial_gain,
+			(distance - OrbitManager.orbit_radius) * OrbitManager.radial_gain,
 			45.0
 		)
 	else:
 		radial_speed = minf(
-			(distance - orbitManager.orbit_radius) * 5.0,
-			orbitManager.max_inward_speed
+			(distance - OrbitManager.orbit_radius) * 5.0,
+			OrbitManager.max_inward_speed
 		)
 
-	radial_speed = maxf(radial_speed, -orbitManager.max_outward_speed)
+	radial_speed = maxf(radial_speed, -OrbitManager.max_outward_speed)
 
 	var closeness: float = 1.0 - clampf(
-		distance / orbitManager.swirl_range,
+		distance / OrbitManager.swirl_range,
 		0.0,
 		1.0
 	)
 
 	var swirl_speed: float = lerpf(
-		orbitManager.outer_swirl_speed,
-		orbitManager.inner_swirl_speed,
+		OrbitManager.outer_swirl_speed,
+		OrbitManager.inner_swirl_speed,
 		closeness
 	)
 

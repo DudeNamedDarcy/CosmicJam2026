@@ -44,6 +44,7 @@ func _ready() -> void:
 	orbitArea.monitoring = false
 	catchArea.monitoring = false
 	state = State.UNCASTED
+	scale = Vector2(0,0)
 	
 func _process(delta: float) -> void:
 	match state:
@@ -59,6 +60,7 @@ func handleCasting(delta: float):
 	castLine.add_point(position)
 	velocity = castDirection * castPower
 	castPower = move_toward(castPower, 0, castDeceleration * delta)
+	scale
 
 	var collision = move_and_collide(velocity * delta)
 
@@ -88,6 +90,8 @@ func cast(direction: Vector2, power: float, deceleration: float, line: Line2D):
 	castPower = power
 	castLine = line
 	castDeceleration = deceleration
+	var tween = create_tween()
+	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 1.0)
 	state = State.CASTING
 
 func _on_orbit_area_area_entered(area: Area2D) -> void:
