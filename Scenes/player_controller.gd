@@ -33,6 +33,7 @@ var characterDirection: Vector2
 var arrows: Array[DirectionalArrow] = []
 var fishList: Array[Fish] = []
 var activeBobbers: Array[Bobber] = []
+var comboFishList: Array[FishComboSprite] = []
 	
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("CastReel"):
@@ -179,7 +180,9 @@ func StartReelingMinigame() -> void:
 	for fish in fishList:
 		var fish_instance = COMBO_FISH.instantiate()
 		fish_instance.PopulateData(fish)
+		comboFishList.append(fish_instance)
 		vboxContainer.add_child(fish_instance)
+	#delete planets
 	for child in planetParent.get_children():
 		child.queue_free()
 	activeBobbers.clear()
@@ -192,5 +195,8 @@ func EndFishing() -> void:
 			arrow.KillArrow()
 
 	arrows.clear()
-
+	for fish in comboFishList.duplicate():
+		if is_instance_valid(fish):
+			fish.KillFish()
+			
 	aimArrow.show()
